@@ -1,11 +1,27 @@
 <template>
-  <div>
-    <h1>Hotels</h1>
-    <div v-if="loading">loading</div>
-    <div v-if="error">
-      {{ error }}
+  <div class="px-10 py-10">
+    <h1 class="text-2xl font-semibold">Hotels</h1>
+    <div class="mt-5 mb-5">
+      <button
+        @click="makeRefetch"
+        class="p-2 bg-gray-200 rounded-xl hover:gray-300 active:gray-300"
+      >
+        Refetch
+      </button>
     </div>
-    <ul>
+
+    <div v-if="loading">loading</div>
+    <div v-else-if="error">
+      <pre>
+        {{ error }}
+      </pre>
+    </div>
+    <div v-else-if="graphqlError">
+      <pre>
+        {{ graphqlError }}
+      </pre>
+    </div>
+    <ul v-else-if="hotels.length">
       <li v-for="hotel in hotels" :key="hotel.id">
         <h3>
           {{ hotel.hotel_name }}
@@ -19,13 +35,13 @@
 </template>
 
 <script>
-// import { gql } from "graphql-tag";
-import { onMounted, ref, watch } from "vue-demi";
-import { useQuery, useQueryp } from "~/composables/useQuery.js";
+import { ref, watch } from "vue-demi";
+import { useQuery } from "~/composables/useQuery.js";
 const gql = String.raw;
 export default {
   setup() {
-    const { result, loading, error } = useQueryp(gql`
+    const graphqlError = ref(null);
+    const { result, loading, error, refetch } = useQuery(gql`
       query {
         hotels {
           id
@@ -38,20 +54,22 @@ export default {
       if (n_res?.data?.hotels) {
         hotels.value = n_res?.data?.hotels;
       }
+      if (n_res?.errors) {
+        graphqlError.value = n_res.errors[0];
+      }
     });
 
-    onMounted(() => {
-      // setTimeout(() => {
-      //   console.log("On Mounted");
-      //   console.log(result.value);
-      //   console.log(hotels.value);
-      // }, 2 * 1000);
-    });
+    function makeRefetch() {
+      graphqlError.value = null;
+      refetch();
+    }
 
     return {
       hotels,
       loading,
       error,
+      graphqlError,
+      makeRefetch,
     };
   },
 };
