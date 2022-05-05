@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "~/*": [
+                "./*"
+            ],
+            "@/*": [
+                "./*"
+            ],
+        },
+        "types": [
+            "@nuxt/types",
+            "@nuxtjs/i18n",
+            "@nuxtjs/color-mode"
+        ]
+    },
+    "exclude": [
+        "node_modules",
+        ".nuxt",
+        "dist",
+        "docs"
+    ]
+}
