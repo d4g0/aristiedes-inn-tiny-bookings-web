@@ -18,12 +18,10 @@ const apolloClient = new ApolloClient({
     cache,
 })
 
-// console.log({ apolloClient });
 
 
 // nuxt plugin
 export default function (ctx, inject) {
     // Doing something with nuxtApp
-    console.log('providing...')
     provideApolloClient(apolloClient);
 }
