@@ -1,4 +1,7 @@
 export default {
+  env: {
+    API_URL: process.env.API_URL || 'http://localhost:3010/graphql'
+  },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -26,7 +29,6 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/composition-api.js',
-    '~/plugins/apollo.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
