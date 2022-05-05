@@ -1,5 +1,6 @@
 <template>
-  <Hotels/>
+  <!-- <Hotels/> -->
+  <Clients />
 </template>
 
 <script>
