@@ -37,7 +37,7 @@
 <script>
 import { ref, watch } from "vue-demi";
 import { useQuery } from "~/composables/useQuery.js";
-const gql = String.raw;
+import { gql } from "~/utils";
 export default {
   setup() {
     const graphqlError = ref(null);
