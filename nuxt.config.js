@@ -1,26 +1,37 @@
 
 export default {
   env: {
-    API_URL: process.env.API_URL || 'http://localhost:3010/graphql'
+    API_URL: process.env.API_URL || 'http://localhost:3010/graphql',
+    DOMAIN: process.env.DOMAIN || 'tiny-bookings.com',
   },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
-  head: {
-    title: 'app',
-    htmlAttrs: {
-      lang: 'en'
-    },
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
-    ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+  head() {
+    if(!this.$nuxtI18nHead){
+      return
+    }
+    const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+    return {
+      title: process.env.SITE_NAME || 'app',
+      titleTemplate: `%s | ${process.env.SITE_NAME}`,
+      htmlAttrs: {
+        lang: 'en',
+        ...i18nHead.htmlAttrs
+      },
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { hid: 'description', name: 'description', content: '' },
+        { name: 'format-detection', content: 'telephone=no' },
+        ...i18nHead.meta
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        ...i18nHead.link
+      ]
+    }
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -43,7 +54,34 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/i18n',
   ],
+  // i18n
+  i18n: {
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-US',
+        file: 'en-US.js',
+        name: 'English',
+      },
+      {
+        code: 'es',
+        iso: 'es-ES',
+        file: 'es-ES.js',
+        name: 'Español',
+      },
+    ],
+    vueI18n: {
+      fallbackLocale: 'es'
+    },
+    defaultLocale: 'es',
+    parsePages: false,
+    detectBrowserLanguage: false,
+    lazy: true,
+    langDir: 'i18n/',
+    baseUrl: `https://${process.env.DOMAIN}`
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
