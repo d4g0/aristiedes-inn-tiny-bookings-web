@@ -3,6 +3,7 @@ export default {
   env: {
     API_URL: process.env.API_URL || 'http://localhost:3010/graphql',
     DOMAIN: process.env.DOMAIN || 'tiny-bookings.com',
+    BRAND: process.env.BRAND || 'tiny-bookings',
   },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -36,6 +37,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/assets/css/main.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

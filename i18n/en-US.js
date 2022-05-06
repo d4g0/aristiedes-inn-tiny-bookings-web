@@ -10,6 +10,8 @@ module.exports = {
     nav: {
         links: {
             home: 'Home',
+            login: 'Login',
+            singup: 'Sing Up',
         },
         reserve: 'Book Now'
     },
@@ -22,7 +24,7 @@ module.exports = {
             title: 'Book your room in the hotel today',
             description: `Our infrastructure provides an atmosphere of warmth, modernity and tranquility that characterize our hotel. `
         },
-        
+
     },
 
     // ---------------
@@ -30,11 +32,11 @@ module.exports = {
     // ---------------
     home: {
         // intro
-        
+
     },
 
 
-    
+
 
     // ---------------
     // 404 

@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* transitions */
+
+/* Fade */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+
+.fade-explixict-time-enter-active,
+.fade-explixict-time-leave-active {
+  transition: opacity;
+}
+
+.fade-explixict-time-enter-active{
+  transition-duration: 2000ms;
+}
+
+.fade-explixict-time-leave-active{
+  transition-duration: 200ms;
+}
+
+.fade-explixict-time-enter,
+.fade-explixict-time-leave-to {
+  opacity: 0;
+}
+
+
+/* Fade Slow */
+.fade-slow-enter-active,
+.fade-slow-leave-active {
+  transition: opacity 0.4s;
+}
+
+.fade-slow-enter,
+.fade-slow-leave-to {
+  opacity: 0;
+}
+
+/* Fade Mobile Nav (sample reference) */
+
+/* enter  */
+.fade-mobile-nav-enter-active {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 800ms;
+}
+
+.fade-mobile-nav-enter {
+  transform: translateY(-100%);
+}
+
+.fade-mobile-nav-enter-to {
+  transform: translateY(0%);
+}
+
+/* leave */
+.fade-mobile-nav-leave-active {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
+
+.fade-mobile-nav-leave {
+  transform: translateY(0%);
+}
+
+.fade-mobile-nav-leave-to {
+  transform: translateY(-100%);
+}
+
+
+/* PAGE */
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.3s;
+}
+
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
+/* Layout */
+
+.layout-enter-active,
+.layout-leave-active {
+  transition: all 0.3s;
+}
+
+.layout-enter,
+.layout-leave-active {
+  opacity: 0;
+}
+
+/* IOS INPPUTs SHADOW RESET */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  -webkit-appearance: none;
+}
+
+/* Utilities */
+
+@layer utilities {
+
+  /* Focus */
+  .focus-styles {
+    @apply focus:outline-none
+    focus-visible:ring focus-visible:ring-blue-500
+    dark:focus-visible:ring-gray-200
+    focus:text-opacity-100
+    transition-shadow
+    duration-300;
+  }
+  .focus-styles-white {
+    @apply focus:outline-none
+    focus-visible:ring focus-visible:ring-white
+    focus:text-opacity-100
+    transition-shadow
+    duration-300;
+  }
+  .focus-styles-obsidiana {
+    @apply focus:outline-none
+    focus-visible:ring focus-visible:ring-gray-800
+    focus:text-opacity-100
+    transition-shadow
+    duration-300;
+  }
+  .focus-styles-no-transition {
+    @apply focus:outline-none
+    focus-visible:ring focus-visible:ring-white
+    focus:text-opacity-100
+  }
+
+  
+  /* Text */
+  .text-color-modes{
+    @apply text-gray-800 dark:text-gray-200 transition-colors duration-300 ;
+  }
+
+  /* Wraper */
+  .frame {
+    @apply w-full px-8 lg:px-12 max-w-screen-xl mx-auto;
+  }
+
+  /* Padding */
+  .pt-nav-h {
+    @apply pt-[110px] lg:pt-[136px];
+  }
+
+}

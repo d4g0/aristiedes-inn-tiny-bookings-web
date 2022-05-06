@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full min-h-screen bg-gray-400" ref="shell">
-    <!-- <Navigation /> -->
+  <div class="w-full min-h-screen bg-white" ref="shell">
+    <Navigation />
     <main class="pt-nav-h">
       <Nuxt />
       <LangMenuOptions
@@ -14,8 +14,6 @@
 </template>
 
 <script>
-// import Navigation from "~/components/global/Navigation.vue";
-// import Footer from "~/components/global/Footer.vue";
 import { ref, provide, watch } from "@vue/composition-api";
 import { useElementSize } from "@vueuse/core";
 import LangMenuOptions from "~/components/global/LangMenuOptions.vue";
@@ -23,8 +21,6 @@ import useBodOverflow from "~/composables/useBodyOverflow.js";
 
 export default {
   components: {
-    // Navigation,
-    // Footer,
     LangMenuOptions,
   },
   setup() {

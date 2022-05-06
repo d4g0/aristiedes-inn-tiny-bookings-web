@@ -19,10 +19,26 @@ $ yarn generate
 
 
 ## Planing
--   Lang
--   Meta
--   SEO
+-   Lang [done] (setup)
+-   Meta [done] (setup)
+-   SEO  [done] (setup)
+-   Navigation
+    -   Public
+    -   Client
 -   SingUp
 -   Login
 -   SearchBookings
-    -   
+
+
+
+## Specs
+
+### Navigation
+
+#### Public
+-   Home
+    -   Search Available offers page
+-   Sing Up
+    -   clients sing up page
+-   Login
+    -   clients, admins login page

@@ -10,6 +10,8 @@ module.exports = {
     nav: {
         links: {
             home: 'Inicio',
+            login: 'Iniciar Sessión',
+            singup: 'Registrarse',
         },
         reserve: 'Reservar'
     },
