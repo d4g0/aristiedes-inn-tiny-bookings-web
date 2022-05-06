@@ -1,3 +1,4 @@
+
 export default {
   env: {
     API_URL: process.env.API_URL || 'http://localhost:3010/graphql'
@@ -53,5 +54,9 @@ export default {
         type: "javascript/auto"
       });
     }
+  },
+
+  postcss: {
+    autoprefixer: {}
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-screen bg-white" ref="shell">
+  <div class="w-full min-h-screen bg-gray-400" ref="shell">
     <!-- <Navigation /> -->
     <main class="pt-nav-h">
       <Nuxt />
