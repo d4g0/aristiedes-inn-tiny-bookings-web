@@ -19,8 +19,8 @@ module.exports = {
     // ---------------
     metadata: {
         home: {
-            title: 'Book your room in the hotel today, stay in the heart of the city of Huarmey',
-            description: `Our infrastructure provides an atmosphere of warmth, modernity and tranquility that characterize our hotel. This, added to the quality service and highly trained staff, make Aristides Inn one of the best hotels in the city.`
+            title: 'Book your room in the hotel today',
+            description: `Our infrastructure provides an atmosphere of warmth, modernity and tranquility that characterize our hotel. `
         },
         
     },
