@@ -1,6 +1,6 @@
 <template>
   <section
-    class="pb-10 text-sm mx-auto max-w-screen-lg xl:max-w-screen-xl py-1 px-5 bg-gray-200"
+    class="pb-10 text-sm mx-auto max-w-screen-lg xl:max-w-screen-xl py-1 px-5 bg-gray-200 border-t-gray-500 border"
   >
     <div class="flex flex-col items-center">
       <!-- naviation links -->
