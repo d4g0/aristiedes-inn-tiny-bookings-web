@@ -1,6 +1,7 @@
 <template>
-    <div>
+    <div class="frame">
         Log In
+        <Counter />
     </div>
 </template>
 
@@ -9,7 +10,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-</style>
