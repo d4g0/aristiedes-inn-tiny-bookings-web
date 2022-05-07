@@ -1,8 +1,19 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
+
+
 module.exports = {
-  content:[],
+  content: [],
   // darkMode: 'false', // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        ...colors,
+        brand: {
+          DEFAULT: colors.blue['600'],
+        },
+      },
+    },
   },
   plugins: [],
 }

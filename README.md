@@ -42,3 +42,10 @@ $ yarn generate
     -   clients sing up page
 -   Login
     -   clients, admins login page
+
+
+## Tasks
+- Login
+  - create form
+  - call api
+  - procced with redirections to client or admin space
