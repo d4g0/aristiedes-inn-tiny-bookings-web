@@ -67,7 +67,7 @@
           <div class="pl-2 mt-1 text-red-700 text-sm" v-if="passwError">
             <span aria-hidden="true">*</span>
             <span class="">
-              A password with 8 characters at least is required
+              A valid password is required, with 8 characters at least and 24 max 
             </span>
           </div>
         </transition>
@@ -152,6 +152,7 @@ import {
   required,
   email as emailValidation,
   minLength,
+  maxLength,
 } from "@vuelidate/validators";
 export default {
   props: {
@@ -167,7 +168,7 @@ export default {
     const utts = ref(false);
     const rules = {
       email: { required, emailValidation },
-      password: { required, minLength: minLength(8) },
+      password: { required, minLength: minLength(8), maxLength: maxLength(24) },
     };
 
     const v = useVuelidate(rules, { email, password });
@@ -175,11 +176,11 @@ export default {
     function onFormSubmit() {
       utts.value = true;
 
-      console.log({
-        evt: EVENTS.LOGIN.FORM_SUBMITION_EVENT,
-        email: email.value,
-        password: password.value,
-      });
+      //   console.log({
+      //     evt: EVENTS.LOGIN.FORM_SUBMITION_EVENT,
+      //     email: email.value,
+      //     password: password.value,
+      //   });
 
       // emit
       if (!v.value.$invalid) {
