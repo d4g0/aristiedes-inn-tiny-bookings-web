@@ -14,6 +14,8 @@ export function useLazyQuery(query, variables = {}) {
 
     async function load() {
         loading.value = true;
+        result.value = null;
+        error.value = null;
         try {
             var res = await fetch(
                 process.env.API_URL,
@@ -37,12 +39,6 @@ export function useLazyQuery(query, variables = {}) {
         }
     }
 
-    function refetch() {
-        loading.value = true;
-        result.value = null;
-        error.value = null;
-        load()
-    }
 
     function setVariables(variables) {
         queryVariables = variables;
@@ -54,7 +50,6 @@ export function useLazyQuery(query, variables = {}) {
         result,
         error,
         // fn
-        refetch,
         load,
         setVariables,
     }
