@@ -35,6 +35,25 @@ module.exports = {
 
     },
 
+    // ---------------
+    // Login 
+    // ---------------
+    login: {
+        errors: {
+            user_not_found: "Email or password or both don't match",
+            fetch_error:"Failed to Fetch"
+        },
+        form:{
+            email:'Email',
+            password:'Password',
+            submit:'Submit',
+            validation_errors_hints:{
+                email:' A valid email is required',
+                password:'A valid password is required, with 8 characters at least and 24 max'
+            }
+        }
+    },
+
 
 
 

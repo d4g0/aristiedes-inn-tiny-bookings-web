@@ -10,7 +10,9 @@
             'opacity-60': isSending,
             'text-red-700': emailError,
           }"
-          >Email</label
+          >
+          {{$t('login.form.email')}}
+          </label
         >
         <input
           type="email"
@@ -31,7 +33,9 @@
         <transition name="fade">
           <div class="pl-2 mt-1 text-red-700 text-sm" v-if="emailError">
             <span aria-hidden="true">*</span>
-            <span class=""> A valid email is required </span>
+            <span class="">
+              {{ $t("login.form.validation_errors_hints.email") }}
+            </span>
           </div>
         </transition>
       </div>
@@ -40,12 +44,14 @@
       <div class="mt-4">
         <label
           for="password"
-          class="label"
+          class="label pl-2"
           :class="{
             'opacity-60': isSending,
             'text-red-700': passwError,
           }"
-          >Password</label
+          >
+          {{$t('login.form.password')}}
+          </label
         >
         <input
           type="password"
@@ -67,7 +73,7 @@
           <div class="pl-2 mt-1 text-red-700 text-sm" v-if="passwError">
             <span aria-hidden="true">*</span>
             <span class="">
-              A valid password is required, with 8 characters at least and 24 max 
+              {{ $t("login.form.validation_errors_hints.password") }}
             </span>
           </div>
         </transition>
@@ -85,11 +91,12 @@
             text-lg
             w-full
             focus-effect
+            focus:ring-brand
             disabled:bg-brand/60 disabled:cursor-not-allowed
           "
           :disabled="isSending"
         >
-          Submit
+          {{ $t("login.form.submit") }}
         </button>
 
         <!-- spinner -->

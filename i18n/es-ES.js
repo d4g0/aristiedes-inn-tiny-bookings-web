@@ -36,6 +36,25 @@ module.exports = {
 
     },
 
+    // ---------------
+    // Login 
+    // ---------------
+    login: {
+        errors: {
+            user_not_found: "El correo o la contraseña o ambos no coinciden",
+            fetch_error:"Falló al enviar"
+        },
+        form:{
+            email:'Correo',
+            password:'Contraseña',
+            submit:'Enviar',
+            validation_errors_hints:{
+                email:'Se requiere un correo válido',
+                password:'Se requiere de una contraseña válida de al menos 8 caracteres y máximo 24'
+            }
+        }
+    },
+
 
     // ---------------
     // 404 
