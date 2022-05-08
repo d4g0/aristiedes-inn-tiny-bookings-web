@@ -98,7 +98,7 @@
 import { onMounted, watch } from "@vue/composition-api";
 import { createFocusTrap } from "focus-trap";
 import XIcon from "~/components/icons/XIcon.vue";
-import { wait } from '~/utils';
+import { wait } from "~/utils";
 import { onKeyUp } from "@vueuse/core";
 
 export default {
@@ -128,7 +128,9 @@ export default {
     });
 
     onKeyUp("Escape", () => {
-      emit("close");
+      if (props.langMenuNeeded) {
+        emit("close");
+      }
     });
     // ---------------
     // Focus Trap
