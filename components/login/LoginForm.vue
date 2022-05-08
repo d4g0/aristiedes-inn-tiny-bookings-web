@@ -10,10 +10,9 @@
             'opacity-60': isSending,
             'text-red-700': emailError,
           }"
-          >
-          {{$t('login.form.email')}}
-          </label
         >
+          {{ $t("login.form.email") }}
+        </label>
         <input
           type="email"
           name="email"
@@ -49,10 +48,9 @@
             'opacity-60': isSending,
             'text-red-700': passwError,
           }"
-          >
-          {{$t('login.form.password')}}
-          </label
         >
+          {{ $t("login.form.password") }}
+        </label>
         <input
           type="password"
           name="password"
@@ -90,8 +88,7 @@
             font-medium
             text-lg
             w-full
-            focus-effect
-            focus:ring-brand
+            focus-effect focus:ring-brand
             disabled:bg-brand/60 disabled:cursor-not-allowed
           "
           :disabled="isSending"
@@ -134,9 +131,8 @@
       </div>
     </form>
     <!-- data  debug -->
-    <div
+    <!-- <div
       class="mt-10 border-gray-600 bg-gray-300 overflow-auto rounded-xl p-2"
-      v-if="false"
     >
       <pre>
 <code>
@@ -147,7 +143,7 @@ errors: {{ v.$errors }}
 v: {{ v }}
 </code>
         </pre>
-    </div>
+    </div> -->
   </div>
 </template>
 
