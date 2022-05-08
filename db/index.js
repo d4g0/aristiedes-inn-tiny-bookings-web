@@ -18,7 +18,8 @@ export const navigationLinks = {
 
 export const EVENTS = {
     LOGIN: {
-        FORM_SUBMITION_EVENT: "form-submition"
+        FORM_SUBMITION_EVENT: "form-submition",
+        SUCCESS:'login-success',
     }
 }
 
