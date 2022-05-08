@@ -1,15 +1,16 @@
 <template>
   <div class="w-full min-h-screen bg-white" ref="shell">
     <Navigation />
-    <main class="pt-nav-h">
-      <Nuxt />
-      <LangMenuOptions
-        @close="onCloseLangOptions"
-        :langMenuNeeded="langOptionsNeeded"
-      />
-      
-    </main>
-    <Footer class="mt-44"/>
+    <ToastControler>
+      <main class="pt-nav-h">
+        <Nuxt />
+        <LangMenuOptions
+          @close="onCloseLangOptions"
+          :langMenuNeeded="langOptionsNeeded"
+        />
+      </main>
+    </ToastControler>
+    <Footer class="mt-44" />
   </div>
 </template>
 
