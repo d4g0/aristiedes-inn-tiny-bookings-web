@@ -1,20 +1,76 @@
 <template>
   <div class="w-full sm:px-8">
-    <form>
+    <form @submit.prevent="onFormSubmit">
       <!-- email -->
       <div class="mt-4">
-        <label for="email" class="label">Email</label>
-        <input type="email" name="email" class="input-field focus-effect" />
+        <label
+          for="email"
+          class="label pl-2"
+          :class="{
+            'opacity-60': isSending,
+            'text-red-700': emailError,
+          }"
+          >Email</label
+        >
+        <input
+          type="email"
+          name="email"
+          class="
+            input-field
+            focus-effect
+            border-gray-800/40 border
+            focus:ring-brand
+          "
+          :disabled="isSending"
+          :class="{
+            'opacity-60': isSending,
+            'text-red-700 border-red-700 focus:ring-red-700': emailError,
+          }"
+          v-model="v.email.$model"
+        />
+        <transition name="fade">
+          <div class="pl-2 mt-1 text-red-700 text-sm" v-if="emailError">
+            <span aria-hidden="true">*</span>
+            <span class=""> A valid email is required </span>
+          </div>
+        </transition>
       </div>
 
       <!-- passw -->
       <div class="mt-4">
-        <label for="password" class="label">Password</label>
+        <label
+          for="password"
+          class="label"
+          :class="{
+            'opacity-60': isSending,
+            'text-red-700': passwError,
+          }"
+          >Password</label
+        >
         <input
           type="password"
           name="password"
-          class="input-field focus-effect"
+          class="
+            input-field
+            focus-effect
+            border-gray-800/40 border
+            focus:ring-brand
+          "
+          :disabled="isSending"
+          :class="{
+            'opacity-60': isSending,
+            'text-red-700 border-red-700 focus:ring-red-700': passwError,
+          }"
+          v-model="v.password.$model"
         />
+        <transition name="fade">
+          <div class="pl-2 mt-1 text-red-700 text-sm" v-if="passwError">
+            <span aria-hidden="true">*</span>
+            <span class="">
+              A password with 8 characters at least is required
+            </span>
+          </div>
+        </transition>
       </div>
 
       <!-- submit -->
@@ -70,11 +126,33 @@
         </transition>
       </div>
     </form>
+    <!-- data  debug -->
+    <div
+      class="mt-10 border-gray-600 bg-gray-300 overflow-auto rounded-xl p-2"
+      v-if="false"
+    >
+      <pre>
+<code>
+email: {{ email }} 
+passwd: {{ password }}
+invalid: {{ v.$invalid }}
+errors: {{ v.$errors }}
+v: {{ v }}
+</code>
+        </pre>
+    </div>
   </div>
 </template>
 
 <script>
-import { ref } from "@nuxtjs/composition-api";
+import { ref, computed } from "@nuxtjs/composition-api";
+import useVuelidate from "@vuelidate/core";
+import { EVENTS } from "~/db";
+import {
+  required,
+  email as emailValidation,
+  minLength,
+} from "@vuelidate/validators";
 export default {
   props: {
     isSending: {
@@ -82,11 +160,51 @@ export default {
       default: false,
     },
   },
-  setup() {
+  setup(props, { emit }) {
     const email = ref("");
     const password = ref("");
+    // user has tryed to submit the form
+    const utts = ref(false);
+    const rules = {
+      email: { required, emailValidation },
+      password: { required, minLength: minLength(8) },
+    };
 
-    return {};
+    const v = useVuelidate(rules, { email, password });
+
+    function onFormSubmit() {
+      utts.value = true;
+
+      console.log({
+        evt: EVENTS.LOGIN.FORM_SUBMITION_EVENT,
+        email: email.value,
+        password: password.value,
+      });
+
+      // emit
+      if (!v.value.$invalid) {
+        emit(EVENTS.LOGIN.FORM_SUBMITION_EVENT, {
+          email: email.value,
+          password: password.value,
+        });
+      }
+    }
+
+    const emailError = computed(() => utts.value && v.value.email.$invalid);
+    const passwError = computed(() => utts.value && v.value.password.$invalid);
+
+    return {
+      // state
+      utts,
+      email,
+      password,
+      v,
+      // computed
+      emailError,
+      passwError,
+      // fn
+      onFormSubmit,
+    };
   },
 };
 </script>
@@ -102,14 +220,12 @@ export default {
             p-2
             rounded-xl
             font-medium
-            bg-transparent
-            border-gray-800/40 border;
+            bg-transparent;
 }
 .focus-effect {
   @apply transition-shadow duration-500
             focus:outline-none
             focus:ring
-            focus:ring-brand
             focus:ring-offset-white
             focus:ring-offset-2;
 }
