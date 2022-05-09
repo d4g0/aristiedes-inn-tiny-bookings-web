@@ -22,13 +22,13 @@ export default {
     // auth store
     const authStore = useAuthStore();
     // authenticate & redirect
-    const { authenticate, isAuthenticated } = authStore;
+    const { authenticate } = authStore;
     const { user } = storeToRefs(authStore);
 
     // handle case a prev session was found in browser
     //
     function hanlePrevSessionIfAny() {
-      if (isAuthenticated()) {
+      if (user.value != null) {
         handleRedirect(user.value);
       }
     }
