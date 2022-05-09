@@ -3,7 +3,16 @@
     <div class="bg-white relative border-obsidiana/10 border-b">
       <!-- main navigation -->
       <div
-        class="mx-auto max-w-screen-lg xl:max-w-screen-xl py-1 px-5 flex items-center justify-between"
+        class="
+          mx-auto
+          max-w-screen-lg
+          xl:max-w-screen-xl
+          py-1
+          px-5
+          flex
+          items-center
+          justify-between
+        "
       >
         <!-- logo -->
         <div class="flex items-center">
@@ -27,6 +36,7 @@
             <li v-for="(link, index) in navigationLinks" :key="index">
               <NavigationLargeLink :link="{ ...link, pathName }" />
             </li>
+            <li><NavigationLargeLogOutBtn :btn="{ body: 'Logout' }" v-if="renderLogOut"/></li>
           </ul>
         </div>
       </div>
@@ -35,9 +45,12 @@
 </template>
 
 <script>
+import { storeToRefs } from "pinia";
+import { useAuthStore } from "~/stores/auth";
+import NavigationLargeLogOutBtn from "./NavigationLargeLogOutBtn.vue";
+import { computed } from '@nuxtjs/composition-api';
 export default {
-  components: {},
-
+  components: { NavigationLargeLogOutBtn },
   props: {
     navigationLinks: {
       type: Array,
@@ -52,6 +65,16 @@ export default {
       type: String,
       default: "/",
     },
+  },
+
+  setup() {
+    const authStore = useAuthStore();
+    const { user } = storeToRefs(authStore);
+    const renderLogOut = computed(() => (user.value ? true : false));
+
+    return {
+      renderLogOut,
+    };
   },
 };
 </script>

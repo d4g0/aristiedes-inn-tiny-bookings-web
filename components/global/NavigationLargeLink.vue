@@ -2,7 +2,17 @@
   <div class="transition-all relative py-2">
     <nuxt-link
       :to="localePath(link.route)"
-      class="text-[#086ba5] text-sm block font-medium hover:text-opacity-100 hover:bg-gray-300 dark:hover:bg-gray-500 px-2 py-1 rounded-xl focus-styles"
+      class="
+        text-[#086ba5] text-md
+        block
+        font-medium
+        hover:text-opacity-100 hover:bg-gray-200
+        dark:hover:bg-gray-500
+        px-2
+        py-1
+        rounded-xl
+        focus-styles
+      "
     >
       <span
         class="transition-all duration-150"
