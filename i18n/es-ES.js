@@ -42,7 +42,8 @@ module.exports = {
     login: {
         errors: {
             user_not_found: "El correo o la contraseña o ambos no coinciden",
-            fetch_error:"Falló al enviar"
+            fetch_error:"Falló al enviar",
+            validation_error:`El email que ha introducido no parece ser real, por favor  use solo un email real.`
         },
         form:{
             email:'Correo',
