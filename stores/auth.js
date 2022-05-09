@@ -35,6 +35,9 @@ export const useAuthStore = defineStore(AUTH_STORAGE_KEY, () => {
 
     }
 
+
+
+
     function deauthenticate() {
         user.value = null;
         token.value = null;
@@ -44,6 +47,24 @@ export const useAuthStore = defineStore(AUTH_STORAGE_KEY, () => {
         localStorage.removeItem(AUTH_STORAGE_KEY)
     }
 
+    // in tab session only
+    function authenticateLocal(auth = {
+        user,
+        token,
+        token_created_at
+    }) {
+
+        user.value = auth.user;
+        token.value = auth.token;
+        token_created_at.value = auth.token_created_at;
+
+    }
+
+    function deauthenticateLocal() {
+        user.value = null;
+        token.value = null;
+        token_created_at.value = null;
+    }
 
     return {
         // state
@@ -54,5 +75,7 @@ export const useAuthStore = defineStore(AUTH_STORAGE_KEY, () => {
         isAuthenticated,
         authenticate,
         deauthenticate,
+        deauthenticateLocal,
+        authenticateLocal
     }
 })
