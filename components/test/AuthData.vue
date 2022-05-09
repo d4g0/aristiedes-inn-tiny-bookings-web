@@ -1,22 +1,23 @@
 <template>
   <pre>
 <code>
-auth {{auth}}
+auth: {{ { user, token, token_created_at } }}
 </code>
   </pre>
 </template>
 
 <script>
+import { storeToRefs } from "pinia";
+import { useAuthStore } from "~/stores/auth";
 export default {
-  props: {
-    auth: {
-      type: Object,
-      default: () => ({
-        user: {},
-        token: "",
-        token_created_at: "",
-      }),
-    },
+  setup() {
+    const authStore = useAuthStore();
+    const { user, token, token_created_at } = storeToRefs(authStore);
+    return {
+      user,
+      token,
+      token_created_at,
+    };
   },
 };
 </script>

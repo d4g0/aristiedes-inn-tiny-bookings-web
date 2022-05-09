@@ -2,52 +2,18 @@
   <div class="p-10">
     <h1 class="text-2xl font-bold">Home</h1>
     <div class="min-h-screen">
-      <AuthData :auth="{ user, token, token_created_at }" />
+      <AuthData />
     </div>
   </div>
 </template>
 
 <script>
-import { storeToRefs } from "pinia";
 import AuthData from "~/components/test/AuthData.vue";
-import { useAuthStore } from "~/stores/auth";
-import { onMounted, useContext } from "@nuxtjs/composition-api";
-import { USER_ROLES } from "~/db";
+
 export default {
   name: "IndexPage",
   // middleware: "home",
   components: { AuthData },
-  setup() {
-    const authStore = useAuthStore();
-    const { user, token, token_created_at } = storeToRefs(authStore);
-    // console.log(user);
-
-    onMounted(mountedSecuence);
-    function mountedSecuence() {
-      redirectIfAdmin();
-    }
-    // redirect to dashboard if an admin is logedin
-    const { isAuthenticated } = authStore;
-
-    const ctx = useContext();
-
-    function redirectIfAdmin() {
-      if (!isAuthenticated()) {
-        return;
-      }
-
-      const user_role = user.value?.user_role;
-      if ([USER_ROLES.BASIC_ADMIN, USER_ROLES.FULL_ADMIN].includes(user_role)) {
-        ctx.redirect(200, ctx.localePath("/admin"));
-      }
-    }
-
-    return {
-      user,
-      token,
-      token_created_at,
-    };
-  },
   head() {
     const DOMAIN = this?.$nuxt?.context?.env?.DOMAIN;
     const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true });
