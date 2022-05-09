@@ -11,11 +11,11 @@ import { storeToRefs } from "pinia";
 import { useAuthStore } from "~/stores/auth";
 export default {
   layout: "admin",
+  middleware: "admin",
   components: { AuthData },
   setup() {
     const authStore = useAuthStore();
     const { user, token, token_created_at } = storeToRefs(authStore);
-    // console.log(user);
     return {
       user,
       token,

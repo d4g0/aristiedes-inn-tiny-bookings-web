@@ -9,10 +9,14 @@ import { useAuthStore } from "~/stores/auth";
 export default {
   setup() {
     const authStore = useAuthStore();
-    const { authenticate , deauthenticate} = authStore;
+    const { authenticate, deauthenticate, isAuthenticated } = authStore;
     onMounted(syncAuth);
 
     function syncAuth() {
+      // case is Authenticated: ignore
+      if (isAuthenticated()) {
+        return;
+      }
       console.log("syncing auth...");
 
       var rawSessionData = localStorage.getItem(AUTH_STORAGE_KEY);
