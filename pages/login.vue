@@ -9,7 +9,7 @@ import { EVENTS, USER_ROLES } from "~/db";
 const { SUCCESS } = EVENTS.LOGIN;
 import { useAuthStore } from "~/stores/auth";
 import { storeToRefs } from "pinia";
-import { useContext } from "@nuxtjs/composition-api";
+import { onMounted, useContext } from "@nuxtjs/composition-api";
 
 export default {
   setup(props, { root }) {
@@ -22,33 +22,43 @@ export default {
     // auth store
     const authStore = useAuthStore();
     // authenticate & redirect
-    const { authenticate } = authStore;
+    const { authenticate, isAuthenticated } = authStore;
     const { user } = storeToRefs(authStore);
+
+    // handle case a prev session was found in browser
+    //
+    function hanlePrevSessionIfAny() {
+      if (isAuthenticated()) {
+        handleRedirect(user.value);
+      }
+    }
+
+    onMounted(hanlePrevSessionIfAny);
 
     function onLoginSuccess(authData) {
       console.log("onLoginSuccess");
       console.log(authData);
       authenticate(authData);
-      handleRedirect(authData);
+      handleRedirect(authData.user);
     }
 
-    function handleRedirect(authData) {
-      const user = authData.user;
-
+    function handleRedirect(user) {
       if (
         user.user_role == USER_ROLES.FULL_ADMIN ||
         user.user_role == USER_ROLES.BASIC_ADMIN
       ) {
         console.log("Found Admin");
         // redirect to admin dashboard
+        return ctx.redirect(200, ctx.localePath("/admin"));
       }
+
       if (user.user_role == USER_ROLES.CLIENT) {
         console.log("Found Client");
         // redirect to client private home
-        ctx.redirect(200, ctx.localePath("/"));
-      } else {
-        console.log("Unknow user is user role dude", user);
+        return ctx.redirect(200, ctx.localePath("/"));
       }
+
+      console.log("Unknow user is user role dude", user);
     }
 
     return {
