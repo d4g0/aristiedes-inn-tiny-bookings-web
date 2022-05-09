@@ -1,21 +1,29 @@
 <template>
   <nav
-    class="fixed z-10 top-0 left-0 w-full transform transition-transform duration-500"
+    class="
+      fixed
+      z-10
+      top-0
+      left-0
+      w-full
+      transform
+      transition-transform
+      duration-500
+    "
     ref="nav_ref"
     :class="showShadow ? 'shadow-md lg:shadow-none' : ''"
     v-show="shouldRenderNav"
   >
     <transition name="fade-slow" mode="out-in">
-     
       <NavigationLarge
         v-if="width > 1023 - 15 && width > 0"
-        :navigationLinks="navigationLinks.public"
+        :navigationLinks="currentLinks"
         :pathName="computedPath"
         class=""
       />
       <NavigationMobile
         v-else
-        :navigationLinks="navigationLinks.public"
+        :navigationLinks="currentLinks"
         @nav-open-change="onNavOpenChange"
         class="lg:hidden"
       />
@@ -25,9 +33,17 @@
 
 <script>
 import { useEventListener, useThrottleFn } from "@vueuse/core";
-import { onMounted, ref, inject } from "@vue/composition-api";
 import { wait } from "~/utils";
-import { navigationLinks } from "~/db";
+import { navigationLinks, USER_ROLES } from "~/db";
+import { useAuthStore } from "~/stores/auth";
+import { storeToRefs } from "pinia";
+import {
+  computed,
+  watch,
+  onMounted,
+  ref,
+  inject,
+} from "@nuxtjs/composition-api";
 
 export default {
   components: {
@@ -162,15 +178,44 @@ export default {
       }
     }
 
+    // ---------------
+    // Navigation links selections handling
+    // ---------------
+    const authStore = useAuthStore();
+    const { user } = storeToRefs(authStore);
+    const { isAuthenticated } = authStore;
+    // public is the default value (in db)
+    const currentNavigationLinksSelection = ref("public");
+    const currentLinks = computed(
+      () => navigationLinks[currentNavigationLinksSelection.value]
+    );
+    watch(user, (newU, oU) => {
+      if (newU) {
+        if (!isAuthenticated()) {
+          return;
+        }
+        console.log(newU)
+        const user_role = newU.user_role;
+        if (user_role == USER_ROLES.CLIENT) {
+          currentNavigationLinksSelection.value = "authenticatedClient";
+        }
+        if (
+          [USER_ROLES.FULL_ADMIN, USER_ROLES.BASIC_ADMIN].includes(user_role)
+        ) {
+          currentNavigationLinksSelection.value = "authenticatedAdmin";
+        }
+      }
+    });
+
     return {
       // ref
       nav_ref,
       // state
-      navigationLinks,
       pathName,
       showShadow,
       width,
       shouldRenderNav,
+      currentLinks,
       // fn
       onNavOpenChange,
     };

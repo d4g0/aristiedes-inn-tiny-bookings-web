@@ -12,6 +12,8 @@ module.exports = {
             home: 'Home',
             login: 'Login',
             singup: 'Sing Up',
+            bookings: 'Bookings',
+            payments: 'Payments',
         },
         reserve: 'Book Now'
     },
@@ -41,16 +43,16 @@ module.exports = {
     login: {
         errors: {
             user_not_found: "Email or password or both don't match",
-            fetch_error:"Failed to Fetch",
-            validation_error:`Provided email it's not supported, please  use real a email only.`
+            fetch_error: "Failed to Fetch",
+            validation_error: `Provided email it's not supported, please  use real a email only.`
         },
-        form:{
-            email:'Email',
-            password:'Password',
-            submit:'Submit',
-            validation_errors_hints:{
-                email:' A valid email is required',
-                password:'A valid password is required, with 8 characters at least and 24 max'
+        form: {
+            email: 'Email',
+            password: 'Password',
+            submit: 'Submit',
+            validation_errors_hints: {
+                email: ' A valid email is required',
+                password: 'A valid password is required, with 8 characters at least and 24 max'
             }
         }
     },

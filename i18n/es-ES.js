@@ -12,6 +12,8 @@ module.exports = {
             home: 'Inicio',
             login: 'Iniciar Sessión',
             singup: 'Registrarse',
+            bookings: 'Reservaciones',
+            payments: 'Pagos',
         },
         reserve: 'Reservar'
     },

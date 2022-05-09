@@ -12,6 +12,27 @@ export const navigationLinks = {
             route: "/singup",
             i18nPath: "nav.links.singup",
         },
+    ],
+    authenticatedClient: [
+        {
+            route: "/",
+            i18nPath: "nav.links.home",
+        },
+        {
+            route: "/bookings",
+            i18nPath: "nav.links.bookings",
+        },
+        {
+            route: "/payments",
+            i18nPath: "nav.links.payments",
+        },
+    ],
+    authenticatedAdmin: [
+        {
+            route: "/admin",
+            i18nPath: "nav.links.home",
+        },
+
     ]
 }
 
