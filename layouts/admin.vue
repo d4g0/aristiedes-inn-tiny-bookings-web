@@ -1,6 +1,6 @@
 <template>
   <div class="w-full min-h-screen bg-white" ref="shell">
-    <Navigation />
+    <AdminNavigation />
     <AuthCtrl />
     <ToastControler>
       <main class="pt-nav-h">

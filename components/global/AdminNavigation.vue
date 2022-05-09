@@ -34,9 +34,8 @@
 <script>
 import { useEventListener, useThrottleFn } from "@vueuse/core";
 import { wait } from "~/utils";
-import { navigationLinks, USER_ROLES } from "~/db";
-import { useAuthStore } from "~/stores/auth";
-import { storeToRefs } from "pinia";
+import { navigationLinks } from "~/db";
+
 import {
   computed,
   watch,
@@ -181,29 +180,7 @@ export default {
     // ---------------
     // Navigation links selections handling
     // ---------------
-    const authStore = useAuthStore();
-    const { user } = storeToRefs(authStore);
-    const { isAuthenticated } = authStore;
-    // public is the default value (in db)
-    const currentNavigationLinksSelection = ref("public");
-    const currentLinks = computed(
-      () => navigationLinks[currentNavigationLinksSelection.value]
-    );
-    watch(user, (newU, oU) => {
-      if (newU) {
-        if (!isAuthenticated()) {
-          return;
-        }
-        // console.log(newU)
-        const user_role = newU.user_role;
-        if (user_role == USER_ROLES.CLIENT) {
-          currentNavigationLinksSelection.value = "authenticatedClient";
-        }
-        // case admin offloaded to AdminNavigation component
-      } else {
-        currentNavigationLinksSelection.value = "public";
-      }
-    });
+    const currentLinks = navigationLinks.authenticatedAdmin;
 
     return {
       // ref
