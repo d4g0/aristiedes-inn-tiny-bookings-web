@@ -4,13 +4,14 @@ export default {
     API_URL: process.env.API_URL || 'http://localhost:3010/graphql',
     DOMAIN: process.env.DOMAIN || 'tiny-bookings.com',
     BRAND: process.env.BRAND || 'tiny-bookings',
+    SITE_NAME: process.env.SITE_NAME || 'tiny-bookings',
   },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head() {
-    if(!this.$nuxtI18nHead){
+    if (!this.$nuxtI18nHead) {
       return
     }
     const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
