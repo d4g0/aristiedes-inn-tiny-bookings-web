@@ -1,13 +1,26 @@
 <template>
   <div class="">
-    <div class="relative ">
+    <div class="relative">
       <button
         @click="onClick"
         id="lang-selector-btn"
         :aria-label="$t('langSwitcher.label')"
         aria-haspopup="true"
         aria-controls="lang_menu"
-        class="py-2 px-2 rounded-lg w-full h-full flex items-center justify-center space-x-2 focus-styles  hover:bg-gray-200"
+        class="
+          py-2
+          px-2
+          rounded-lg
+          w-full
+          h-full
+          flex
+          items-center
+          justify-center
+          space-x-2
+          focus-styles
+          hover:bg-gray-300
+          border-gray-500 border 
+        "
       >
         <WorldIcon aria-hidden="true" class="text-obsidiana/80" />
 
