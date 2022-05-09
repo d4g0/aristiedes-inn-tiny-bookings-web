@@ -2,6 +2,7 @@
   <div class="w-full min-h-screen bg-white" ref="shell">
     <AdminNavigation />
     <AuthCtrl />
+    <AuthMultiTabSync/>
     <ToastControler>
       <main class="pt-nav-h">
         <Nuxt />
@@ -20,11 +21,13 @@ import { useElementSize } from "@vueuse/core";
 import LangMenuOptions from "~/components/global/LangMenuOptions.vue";
 import useBodOverflow from "~/composables/useBodyOverflow.js";
 import AuthCtrl from "~/components/auth/AuthCtrl.vue";
+import AuthMultiTabSync from '~/components/auth/AuthMultiTabSync.vue';
 
 export default {
   components: {
     LangMenuOptions,
     AuthCtrl,
+    AuthMultiTabSync,
   },
   setup() {
     // reactive $width spred
