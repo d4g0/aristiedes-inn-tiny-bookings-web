@@ -6,7 +6,7 @@ export const useAuthStore = defineStore(AUTH_STORAGE_KEY, () => {
     const token = ref(null);
     const token_created_at = ref(null);
 
-    
+
 
     function isAuthenticated() {
         return user.value != null
@@ -45,6 +45,11 @@ export const useAuthStore = defineStore(AUTH_STORAGE_KEY, () => {
 
 
     return {
+        // state
+        user,
+        token,
+        token_created_at,
+        // fn
         isAuthenticated,
         authenticate,
         deauthenticate,

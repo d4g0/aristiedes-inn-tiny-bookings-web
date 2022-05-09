@@ -96,9 +96,5 @@ export default {
         type: "javascript/auto"
       });
     }
-  },
-
-  postcss: {
-    autoprefixer: {}
   }
 }

@@ -46,6 +46,12 @@ $ yarn generate
 
 ## Tasks
 - Login
-  - create form
-  - call api
+  - form [done]
+    - errors handling [done]
+  - call api [done]
+    - errors handling [done]
   - procced with redirections to client or admin space
+
+
+## TODOS
+Fix focus styles non show up in non chrome browsers (autoprefixer)

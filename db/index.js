@@ -19,7 +19,7 @@ export const navigationLinks = {
 export const EVENTS = {
     LOGIN: {
         FORM_SUBMITION_EVENT: "form-submition",
-        SUCCESS:'login-success',
+        SUCCESS: 'login-success',
     }
 }
 
@@ -30,4 +30,11 @@ export const API_ERRORS = {
 
 export const TOAST_TYPES = {
     error: 'error-toast'
+}
+
+
+export const USER_ROLES = {
+    FULL_ADMIN: 'FULL_ADMIN',
+    BASIC_ADMIN: 'BASIC_ADMIN',
+    CLIENT: 'CLIENT'
 }

@@ -214,7 +214,7 @@ export default {
 </script>
 
 <style scopped>
-.label {
+/* .label {
   @apply block text-lg font-medium;
 }
 .input-field {
@@ -235,8 +235,7 @@ export default {
 }
 
 .spinner-border {
-  /* border: 0.25em solid white; */
-  /* border-right-color: transparent; */
+  
   @apply border-[0.25em] border-solid border-r-transparent border-white;
-}
+} */
 </style>
