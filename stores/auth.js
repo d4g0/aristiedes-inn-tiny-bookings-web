@@ -113,6 +113,19 @@ export const useAuthStore = defineStore(AUTH_STORAGE_KEY, () => {
     }
 
 
+    function isClient() {
+        // case no user
+        if(!user.value){
+            return false
+        }
+        // case user
+        const user_role = user?.value.user_role;
+        const isClient = USER_ROLES.CLIENT == user_role;
+
+        return isClient;
+    }
+
+
 
 
 
@@ -128,6 +141,7 @@ export const useAuthStore = defineStore(AUTH_STORAGE_KEY, () => {
         deauthenticate,
         deauthenticateLocal,
         authenticateLocal,
-        isAdmin
+        isAdmin,
+        isClient
     }
 })
