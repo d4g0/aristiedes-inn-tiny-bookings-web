@@ -98,6 +98,20 @@ export const useAuthStore = defineStore(AUTH_STORAGE_KEY, () => {
     }
 
 
+    function isAdmin() {
+        // case no user
+        if(!user.value){
+            return false
+        }
+        // case user
+        const user_role = user.value.user_role;
+        const isAdmin = [
+            USER_ROLES.BASIC_ADMIN, USER_ROLES.FULL_ADMIN
+        ].includes(user_role);
+
+        return isAdmin
+    }
+
 
 
 
@@ -113,6 +127,7 @@ export const useAuthStore = defineStore(AUTH_STORAGE_KEY, () => {
         authenticate,
         deauthenticate,
         deauthenticateLocal,
-        authenticateLocal
+        authenticateLocal,
+        isAdmin
     }
 })
