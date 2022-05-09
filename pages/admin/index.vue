@@ -1,22 +1,25 @@
 <template>
   <div class="frame">
-    <h1 class="text-4xl font-bold">Client Home</h1>
-    <UserData :user="user" />
+    <h1 class="text-4xl font-bold">Admin Home</h1>
+    <AuthData :auth="{ user, token, token_created_at }" />
   </div>
 </template>
 
 <script>
+import AuthData from "~/components/test/AuthData.vue";
 import { storeToRefs } from "pinia";
-import UserData from "~/components/test/UserData.vue";
 import { useAuthStore } from "~/stores/auth";
 export default {
-  components: { UserData },
+  layout: "admin",
+  components: { AuthData },
   setup() {
     const authStore = useAuthStore();
-    const { user } = storeToRefs(authStore);
-    // console.log(user)
+    const { user, token, token_created_at } = storeToRefs(authStore);
+    // console.log(user);
     return {
       user,
+      token,
+      token_created_at,
     };
   },
 };
