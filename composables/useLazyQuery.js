@@ -24,7 +24,8 @@ export function useLazyQuery(query, variables = {}) {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ query, variables: queryVariables })
+                    body: JSON.stringify({ query, variables: queryVariables }),
+                    mode: 'cors'
                 }
             );
 
