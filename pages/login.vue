@@ -45,7 +45,7 @@ export default {
       if (user.user_role == USER_ROLES.CLIENT) {
         console.log("Found Client");
         // redirect to client private home
-        ctx.redirect(200, ctx.localePath("/client/"));
+        ctx.redirect(200, ctx.localePath("/"));
       } else {
         console.log("Unknow user is user role dude", user);
       }

@@ -42,7 +42,13 @@ $ yarn generate
     -   clients sing up page
 -   Login
     -   clients, admins login page
+when a clients logins or singups redirect them to home and use navigation for authenticated clients;
 
+#### Authenticated Client
+-   Home
+-   Logout
+-   Bookings
+-   Payments
 
 ## Tasks
 - Login
@@ -54,4 +60,5 @@ $ yarn generate
 
 
 ## TODOS
+[done]
 Fix focus styles non show up in non chrome browsers (autoprefixer)

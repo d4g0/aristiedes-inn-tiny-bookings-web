@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from '@nuxtjs/composition-api';
-const AUTH_STORAGE_KEY = 'auth-storage';
+import { AUTH_STORAGE_KEY } from '~/db';
+
 export const useAuthStore = defineStore(AUTH_STORAGE_KEY, () => {
     const user = ref(null);
     const token = ref(null);

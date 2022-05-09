@@ -15,6 +15,7 @@ export const navigationLinks = {
     ]
 }
 
+export const AUTH_STORAGE_KEY = 'auth-storage';
 
 export const EVENTS = {
     LOGIN: {
@@ -39,3 +40,5 @@ export const USER_ROLES = {
     BASIC_ADMIN: 'BASIC_ADMIN',
     CLIENT: 'CLIENT'
 }
+
+export const API_TOKEN_LIVE_HOURS = 2;

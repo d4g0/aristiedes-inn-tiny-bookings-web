@@ -1,6 +1,7 @@
 <template>
   <div class="w-full min-h-screen bg-white" ref="shell">
     <Navigation />
+    <AuthCtrl />
     <ToastControler>
       <main class="pt-nav-h">
         <Nuxt />
@@ -19,10 +20,12 @@ import { ref, provide, watch } from "@vue/composition-api";
 import { useElementSize } from "@vueuse/core";
 import LangMenuOptions from "~/components/global/LangMenuOptions.vue";
 import useBodOverflow from "~/composables/useBodyOverflow.js";
+import AuthCtrl from "~/components/auth/AuthCtrl.vue";
 
 export default {
   components: {
     LangMenuOptions,
+    AuthCtrl,
   },
   setup() {
     // reactive $width spred

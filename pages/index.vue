@@ -1,15 +1,29 @@
 <template>
   <div class="p-10">
-    <h1 class="text-2xl font-bold">Foo Bar Bazz</h1>
+    <h1 class="text-2xl font-bold">Home</h1>
     <div class="min-h-screen">
-
+      <AuthData :auth="{ user, token, token_created_at }" />
     </div>
   </div>
 </template>
 
 <script>
+import { storeToRefs } from "pinia";
+import AuthData from "~/components/test/AuthData.vue";
+import { useAuthStore } from "~/stores/auth";
 export default {
   name: "IndexPage",
+  components: { AuthData },
+  setup() {
+    const authStore = useAuthStore();
+    const { user, token, token_created_at } = storeToRefs(authStore);
+    // console.log(user);
+    return {
+      user,
+      token,
+      token_created_at,
+    };
+  },
   head() {
     const DOMAIN = this?.$nuxt?.context?.env?.DOMAIN;
     const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true });
