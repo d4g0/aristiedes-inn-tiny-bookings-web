@@ -1,7 +1,7 @@
 <template>
   <button
     class="
-      hover:bg-gray-300
+      hover:bg-gray-200
       dark:hover:bg-gray-600
       transition-all
       font-medium
@@ -25,7 +25,6 @@
 
 <script>
 import { useAuthStore } from "~/stores/auth";
-import { useContext } from "@nuxtjs/composition-api";
 export default {
   props: {
     btn: {
@@ -42,7 +41,6 @@ export default {
     // ---------------
     const authStore = useAuthStore();
     const { deauthenticate } = authStore;
-    const ctx = useContext();
     function onLogout() {
       console.log("(logout-btn) on logout");
       deauthenticate();

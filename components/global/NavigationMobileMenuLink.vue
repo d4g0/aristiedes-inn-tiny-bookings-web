@@ -4,7 +4,7 @@
       relative
       transition-all
       overflow-x-visible
-      hover:bg-gray-300
+      hover:bg-gray-200
       dark:hover:bg-gray-600
       rounded-lg
     "
