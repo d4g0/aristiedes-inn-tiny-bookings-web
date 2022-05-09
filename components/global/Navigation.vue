@@ -183,7 +183,6 @@ export default {
     // ---------------
     const authStore = useAuthStore();
     const { user } = storeToRefs(authStore);
-    // const { isAuthenticated } = authStore;
     // public is the default value (in db)
     const currentNavigationLinksSelection = ref("public");
     const currentLinks = computed(
@@ -191,9 +190,6 @@ export default {
     );
     watch(user, (newU, oU) => {
       if (newU) {
-        // if (!isAuthenticated()) {
-        //   return;
-        // }
         // console.log(newU)
         const user_role = newU.user_role;
         if (user_role == USER_ROLES.CLIENT) {

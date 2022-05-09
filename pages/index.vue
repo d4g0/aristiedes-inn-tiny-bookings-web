@@ -12,7 +12,7 @@ import AuthData from "~/components/test/AuthData.vue";
 
 export default {
   name: "IndexPage",
-  // middleware: "home",
+  middleware: "home",
   components: { AuthData },
   head() {
     const DOMAIN = this?.$nuxt?.context?.env?.DOMAIN;

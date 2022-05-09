@@ -44,10 +44,8 @@ export default {
     const { deauthenticate } = authStore;
     const ctx = useContext();
     function onLogout() {
-      console.log("on logout");
+      console.log("(logout-btn) on logout");
       deauthenticate();
-      // redirect home
-      ctx.redirect(200, ctx.localePath("/"));
       emit("activation");
     }
 

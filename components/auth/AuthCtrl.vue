@@ -9,7 +9,7 @@ import { useAuthStore } from "~/stores/auth";
 export default {
   setup() {
     const authStore = useAuthStore();
-    const { authenticate, deauthenticate, isAuthenticated } = authStore;
+    const { authenticateLocal, deauthenticateLocal, isAuthenticated } = authStore;
     onMounted(syncAuth);
 
     function syncAuth() {
@@ -39,10 +39,10 @@ export default {
 
       if (isNowBefore) {
         // authenticate
-        authenticate(authSessionData);
+        authenticateLocal(authSessionData);
       } else {
         // deauthenticate
-        deauthenticate();
+        deauthenticateLocal();
       }
 
       function isNowBeforeThen(dateStr, hoursOffset = 0) {
