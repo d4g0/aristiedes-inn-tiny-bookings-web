@@ -13,7 +13,7 @@
           >
             <div class="w-64 relative top-0 left-0">
               <LazyImage
-                src="/img/global/aristides-inn-logo.jpg"
+                src="/img/global/logo.jpg"
                 alt="Aristides Inn Logo"
                 class="rounded-xl"
               />
