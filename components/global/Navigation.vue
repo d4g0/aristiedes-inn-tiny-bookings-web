@@ -194,7 +194,7 @@ export default {
         if (!isAuthenticated()) {
           return;
         }
-        console.log(newU)
+        // console.log(newU)
         const user_role = newU.user_role;
         if (user_role == USER_ROLES.CLIENT) {
           currentNavigationLinksSelection.value = "authenticatedClient";
@@ -204,6 +204,8 @@ export default {
         ) {
           currentNavigationLinksSelection.value = "authenticatedAdmin";
         }
+      }else{
+        currentNavigationLinksSelection.value = 'public'
       }
     });
 

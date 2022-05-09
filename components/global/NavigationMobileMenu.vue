@@ -1,11 +1,34 @@
 <template>
   <div
     ref="menu_links_container"
-    class="fixed top-0 left-0 w-full transform-gpu -translate-y-full transition-all duration-700 h-screen bg-white"
+    class="
+      fixed
+      top-0
+      left-0
+      w-full
+      transform-gpu
+      -translate-y-full
+      transition-all
+      duration-700
+      h-screen
+      bg-white
+    "
     :class="show ? 'translate-y-0' : ''"
   >
     <div
-      class="px-8 sm:px-12 absolute w-full h-full pt-[140px] overflow-y-auto pb-16 transition-opacity bg-white  text-obsidiana "
+      class="
+        px-8
+        sm:px-12
+        absolute
+        w-full
+        h-full
+        pt-[140px]
+        overflow-y-auto
+        pb-16
+        transition-opacity
+        bg-white
+        text-obsidiana
+      "
       :class="show ? 'duration-1000' : 'opacity-0 duration-300'"
     >
       <!-- in site links -->
@@ -13,13 +36,16 @@
         <li v-for="(link, index) in links" :key="index" class="block">
           <NavigationMobileMenuLink :link="link" class="" />
         </li>
+        <!-- logout -->
+        <li v-if="renderLogOut">
+          <NavigationMobileMenuLogoutBtn  :btn="{ body: 'Logout' }" @activation="requestClose" />
+        </li>
       </ul>
       <!-- divider -->
       <div
         aria-hidden="true"
         class="h-[1px] w-full bg-gray-200 dark:bg-gray-500 my-[26px]"
       ></div>
-      
 
       <div class="">
         <LangSwitcherMobile @close-mobile-nav="requestClose" />
@@ -32,12 +58,17 @@
 import NavigationMobileMenuLink from "./NavigationMobileMenuLink.vue";
 import LangSwitcherMobile from "~/components/global/LangSwitcheMobile.vue";
 import { onMounted, onUnmounted, ref } from "@vue/composition-api";
+import NavigationMobileMenuLogoutBtn from "./NavigationMobileMenuLogoutBtn.vue";
+import { useAuthStore } from "~/stores/auth";
+import { computed } from "@nuxtjs/composition-api";
+import { storeToRefs } from 'pinia';
 
 export default {
   components: {
     LangSwitcherMobile,
     //
     NavigationMobileMenuLink,
+    NavigationMobileMenuLogoutBtn,
   },
   props: {
     show: {
@@ -105,9 +136,14 @@ export default {
       menu_links_container.value.removeEventListener("click", onClick);
     });
 
+    const authStore = useAuthStore();
+    const { user } = storeToRefs(authStore);
+    const renderLogOut = computed(() => (user.value ? true : false));
+
     return {
       // ref
       menu_links_container,
+      renderLogOut,
       // data
       // fn
       requestClose,
