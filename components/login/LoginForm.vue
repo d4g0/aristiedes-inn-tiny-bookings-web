@@ -212,30 +212,3 @@ export default {
   },
 };
 </script>
-
-<style scopped>
-/* .label {
-  @apply block text-lg font-medium;
-}
-.input-field {
-  @apply mt-1
-            block
-            w-full
-            p-2
-            rounded-xl
-            font-medium
-            bg-transparent;
-}
-.focus-effect {
-  @apply transition-shadow duration-500
-            focus:outline-none
-            focus:ring
-            focus:ring-offset-white
-            focus:ring-offset-2;
-}
-
-.spinner-border {
-  
-  @apply border-[0.25em] border-solid border-r-transparent border-white;
-} */
-</style>
