@@ -28,7 +28,6 @@ export default {
         return;
       }
 
-      const now = new Date();
       const isNowBefore = isNowBeforeThen(
         token_created_at,
         API_TOKEN_LIVE_HOURS
