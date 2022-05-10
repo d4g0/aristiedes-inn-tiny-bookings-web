@@ -29,7 +29,7 @@ export default {
 
     function onFormSubmit(data) {
       console.log("(sing up ctrl) form submit");
-      console.log(data);
+      // console.log(data);
 
       setVariables({
         input: {
