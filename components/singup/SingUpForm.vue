@@ -112,6 +112,25 @@
             </transition>
           </div>
 
+          <!-- captcha -->
+          <CaptchaCheckBox
+            @[CAPTCHA_COMPLETION]="onCaptchaCompletion"
+            @[CAPTCHA_ERROR]="onCaptchaError"
+            @[CAPTCHA_EXPIRED]="onCaptchaExpire"
+          />
+          <!-- captchaMisingError -->
+          <transition name="fade">
+            <div
+              class="pl-2 mt-1 text-red-700 text-sm"
+              v-if="captchaMisingError"
+            >
+              <span aria-hidden="true">*</span>
+              <span class="">
+                {{ $t("singup.errors.captcha_missing") }}
+              </span>
+            </div>
+          </transition>
+
           <!-- submit -->
           <div class="mt-[40px] relative">
             <button
@@ -167,19 +186,21 @@
         </form>
       </div>
     </transition>
+
     <!-- data  debug -->
-    <div class="mt-10 border-gray-600 bg-gray-300 overflow-auto rounded-xl p-2">
+    <!-- <div class="mt-10 border-gray-600 bg-gray-300 overflow-auto rounded-xl p-2">
       <pre>
 <code>
-name: {{ client_name}}
-last_name: {{ client_last_name}}
+captchaToken: {{ captchaToken }}
+name: {{ client_name }}
+last_name: {{ client_last_name }}
 email: {{ email }} 
 passwd: {{ password }}
 invalid: {{ v.$invalid }}
 v: {{ v }}
 </code>
         </pre>
-    </div>
+    </div> -->
     <!-- errors: {{ v.$errors }} -->
   </div>
 </template>
@@ -189,6 +210,9 @@ import { ref, computed } from "@nuxtjs/composition-api";
 import useVuelidate from "@vuelidate/core";
 import { EVENTS } from "~/db";
 const NAMES_FORM_SUBMISSION = EVENTS.SINGUP.NAMES_FORM_SUBMISSION;
+const CAPTCHA_COMPLETION = EVENTS.CAPTCHA.COMPLETION;
+const CAPTCHA_ERROR = EVENTS.CAPTCHA.ERROR;
+const CAPTCHA_EXPIRED = EVENTS.CAPTCHA.EXPIRED;
 import {
   required,
   email as emailValidation,
@@ -197,9 +221,10 @@ import {
 } from "@vuelidate/validators";
 import NamesForm from "./NamesForm.vue";
 import ChevronLeft from "~/components/icons/ChevronLeft.vue";
+import CaptchaCheckBox from "~/components/captcha/CaptchaCheckBox.vue";
 
 export default {
-  components: { NamesForm, ChevronLeft },
+  components: { NamesForm, ChevronLeft, CaptchaCheckBox },
   props: {
     isSending: {
       type: Boolean,
@@ -212,7 +237,7 @@ export default {
     const client_last_name = ref("");
     const email = ref("");
     const password = ref("");
-    const captchaToken = ref("");
+    const captchaToken = ref(null);
 
     // captcha state
     const captchaTokenReady = ref(false);
@@ -263,9 +288,30 @@ export default {
 
     // captcha
 
+    const captchaMisingError = computed(
+      () => utts.value && !captchaToken.value
+    );
+    function onCaptchaCompletion(token) {
+      captchaToken.value = token;
+      captchaTokenReady.value = true;
+    }
+
+    function onCaptchaError() {
+      captchaToken.value = null;
+      captchaTokenReady.value = false;
+    }
+
+    function onCaptchaExpire() {
+      captchaToken.value = null;
+      captchaTokenReady.value = false;
+    }
+
     return {
       // ata
       NAMES_FORM_SUBMISSION,
+      CAPTCHA_COMPLETION,
+      CAPTCHA_ERROR,
+      CAPTCHA_EXPIRED,
       // state
       client_name,
       client_last_name,
@@ -277,10 +323,17 @@ export default {
       // computed
       emailError,
       passwError,
+      captchaMisingError,
       // fn
       onNamesSubmit,
       onFormSubmit,
       backToNames,
+      onCaptchaCompletion,
+      onCaptchaError,
+      onCaptchaExpire,
+
+      // test only
+      captchaToken
     };
   },
 };

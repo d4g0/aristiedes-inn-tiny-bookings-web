@@ -60,7 +60,9 @@ module.exports = {
     singup: {
         errors: {
             name_error: 'Valid name required, it must have 1 to 60 characters.',
-            last_name_error: 'Valid last name required, it must have 1 to 60 characters .'
+            last_name_error: 'Valid last name required, it must have 1 to 60 characters .',
+            captcha_missing:'Please show us you are not a robot',
+            submition_fail:'Failed to send'
         },
         form: {
             names_title:'Tell us how you are:',

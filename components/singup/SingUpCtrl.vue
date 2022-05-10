@@ -1,15 +1,16 @@
 <template>
   <div class="w-full max-w-md mx-auto">
-    <SingUpForm @[FULL_FORM_SUBMIT]="onFormSubmit" />
+    <SingUpForm :isSending="loading" @[FULL_FORM_SUBMIT]="onFormSubmit" />
   </div>
 </template>
 
 <script>
 import SingUpForm from "./SingUpForm.vue";
-import { EVENTS } from "~/db";
+import { EVENTS, TOAST_TYPES } from "~/db";
 import { useLazyQuery } from "~/composables/useLazyQueryWithCaptcha";
 import { singup as singupQuery } from "~/querys/singup.js";
-import { ref } from "@nuxtjs/composition-api";
+import { inject, ref, watch } from "@nuxtjs/composition-api";
+import { useAuthStore } from "~/stores/auth";
 const FULL_FORM_SUBMIT = EVENTS.SINGUP.FULL_FORM_SUBMIT;
 export default {
   components: { SingUpForm },
@@ -22,27 +23,79 @@ export default {
         email: "casidy4@gmail.com",
       },
     };
-    const formData = ref("");
-    const captchaToken = ref("");
+
+    const { loading, result, error, load, setVariables, setToken } =
+      useLazyQuery(singupQuery);
+
     function onFormSubmit(data) {
-      console.log("(sing up ctrl)");
+      console.log("(sing up ctrl) form submit");
       console.log(data);
 
-      formData.value = {
-        client_last_name: data.client_last_name,
-        client_name: data.client_name,
-        email: data.email,
-        password: data.password,
-      };
+      setVariables({
+        input: {
+          client_last_name: data.client_last_name,
+          client_name: data.client_name,
+          email: data.email,
+          password: data.password,
+        },
+      });
 
-      captchaToken.value = data.captchaToken;
+      setToken(data.captchaToken);
+
+      load();
     }
 
-    const {} = useLazyQuery(singupQuery, { input: formData.value });
+    watch(result, (newR, oldR) => {
+      // console.log({ result: result.value });
+      // success
+      if (newR?.data?.singUp) {
+        onSuccess(newR?.data?.singUp);
+      }
+      // error
+      if (newR?.errors) {
+        onError(newR.errors[0]);
+      }
+    });
+
+    watch(error, (nE, oE) => {
+      if (nE) {
+        onError(nE);
+      }
+    });
+
+    const showToast = inject('showToast');
+
+    function onError(error) {
+      console.log("(singup) error detected ");
+      console.log(error.message);
+      console.log(error?.extensions?.exception?.code);
+
+      showToast(TOAST_TYPES.error, "singup.errors.submition_fail");
+    }
+
+    const authStore = useAuthStore();
+    const { authenticate } = authStore;
+
+    function onSuccess(data) {
+      console.log("(singup) user found ");
+      console.log({
+        user: data.user,
+        token: data.token,
+        token_created_at: data.token_created_at,
+      });
+
+      // authenticate & stuff aja
+      authenticate({
+        user: data.user,
+        token: data.token,
+        token_created_at: data.token_created_at,
+      });
+    }
 
     return {
       FULL_FORM_SUBMIT,
       onFormSubmit,
+      loading,
     };
   },
 };

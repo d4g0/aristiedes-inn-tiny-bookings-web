@@ -61,7 +61,9 @@ module.exports = {
     singup: {
         errors: {
             name_error: 'Un nombre válido es requrido, debe tener  entre 1 y 60 caracteres.',
-            last_name_error: 'Apellido válido es requrido, debe tener  entre 1 y 60 caracteres.'
+            last_name_error: 'Apellido válido es requrido, debe tener  entre 1 y 60 caracteres.',
+            captcha_missing:'Por favor, démuestrenos que no es un robot',
+            submition_fail:'Falló al enviar',
         },
         form: {
             names_title:'Díganos quien es:',

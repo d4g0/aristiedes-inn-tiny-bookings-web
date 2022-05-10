@@ -1,7 +1,7 @@
 <template>
   <div class="frame flex items-center justify-center">
     <!-- todo uncomment cloader for production  -->
-    <!-- <CaptchaLoader /> -->
+    <CaptchaLoader />
     <SingUpCtrl />
   </div>
 </template>

@@ -43,9 +43,14 @@ export const EVENTS = {
         FORM_SUBMITION_EVENT: "form-submition",
         SUCCESS: 'login-success',
     },
-    SINGUP:{
-        NAMES_FORM_SUBMISSION:'NAMES_FORM_SUBMISSION',
-        FULL_FORM_SUBMIT:'FULL_FORM_SUBMIT'
+    SINGUP: {
+        NAMES_FORM_SUBMISSION: 'NAMES_FORM_SUBMISSION',
+        FULL_FORM_SUBMIT: 'FULL_FORM_SUBMIT'
+    },
+    CAPTCHA: {
+        COMPLETION: "CAPTCHA_COMPLETION",
+        ERROR: "CAPTCHA_ERROR",
+        EXPIRED: 'EXPIRED'
     }
 }
 

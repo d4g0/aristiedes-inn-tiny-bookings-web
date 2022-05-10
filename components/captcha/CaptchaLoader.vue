@@ -36,7 +36,7 @@ export default {
       script.src = CAPTCHA_SCRIPT_SOURCE;
       document.head.appendChild(script);
 
-      console.log(script);
+      // console.log(script);
     }
 
     // offload
