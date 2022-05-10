@@ -5,6 +5,7 @@ export default {
     DOMAIN: process.env.DOMAIN || 'tiny-bookings.com',
     BRAND: process.env.BRAND || 'tiny-bookings',
     SITE_NAME: process.env.SITE_NAME || 'tiny-bookings',
+    CAPTCHA_SITE_KEY: process.env.CAPTCHA_SITE_KEY
   },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',

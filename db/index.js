@@ -42,6 +42,10 @@ export const EVENTS = {
     LOGIN: {
         FORM_SUBMITION_EVENT: "form-submition",
         SUCCESS: 'login-success',
+    },
+    SINGUP:{
+        NAMES_FORM_SUBMISSION:'NAMES_FORM_SUBMISSION',
+        FULL_FORM_SUBMIT:'FULL_FORM_SUBMIT'
     }
 }
 

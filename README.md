@@ -58,11 +58,38 @@ when a clients logins or singups redirect them to home and use navigation for au
     - errors handling [done]
   - procced with redirections to client or admin space [one]
   - session recovery hanling [one]
-  - pages middlewares
+  - pages middlewares [one]
+  - Sing Up
+    - captcha script loader [one]
+    - singup form
+    - captcha box
+    - api call
+  - Cart
+
+
+
+## Task Expantions
+#### Sing Up
+##### singup form
+- variables
+client_name
+  - validation: string().min(1).max(60)
+client_last_name
+  - validation: string().min(1).max(60)
+password: 
+  - validation string().min(8).max(24)
+email
+  - valid email
+
+
+
+
+
 
 
 ## TODOS
-Evaluate how to put all login logut redirection logic inside store
+[one]
+Evaluate how to put all login logut redirection logic inside store 
 
 Make app auth state multitab aware and redirect on change when appropiate
 
@@ -71,4 +98,4 @@ Since home is public when admin ask for to server it get's it back, middleware r
 Remove home middleware from public home
 
 [done]
-Fix focus styles non show up in non chrome browsers (autoprefixer)
+Fix focus styles non show up in non chrome browsers (autoprefixer) was tailwind 3.0.23, downgrade it to .10

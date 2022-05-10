@@ -57,6 +57,21 @@ module.exports = {
         }
     },
 
+    singup: {
+        errors: {
+            name_error: 'Valid name required, it must have 1 to 60 characters.',
+            last_name_error: 'Valid last name required, it must have 1 to 60 characters .'
+        },
+        form: {
+            names_title:'Tell us how you are:',
+            client_name: 'Name',
+            client_last_name: 'Last Name',
+            next: 'Next',
+            back:'Back',
+            credentials_title: 'Set up your credentials:'
+        }
+    },
+
 
 
 

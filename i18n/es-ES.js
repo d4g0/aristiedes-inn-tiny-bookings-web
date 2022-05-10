@@ -26,7 +26,7 @@ module.exports = {
             title: 'Reserva tu habitación en el hotel hoy.',
             description: `Nuestra infraestructura proporciona una atmósfera de calidez, modernidad y tranquilidad que caracterizan a nuestro hotel. `
         },
-        
+
     },
 
     // ---------------
@@ -34,7 +34,7 @@ module.exports = {
     // ---------------
     home: {
         // intro
-        
+
 
     },
 
@@ -44,17 +44,32 @@ module.exports = {
     login: {
         errors: {
             user_not_found: "El correo o la contraseña o ambos no coinciden",
-            fetch_error:"Falló al enviar",
-            validation_error:`El email que ha introducido no parece ser real, por favor  use solo un email real.`
+            fetch_error: "Falló al enviar",
+            validation_error: `El email que ha introducido no parece ser real, por favor  use solo un email real.`
         },
-        form:{
-            email:'Correo',
-            password:'Contraseña',
-            submit:'Enviar',
-            validation_errors_hints:{
-                email:'Se requiere un correo válido',
-                password:'Se requiere de una contraseña válida de al menos 8 caracteres y máximo 24'
+        form: {
+            email: 'Correo',
+            password: 'Contraseña',
+            submit: 'Enviar',
+            validation_errors_hints: {
+                email: 'Se requiere un correo válido',
+                password: 'Se requiere de una contraseña válida de al menos 8 caracteres y máximo 24'
             }
+        }
+    },
+
+    singup: {
+        errors: {
+            name_error: 'Un nombre válido es requrido, debe tener  entre 1 y 60 caracteres.',
+            last_name_error: 'Apellido válido es requrido, debe tener  entre 1 y 60 caracteres.'
+        },
+        form: {
+            names_title:'Díganos quien es:',
+            client_name: 'Nombre',
+            client_last_name: 'Apellido',
+            next: 'Siguiente',
+            back:'Atrás',
+            credentials_title: 'Defina sus credenciales:'
         }
     },
 
