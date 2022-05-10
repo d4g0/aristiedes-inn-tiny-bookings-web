@@ -6,13 +6,18 @@ import { ref } from "@nuxtjs/composition-api";
  * @param {Object} variables 
  * @returns 
  */
-export function useLazyQuery(query, variables = {}, captchaResToken = '') {
+export function useLazyQuery(query) {
     var loading = ref(false);
     var result = ref(null);
     var error = ref(null)
-    var queryVariables = variables;
+    var captchaResToken = ref('')
+    var queryVariables = {};
+
+
+
 
     async function load() {
+
         loading.value = true;
         result.value = null;
         error.value = null;
@@ -23,7 +28,7 @@ export function useLazyQuery(query, variables = {}, captchaResToken = '') {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",
-                        "X-Captcha": captchaResToken
+                        "X-Captcha": captchaResToken.value
                     },
                     body: JSON.stringify({ query, variables: queryVariables }),
                     mode: 'cors'
@@ -45,6 +50,11 @@ export function useLazyQuery(query, variables = {}, captchaResToken = '') {
     function setVariables(variables) {
         queryVariables = variables;
     }
+
+    function setToken(token = '') {
+        captchaResToken.value = token;
+    }
+
     return {
         // state
         loading,
@@ -54,6 +64,7 @@ export function useLazyQuery(query, variables = {}, captchaResToken = '') {
         // fn
         load,
         setVariables,
+        setToken,
     }
 
 }
