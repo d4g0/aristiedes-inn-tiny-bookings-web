@@ -78,11 +78,11 @@ export default {
 
     function onSuccess(data) {
       console.log("(singup) user found ");
-      console.log({
-        user: data.user,
-        token: data.token,
-        token_created_at: data.token_created_at,
-      });
+      // console.log({
+      //   user: data.user,
+      //   token: data.token,
+      //   token_created_at: data.token_created_at,
+      // });
 
       // authenticate & stuff aja
       authenticate({
