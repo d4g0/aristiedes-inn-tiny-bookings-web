@@ -19,12 +19,7 @@ export const useAuthStore = defineStore(AUTH_STORAGE_KEY, () => {
         token,
         token_created_at
     }) {
-        if(auth.admin){
-            user.value = auth.admin;
-        }
-        if(auth.client){
-            user.value = auth.client;
-        }
+        user.value = auth.user;
         token.value = auth.token;
         token_created_at.value = auth.token_created_at;
 
@@ -61,12 +56,7 @@ export const useAuthStore = defineStore(AUTH_STORAGE_KEY, () => {
         token_created_at
     }) {
 
-        if(auth.admin){
-            user.value = auth.admin;
-        }
-        if(auth.client){
-            user.value = auth.client;
-        }
+        user.value = auth.user;
         token.value = auth.token;
         token_created_at.value = auth.token_created_at;
 

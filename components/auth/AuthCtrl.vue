@@ -9,7 +9,7 @@ import { useAuthStore } from "~/stores/auth";
 export default {
   setup() {
     const authStore = useAuthStore();
-    const { authenticateLocal, deauthenticateLocal, isAuthenticated } = authStore;
+    const { authenticateLocal, deauthenticate, isAuthenticated } = authStore;
     onMounted(syncAuth);
 
     function syncAuth() {
@@ -37,13 +37,14 @@ export default {
         API_TOKEN_LIVE_HOURS
       );
 
-      if (isNowBefore) {
-        // authenticate
-        authenticateLocal(authSessionData);
-      } else {
-        // deauthenticate
-        deauthenticateLocal();
+      if (!isNowBefore) {
+        // ignore since token is't valid any more
+        return;
       }
+
+      // authenticate (local tab) because it's gettin from localStorage,
+      // other tabs get that data too
+      authenticateLocal(authSessionData);
 
       function isNowBeforeThen(dateStr, hoursOffset = 0) {
         try {
