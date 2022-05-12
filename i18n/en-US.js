@@ -10,10 +10,11 @@ module.exports = {
     nav: {
         links: {
             home: 'Home',
-            login: 'Login',
             singup: 'Sing Up',
             bookings: 'Bookings',
             payments: 'Payments',
+            client_login: 'Login',
+            admin_login: 'Login as Admin',
         },
         reserve: 'Book Now'
     },
