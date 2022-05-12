@@ -5,7 +5,7 @@ export default function ({ redirect, $pinia, localePath }) {
     const authStore = useAuthStore($pinia);
     const { isClient } = authStore;
     if (!isClient()) {
-        return redirect(200, localePath('/login'))
+        return redirect(200, localePath('/client_login'))
     }
 
 }

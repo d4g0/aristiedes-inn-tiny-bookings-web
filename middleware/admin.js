@@ -7,6 +7,6 @@ export default function ({ redirect, $pinia, localePath }) {
     const { isAdmin } = authStore;
 
     if (!isAdmin()) {
-        redirect(200, localePath('/login'))
+        redirect(200, localePath('/admin_login'))
     }
 }
