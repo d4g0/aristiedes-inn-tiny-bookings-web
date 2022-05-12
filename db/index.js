@@ -5,8 +5,8 @@ export const navigationLinks = {
             i18nPath: "nav.links.home",
         },
         {
-            route: "/login",
-            i18nPath: "nav.links.login",
+            route: "/client_login",
+            i18nPath: "nav.links.client_login",
         },
         {
             route: "/singup",
@@ -32,8 +32,12 @@ export const navigationLinks = {
             route: "/admin",
             i18nPath: "nav.links.home",
         },
+    ],
+    adminLogin: {
+        route: "/admin_login",
+        i18nPath: "nav.links.admin_login",
+    },
 
-    ]
 }
 
 export const AUTH_STORAGE_KEY = 'auth-storage';

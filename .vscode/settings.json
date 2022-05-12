@@ -1,0 +1,13 @@
+{
+    "files.exclude": {
+        "**/.nuxt/": true,
+        "**/node_modules/": true
+    },
+    "git.repositoryScanIgnoredFolders": [
+        "node_modules",
+        "**/.nuxt/"
+    ],
+    "files.watcherExclude": {
+        "**/.nuxt/": true
+    }
+}

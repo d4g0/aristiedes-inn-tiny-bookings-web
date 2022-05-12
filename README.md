@@ -59,12 +59,21 @@ when a clients logins or singups redirect them to home and use navigation for au
   - procced with redirections to client or admin space [one]
   - session recovery hanling [one]
   - pages middlewares [one]
-  - Sing Up
+  - Sing Up [one]
     - captcha script loader [one]
-    - singup form
-    - captcha box
-    - api call
+    - singup form [one]
+    - captcha box [one]
+    - api call [one]
+    - [9 of may]
+  - Search
+    - calendar inputs
+    - people input
+    - search api
+    - selection
+    - save to cart
   - Cart
+    - offers show case
+  - Check out page
 
 
 

@@ -3037,6 +3037,11 @@ core-js@^2.6.5:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.12.tgz#d9333dfa7b065e347cc5682219d6f690859cc2ec"
   integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
 
+core-js@^3.15.2:
+  version "3.22.5"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.22.5.tgz#a5f5a58e663d5c0ebb4e680cd7be37536fb2a9cf"
+  integrity sha512-VP/xYuvJ0MJWRAobcmQ8F2H6Bsn+s7zqAAjFaHGBMc5AQm7zaelhD1LGduFn2EehEcQcU+br6t+fwbpQ5d1ZWA==
+
 core-js@^3.19.3:
   version "3.22.4"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.22.4.tgz#f4b3f108d45736935aa028444a69397e40d8c531"
@@ -3357,6 +3362,16 @@ cyclist@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
+
+date-fns-tz@^1.1.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/date-fns-tz/-/date-fns-tz-1.3.4.tgz#8b0e75beb771c7e9f1597aba467dc14431bb5403"
+  integrity sha512-O47vEyz85F2ax/ZdhMBJo187RivZGjH6V0cPjPzpm/yi6YffJg4upD/8ibezO11ezZwP3QYlBHh/t4JhRNx0Ow==
+
+date-fns@^2.22.1:
+  version "2.28.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.28.0.tgz#9570d656f5fc13143e50c975a3b6bbeb46cd08b2"
+  integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
 
 de-indent@^1.0.2:
   version "1.0.2"
@@ -8879,6 +8894,16 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
+
+v-calendar@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/v-calendar/-/v-calendar-2.4.1.tgz#ab50ee6956833aa8e1d2c7297dc3c0511b1751e7"
+  integrity sha512-nhzOlHM2cinv+8jIcnAx+nTo63U40szv3Ig41uLMpGK1U5sApgCP6ggigprsnlMOM5VRq1G/1B8rNHkRrLbGjw==
+  dependencies:
+    core-js "^3.15.2"
+    date-fns "^2.22.1"
+    date-fns-tz "^1.1.4"
+    lodash "^4.17.21"
 
 vary@^1.1.2, vary@~1.1.2:
   version "1.1.2"
