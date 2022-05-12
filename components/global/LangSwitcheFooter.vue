@@ -8,18 +8,17 @@
         aria-haspopup="true"
         aria-controls="lang_menu"
         class="
-          py-2
-          px-2
-          rounded-lg
+          opacity-80
           w-full
           h-full
+          rounded-md
           flex
           items-center
           justify-center
           space-x-2
           focus-styles
-          hover:bg-gray-300
-          border-gray-500 border 
+          hover:opacity-100
+          focus:opacity-100
         "
       >
         <WorldIcon aria-hidden="true" class="text-obsidiana/80" />

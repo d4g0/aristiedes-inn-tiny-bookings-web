@@ -1,18 +1,23 @@
 <template>
-  <section class="pb-10 text-sm bg-gray-200 border-t-gray-500 border">
-    <div class="mx-auto max-w-screen-lg xl:max-w-screen-xl py-1 px-5">
-      <div class="flex flex-col items-center">
+  <section class="text-sm bg-gray-200 border-t-gray-500 border">
+    <div class="frame  mt-20 mb-20">
+      <div class=" flex flex-col items-start">
+
+        <!-- lang -->
+        <div class="">
+          <div class="">
+            <LangSwitcheFooter />
+          </div>
+        </div>
+
+
         <!-- naviation links -->
-        <div class="mt-20">
-          <!-- in site links -->
+        <div class="mt-6 max-w-sm ">
           <ul
             class="
               pt-2
-              flex flex-col
-              gap-2
-              md:flex-row
-              items-center
-              justify-center
+              grid grid-cols-1 md:grid-cols-2 
+              gap-4 
             "
           >
             <li
@@ -26,8 +31,7 @@
                   inline-block
                   font-medium
                   box-border
-                  rounded-lg
-                  p-2
+                  rounded-md
                   focus-styles
                   hover:bg-gray-200
                   opacity-75
@@ -40,18 +44,38 @@
                 </span>
               </nuxt-link>
             </li>
+
+            <!-- admin login -->
+             <li
+              class=""
+            >
+              <nuxt-link
+                :to="localePath(navigationLinks.adminLogin.route)"
+                class="
+                  inline-block
+                  font-medium
+                  box-border
+                  rounded-lg
+                  focus-styles
+                  hover:bg-gray-200
+                  opacity-75
+                  hover:opacity-100
+                  focus:opacity-100
+                "
+              >
+                <span>
+                  {{ $t(navigationLinks.adminLogin.i18nPath) || navigationLinks.adminLogin.body }}
+                </span>
+              </nuxt-link>
+            </li>
           </ul>
         </div>
 
-        <div class="mt-6">
-          <div class="">
-            <LangSwitcheFooter />
-          </div>
-        </div>
+        
 
         <!-- copy -->
         <div class="mt-10">
-          <p class="text-xs opacity-80">{{ brand }} &copy; 2022</p>
+          <p class="opacity-80">{{ brand }} &copy; 2022</p>
         </div>
       </div>
     </div>
