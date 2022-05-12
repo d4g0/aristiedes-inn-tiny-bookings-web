@@ -86,7 +86,7 @@ export default {
 
       // authenticate & stuff aja
       authenticate({
-        user: data.user,
+        user: data.client,
         token: data.token,
         token_created_at: data.token_created_at,
       });

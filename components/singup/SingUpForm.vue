@@ -1,5 +1,10 @@
 <template>
   <div class="w-full sm:px-8">
+
+    <h1 class="mt-10 text-3xl lg:text-4xl lg:mt-20 font-bold">
+      Create your account
+    </h1>
+
     <!-- name & last name -->
     <transition name="fade" mode="out-in">
       <!-- TOO set negative namesFormComplete selection for pro  -->
@@ -31,9 +36,9 @@
           <span class="ml-1 leading-none"> {{ $t("singup.form.back") }} </span>
         </button>
 
-        <h1 class="mt-10 text-3xl lg:text-4xl lg:mt-20 font-bold">
+        <h2 class="mt-10 text-3xl lg:text-4xl lg:mt-20 font-bold">
           {{ $t("singup.form.credentials_title") }}
-        </h1>
+        </h2>
 
         <form @submit.prevent="onFormSubmit" class="mt-10">
           <!-- email -->

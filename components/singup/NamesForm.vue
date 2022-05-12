@@ -1,8 +1,8 @@
 <template>
   <form @submit.prevent="onNamesSubmit">
-    <h1 class="mt-10 text-3xl lg:text-4xl lg:mt-20 font-bold">
+    <h2 class="mt-10 text-2xl lg:mt-20 font-bold">
       {{ $t("singup.form.names_title") }}
-    </h1>
+    </h2>
 
     <!-- name -->
     <div class="mt-10">
