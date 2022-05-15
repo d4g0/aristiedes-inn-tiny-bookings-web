@@ -45,7 +45,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/composition-api.js',
-    // '~/plugins/v-calendar.js',
+    '~/plugins/v-calendar.client.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

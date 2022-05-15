@@ -78,6 +78,14 @@ when a clients logins or singups redirect them to home and use navigation for au
 
 
 ## Task Expantions
+
+
+## Search Days
+Make a computed format dates for check-in & check-out dates from `d/m/y` to `mont, day` form.
+
+
+
+
 #### Sing Up
 ##### singup form
 - variables
@@ -97,6 +105,10 @@ email
 
 
 ## TODOS
+
+
+
+
 [one]
 Evaluate how to put all login logut redirection logic inside store 
 

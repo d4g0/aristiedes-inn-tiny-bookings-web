@@ -1,0 +1,67 @@
+```js
+/**
+ * Get Toay ate
+ */
+
+function getToDayDate(){
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return today
+}
+
+
+
+var r = {
+    date:''
+}
+r.date = getToDayDate();
+r.dateStr = r.date.toString();
+// r.dateStr2 = r.date.toISOString();
+
+console.log(r);
+```
+
+```js
+function isDateAEqualOrGreaterThenB(dateA = new Date(), dateB = new Date()) {
+    return dateA.valueOf() >= dateB.valueOf();
+}
+
+
+var r = {};
+
+const dateA = new Date('2022-05-14T00:00:00.000Z');
+const dateB = new Date('2022-05-16T00:00:00.000Z');
+r['A > B'] = isDateAEqualOrGreaterThenB(dateA, dateB)
+console.log(r)
+```
+
+```js
+function isValidDate(date) {
+    return date instanceof Date && date.toString() != new Date(NaN).toString();
+}
+
+
+
+
+var a = new Date(NaN)
+
+
+var r = {};
+r.a = a
+r['valid: NaN']= isValidDate(new Date(NaN))
+
+
+console.log(new Date(NaN).toString())
+
+console.log(r)
+```
+
+```js
+const a = new Date("2022-05-14T04:00:00.000Z");
+
+console.log({
+    a_str: a.toString(),
+    a_iso: a.toISOString(),
+    a_utc: a.toUTCString()
+})
+```

@@ -18,6 +18,7 @@
     "@vuelidate/validators": "^2.0.0-alpha.29",
     "@vueuse/core": "^8.4.2",
     "core-js": "^3.19.3",
+    "dayjs": "^1.11.2",
     "focus-trap": "^6.9.0",
     "graphql": "^16.4.0",
     "graphql-tag": "^2.12.6",

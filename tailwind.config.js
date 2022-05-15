@@ -13,6 +13,14 @@ module.exports = {
         brand: {
           DEFAULT: colors.blue['600'],
         },
+        surface: {
+          light: '',
+          dark: ''
+        },
+        type: {
+          light: '',
+          dark: ''
+        }
       },
     },
   },

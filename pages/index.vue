@@ -1,19 +1,31 @@
 <template>
-  <div class="p-10">
-    <h1 class="text-2xl font-bold">Home</h1>
+  <div class="">
+    <!-- <h1 class="text-2xl font-bold">Home</h1> -->
     <div class="min-h-screen">
-      <AuthData />
+      <!-- <AuthData /> -->
+      <div class="frame mt-20">
+        <h1 class="font-bold text-5xl md:text-7xl">Search your room</h1>
+      </div>
+      <div class="frame mt-10">
+        <div class="max-w-lg mx-auto md:ml-0">
+          <SearchCtrl />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import AuthData from "~/components/test/AuthData.vue";
+import SearchCtrl from "~/components/home/SearchCtrl.vue";
+// import AuthData from "~/components/test/AuthData.vue";
 
 export default {
   name: "IndexPage",
   middleware: "home",
-  components: { AuthData },
+  components: {
+    // AuthData,
+    SearchCtrl,
+  },
   head() {
     const DOMAIN = this?.$nuxt?.context?.env?.DOMAIN;
     const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true });

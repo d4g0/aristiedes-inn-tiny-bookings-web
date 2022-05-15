@@ -1,3 +1,4 @@
+// links
 export const navigationLinks = {
     public: [
         {
@@ -40,8 +41,11 @@ export const navigationLinks = {
 
 }
 
+// stores keys
 export const AUTH_STORAGE_KEY = 'auth-storage';
 
+export const DAYS_STORE_KEY = 'days-storage';
+// events
 export const EVENTS = {
     LOGIN: {
         FORM_SUBMITION_EVENT: "form-submition",
@@ -55,19 +59,31 @@ export const EVENTS = {
         COMPLETION: "CAPTCHA_COMPLETION",
         ERROR: "CAPTCHA_ERROR",
         EXPIRED: 'EXPIRED'
+    },
+    CLIENT:{
+        SEARCH_ROOM:{
+            DATES_PICKER:{
+                DATES_RANGE_SELECTED:'DATES_RANGE_SELECTED'
+            }
+        }
     }
 }
 
-export const API_ERRORS = {
-    USER_NOT_FOUND: 'NOT_FOUND_RECORD_ERROR',
-    VALIATION_ERROR_KEY: 'NON VALID ARGUMENT'
-}
 
 
+// toasts
 export const TOAST_TYPES = {
     error: 'error-toast'
 }
 
+
+// API VALUES
+
+// errors
+export const API_ERRORS = {
+    USER_NOT_FOUND: 'NOT_FOUND_RECORD_ERROR',
+    VALIATION_ERROR_KEY: 'NON VALID ARGUMENT'
+}
 
 export const USER_ROLES = {
     FULL_ADMIN: 'FULL_ADMIN',

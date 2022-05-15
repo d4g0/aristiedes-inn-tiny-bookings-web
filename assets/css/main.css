@@ -168,7 +168,7 @@ textarea {
 
   /* Padding */
   .pt-nav-h {
-    @apply pt-[110px] lg:pt-[136px];
+    @apply pt-[110px] lg:pt-[100px];
   }
 
 }
