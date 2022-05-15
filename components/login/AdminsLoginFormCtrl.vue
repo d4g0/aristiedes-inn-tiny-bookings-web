@@ -17,10 +17,12 @@ import { useLazyQuery } from "~/composables/useLazyQuery";
 const { FORM_SUBMITION_EVENT } = EVENTS.LOGIN;
 import { loginAsAdmin } from "~/querys/loginAdmin";
 import { watch, ref, inject } from "@nuxtjs/composition-api";
+import { useToastStore } from '~/stores/toast-storage';
 
 export default {
   setup(props, { emit }) {
-    const showToast = inject("showToast");
+    const toastStore = useToastStore();
+    const { showToast } = toastStore;
     const { loading, result, error, load, setVariables } =
       useLazyQuery(loginAsAdmin);
 
@@ -56,7 +58,7 @@ export default {
 
       if (API_ERRORS.USER_NOT_FOUND == API_ERROR) {
         showToast(TOAST_TYPES.error, "login.errors.user_not_found", true);
-      } else if(API_ERRORS.VALIATION_ERROR_KEY == API_ERROR) {
+      } else if (API_ERRORS.VALIATION_ERROR_KEY == API_ERROR) {
         showToast(TOAST_TYPES.error, "login.errors.validation_error");
       } else {
         showToast(TOAST_TYPES.error, "login.errors.fetch_error");

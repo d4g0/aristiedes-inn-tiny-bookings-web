@@ -17,10 +17,12 @@ import { useLazyQuery } from "~/composables/useLazyQuery";
 const { FORM_SUBMITION_EVENT } = EVENTS.LOGIN;
 import { loginAsClient } from "~/querys/loginClient";
 import { watch, ref, inject } from "@nuxtjs/composition-api";
+import { useToastStore } from '~/stores/toast-storage';
 
 export default {
   setup(props, { emit }) {
-    const showToast = inject("showToast");
+    const toastStore = useToastStore();
+    const { showToast } = toastStore;
     const { loading, result, error, load, setVariables } =
       useLazyQuery(loginAsClient);
 

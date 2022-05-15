@@ -1,11 +1,12 @@
 <template>
-  <div class="relative">
+  <div class="absolute w-full h-0 left-0 bottom-0">
     <transition name="fade">
       <div v-if="toastNeeded">
         <Toast
           :type="toastType"
           :contentPath="contentPath"
           @close="hideToast"
+          class="mb-20"
         />
       </div>
     </transition>
@@ -16,40 +17,14 @@
 <script>
 import { ref, provide } from "@nuxtjs/composition-api";
 import Toast from "~/components/toast/Toast.vue";
+import { useToastStore } from "~/stores/toast-storage.js";
+import { storeToRefs } from "pinia";
 export default {
   components: { Toast },
   setup() {
-    const toastNeeded = ref(false);
-    const toastType = ref("");
-    const contentPath = ref("");
-
-    function showToast(
-      toastTypeStr = "",
-      contentPathStr = "",
-      autohidable = false
-    ) {
-      toastNeeded.value = false;
-      toastType.value = toastTypeStr;
-      contentPath.value = contentPathStr;
-      toastNeeded.value = true;
-
-      if (autohidable) {
-        setTimeout(() => {
-          toastNeeded.value = false;
-        }, 10 * 1000);
-      }
-    }
-
-    function hideToast() {
-      toastNeeded.value = false;
-      toastType.value = "";
-      contentPath.value = "";
-    }
-
-    provide("showToast", showToast);
-
-    // TODO create handle autohidable toast
-    // as a extra showToast config param `autohidable`
+    const toastStore = useToastStore();
+    const { showToast, hideToast } = toastStore;
+    const { toastNeeded, toastType, contentPath } = storeToRefs(toastStore);
 
     return {
       toastNeeded,
