@@ -34,8 +34,13 @@ module.exports = {
     // Home 
     // ---------------
     home: {
-        // intro
-
+        search: {
+            title:'Busque su habitación',
+            searchBtn: 'Buscar',
+            errors: {
+                selection_error: 'Por favor seleccione al menos una noche'
+            },
+        },
 
     },
 
@@ -63,15 +68,15 @@ module.exports = {
         errors: {
             name_error: 'Un nombre válido es requrido, debe tener  entre 1 y 60 caracteres.',
             last_name_error: 'Apellido válido es requrido, debe tener  entre 1 y 60 caracteres.',
-            captcha_missing:'Por favor, démuestrenos que no es un robot',
-            submition_fail:'Falló al enviar',
+            captcha_missing: 'Por favor, démuestrenos que no es un robot',
+            submition_fail: 'Falló al enviar',
         },
         form: {
-            names_title:'Díganos quien es:',
+            names_title: 'Díganos quien es:',
             client_name: 'Nombre',
             client_last_name: 'Apellido',
             next: 'Siguiente',
-            back:'Atrás',
+            back: 'Atrás',
             credentials_title: 'Defina sus credenciales:'
         }
     },

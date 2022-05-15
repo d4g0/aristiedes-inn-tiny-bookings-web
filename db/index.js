@@ -60,10 +60,10 @@ export const EVENTS = {
         ERROR: "CAPTCHA_ERROR",
         EXPIRED: 'EXPIRED'
     },
-    CLIENT:{
-        SEARCH_ROOM:{
-            DATES_PICKER:{
-                DATES_RANGE_SELECTED:'DATES_RANGE_SELECTED'
+    CLIENT: {
+        SEARCH_ROOM: {
+            DATES_PICKER: {
+                DATES_RANGE_SELECTED: 'DATES_RANGE_SELECTED'
             }
         }
     }

@@ -34,7 +34,14 @@ module.exports = {
     // Home 
     // ---------------
     home: {
-        // intro
+        search: {
+            title: 'Search your room',
+            searchBtn: 'Search',
+            errors: {
+                selection_error: 'Please select an interval with a least one night'
+            },
+
+        }
 
     },
 
@@ -62,18 +69,20 @@ module.exports = {
         errors: {
             name_error: 'Valid name required, it must have 1 to 60 characters.',
             last_name_error: 'Valid last name required, it must have 1 to 60 characters .',
-            captcha_missing:'Please show us you are not a robot',
-            submition_fail:'Failed to send'
+            captcha_missing: 'Please show us you are not a robot',
+            submition_fail: 'Failed to send'
         },
         form: {
-            names_title:'Tell us how you are:',
+            names_title: 'Tell us how you are:',
             client_name: 'Name',
             client_last_name: 'Last Name',
             next: 'Next',
-            back:'Back',
+            back: 'Back',
             credentials_title: 'Set up your credentials:'
         }
     },
+
+
 
 
 

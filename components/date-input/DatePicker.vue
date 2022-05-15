@@ -66,11 +66,11 @@
       </template>
     </v-date-picker>
 
-    <pre>
+    <!-- <pre>
 <code>
 range: {{ range }}
 </code>
-    </pre>
+    </pre> -->
   </div>
 </template>
 
@@ -79,6 +79,7 @@ import { reactive, ref } from "@nuxtjs/composition-api";
 import { getDatesRange } from "~/utils";
 import { useDaysStore } from "~/stores/days-search.js";
 import { storeToRefs } from "pinia";
+import { EVENTS } from "~/db";
 
 export default {
   props: {
@@ -87,7 +88,7 @@ export default {
       default: 90,
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const { startDate: todayDate, endDate: todayPlus3 } = getDatesRange(3);
     const { endDate: hotelLastDay } = getDatesRange(props.calendarLength);
 
@@ -113,13 +114,30 @@ export default {
     range.start = check_in_date;
     range.end = check_out_date;
 
+    const DATES_RANGE_SELECTED =
+      EVENTS.CLIENT.SEARCH_ROOM.DATES_PICKER.DATES_RANGE_SELECTED;
     function onDateSelection(range) {
-      console.log({ range });
+      // console.log({
+      //   loc: "onDateSelection",
+      //   range,
+      // });
       setDates({
         check_in: new Date(range.start),
         check_out: new Date(range.end),
       });
       saveDates();
+      propagateDates();
+    }
+
+    function propagateDates() {
+      emit(DATES_RANGE_SELECTED, {
+        check_in_date: check_in_date.value,
+        check_out_date: check_out_date.value,
+      });
+    }
+
+    if (process.client) {
+      propagateDates();
     }
 
     return {

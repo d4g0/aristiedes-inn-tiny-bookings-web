@@ -4,7 +4,9 @@
     <div class="min-h-screen">
       <!-- <AuthData /> -->
       <div class="frame mt-20">
-        <h1 class="font-bold text-5xl md:text-7xl">Search your room</h1>
+        <h1 class="font-bold text-5xl md:text-7xl">
+           {{ $t("home.search.title") }}
+        </h1>
       </div>
       <div class="frame mt-10">
         <div class="max-w-lg mx-auto md:ml-0">

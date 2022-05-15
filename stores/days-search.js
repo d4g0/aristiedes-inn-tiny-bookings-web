@@ -21,13 +21,6 @@ export const useDaysStore = defineStore(DAYS_STORE_KEY, () => {
             return
         }
 
-        console.log({
-            loca: 'days-storage/save',
-            check_in_date: check_in_date.value,
-            check_out_date: check_out_date.value,
-        })
-
-
 
         const data = JSON.stringify({
             check_in_date: check_in_date.value.toISOString(),
@@ -46,10 +39,7 @@ export const useDaysStore = defineStore(DAYS_STORE_KEY, () => {
 
         var rawDatesData = localStorage.getItem(DAYS_STORE_KEY);
         var datesData = rawDatesData ? JSON.parse(rawDatesData) : null;
-        console.log({
-            loc: 'ays-storage/initWF',
-            datesData
-        })
+
         // init with defaults if nothing found 
         if (!datesData) {
             check_in_date.value = start_date;
