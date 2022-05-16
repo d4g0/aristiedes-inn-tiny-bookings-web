@@ -18,6 +18,24 @@ module.exports = {
         },
         reserve: 'Book Now'
     },
+    colorSelector: {
+        label: 'Color Mode Picker',
+        btnLabel: 'Color Mode',
+        colorModes: [
+            {
+                code: 'system',
+                text: 'system'
+            },
+            {
+                code: 'ligth',
+                text: 'ligth'
+            },
+            {
+                code: 'dark',
+                text: 'dark'
+            }
+        ]
+    },
 
     // ---------------
     // Metadata 

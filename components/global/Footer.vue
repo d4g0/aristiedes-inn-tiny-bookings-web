@@ -1,8 +1,18 @@
 <template>
-  <section class="text-sm bg-gray-200 border-t-gray-500 border">
-    <div class="frame  mt-20 mb-20">
-      <div class=" flex flex-col items-start">
-
+  <section
+    class="
+      text-sm
+      bg-surface-light
+      dark:bg-surface-dark
+      text-type-on-light
+      dark:text-type-on-dark
+      transition-all
+      duration-300
+      border-t-gray-500 border-t
+    "
+  >
+    <div class="frame mt-20 mb-20">
+      <div class="flex flex-col items-start">
         <!-- lang -->
         <div class="">
           <div class="">
@@ -10,16 +20,9 @@
           </div>
         </div>
 
-
         <!-- naviation links -->
-        <div class="mt-6 max-w-sm ">
-          <ul
-            class="
-              pt-2
-              grid grid-cols-1 md:grid-cols-2 
-              gap-4 
-            "
-          >
+        <div class="mt-6 max-w-sm">
+          <ul class="pt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
             <li
               v-for="(link, index) in navigationLinks.public"
               :key="index"
@@ -33,7 +36,6 @@
                   box-border
                   rounded-md
                   focus-styles
-                  hover:bg-gray-200
                   opacity-75
                   hover:opacity-100
                   focus:opacity-100
@@ -46,9 +48,7 @@
             </li>
 
             <!-- admin login -->
-             <li
-              class=""
-            >
+            <li class="">
               <nuxt-link
                 :to="localePath(navigationLinks.adminLogin.route)"
                 class="
@@ -57,21 +57,26 @@
                   box-border
                   rounded-lg
                   focus-styles
-                  hover:bg-gray-200
                   opacity-75
                   hover:opacity-100
                   focus:opacity-100
                 "
               >
                 <span>
-                  {{ $t(navigationLinks.adminLogin.i18nPath) || navigationLinks.adminLogin.body }}
+                  {{
+                    $t(navigationLinks.adminLogin.i18nPath) ||
+                    navigationLinks.adminLogin.body
+                  }}
                 </span>
               </nuxt-link>
             </li>
           </ul>
         </div>
 
-        
+        <!-- color -->
+        <div class="mt-6">
+          <ColorModeSwitch />
+        </div>
 
         <!-- copy -->
         <div class="mt-10">
@@ -85,9 +90,11 @@
 <script>
 import LangSwitcheFooter from "~/components/global/LangSwitcheFooter.vue";
 import { navigationLinks } from "~/db";
+import ColorModeSwitch from "./ColorModeSwitch.vue";
 export default {
   components: {
     LangSwitcheFooter,
+    ColorModeSwitch,
   },
   setup() {
     return {

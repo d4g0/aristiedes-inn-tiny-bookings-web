@@ -1,17 +1,24 @@
 <template>
   <div class="">
-    <!-- <h1 class="text-2xl font-bold">Home</h1> -->
+    <!-- search -->
     <div class="">
       <!-- <AuthData /> -->
-      <div class="frame mt-20">
+      <div class="frame-30 mt-20">
         <h1 class="font-bold text-5xl md:text-7xl">
-           {{ $t("home.search.title") }}
+          {{ $t("home.search.title") }}
         </h1>
       </div>
-      <div class="frame mt-10">
+      <div class="frame-30 mt-10">
         <div class="max-w-lg mx-auto md:ml-0">
           <SearchCtrl />
         </div>
+      </div>
+    </div>
+
+    <!-- listings -->
+    <div>
+      <div class="mt-10 frame-w">
+        <Listings />
       </div>
     </div>
   </div>
@@ -19,6 +26,7 @@
 
 <script>
 import SearchCtrl from "~/components/home/SearchCtrl.vue";
+import Listings from "~/components/listings/Listings.vue";
 // import AuthData from "~/components/test/AuthData.vue";
 
 export default {
@@ -27,6 +35,7 @@ export default {
   components: {
     // AuthData,
     SearchCtrl,
+    Listings,
   },
   head() {
     const DOMAIN = this?.$nuxt?.context?.env?.DOMAIN;

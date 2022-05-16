@@ -8,11 +8,19 @@
       color="gray"
       @drag="onDateSelection"
       :min-date="minDate"
+      :is-dark="isDark"
     >
       <template v-slot="{ inputValue, inputEvents }">
         <div class="flex justify-between items-center gap-2 w-full">
           <!-- check in -->
-          <div class="border border-gray-300 rounded-[16px] p-3">
+          <div
+            class="
+              border border-gray-300
+              dark:border-opacity-20
+              rounded-[16px]
+              p-3
+            "
+          >
             <label
               for="check-in"
               class="block text-sm font-medium uppercase tracking-wider"
@@ -26,6 +34,7 @@
                 mt-2
                 block
                 border
+                dark:border-opacity-20
                 px-2
                 py-1
                 w-full
@@ -33,12 +42,21 @@
                 focus-styles
                 font-medium
                 text-lg
+                bg-surface-light
+                dark:bg-surface-dark
               "
             />
           </div>
 
           <!-- check out -->
-          <div class="border border-gray-300 rounded-[16px] p-3">
+          <div
+            class="
+              border border-gray-300
+              dark:border-opacity-20
+              rounded-[16px]
+              p-3
+            "
+          >
             <label
               for="check-out"
               class="block text-sm font-medium uppercase tracking-wider"
@@ -52,6 +70,7 @@
                 mt-2
                 block
                 border
+                dark:border-opacity-20
                 px-2
                 py-1
                 w-full
@@ -59,6 +78,8 @@
                 focus-styles
                 font-medium
                 text-lg
+                bg-surface-light
+                dark:bg-surface-dark
               "
             />
           </div>
@@ -75,7 +96,7 @@ range: {{ range }}
 </template>
 
 <script>
-import { computed, reactive, ref } from "@nuxtjs/composition-api";
+import { computed, onMounted, reactive, ref } from "@nuxtjs/composition-api";
 import { getDatesRange } from "~/utils";
 import { useDaysStore } from "~/stores/days-search.js";
 import { storeToRefs } from "pinia";
@@ -88,10 +109,9 @@ export default {
       default: 90,
     },
   },
+
   setup(props, { emit }) {
-    
     const { startDate: todayDate, endDate: todayPlus3 } = getDatesRange(3);
-    
 
     // data
 
@@ -106,9 +126,9 @@ export default {
     initWithFalback(todayDate, todayPlus3);
 
     const minDate = ref(todayDate);
-    const maxDate = computed(()=>{
+    const maxDate = computed(() => {
       const { endDate: hotelLastDay } = getDatesRange(props.calendarLength);
-      return hotelLastDay
+      return hotelLastDay;
     });
 
     const range = reactive({
@@ -144,11 +164,27 @@ export default {
       propagateDates();
     }
 
+    // dark handling todo make right
+      const isDark = ref(false);
+    // const htmlRef = ref();
+    // onMounted(() => {
+    //   if (!process.client) {
+    //     return;
+    //   }
+    //   htmlRef.value = document.documentElement;
+    // });
+    // const htmlClasses = computed(() =>
+    //   htmlRef.value?.classList ? Array.from(htmlRef.value?.classList) : []
+    // );
+    // computed(() => htmlClasses.value.includes("dark"));
+    // console.log(htmlClasses)
+
     return {
       range,
       minDate,
       maxDate,
       onDateSelection,
+      isDark,
     };
   },
 };

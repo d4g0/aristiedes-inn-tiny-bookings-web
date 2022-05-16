@@ -5,7 +5,7 @@ const colors = require('tailwindcss/colors');
 module.exports = {
   content: [
   ],
-  // darkMode: 'false', // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
@@ -18,8 +18,12 @@ module.exports = {
           dark: ''
         },
         type: {
-          light: '',
-          dark: ''
+          'on-light': '#24292f',
+          'on-dark': '#adbac7'
+        },
+        surface:{
+          light:'#fff',
+          dark:'#1c2128'
         }
       },
     },

@@ -6,7 +6,8 @@ export default {
     BRAND: process.env.BRAND || 'tiny-bookings',
     SITE_NAME: process.env.SITE_NAME || 'tiny-bookings',
     CAPTCHA_SITE_KEY: process.env.CAPTCHA_SITE_KEY,
-    HOTEL_ID: process.env.HOTEL_ID
+    HOTEL_ID: process.env.HOTEL_ID,
+    API_CONTENT_PATH: process.env.API_CONTENT_PATH
   },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -34,7 +35,18 @@ export default {
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         ...i18nHead.link
-      ]
+      ],
+      bodyAttrs: {
+        class: `
+          text-type-on-light 
+          bg-surface-light
+          dark:bg-surface-dark
+          text-type-on-light
+          dark:text-type-on-dark
+          transition-all
+          duration-300
+        `
+      },
     }
   },
 
@@ -58,11 +70,13 @@ export default {
     '@nuxtjs/tailwindcss',
     '@nuxtjs/composition-api/module',
     '@pinia/nuxt',
+
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/i18n',
+    '@nuxtjs/color-mode',
   ],
   // i18n
   i18n: {
@@ -89,6 +103,11 @@ export default {
     lazy: true,
     langDir: 'i18n/',
     baseUrl: `https://${process.env.DOMAIN}`
+  },
+
+  // color mode
+  colorMode: {
+    classSuffix: ''
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

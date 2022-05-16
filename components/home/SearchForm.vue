@@ -17,11 +17,15 @@
             rounded-[16px]
             p-3
             bg-black
+            dark:bg-type-on-dark
             text-white
+            dark:text-type-on-light
             w-full
             font-medium
             focus-styles focus:ring-offset-2
-            hover:bg-gray-900
+            hover:bg-brand
+            dark:hover:bg-brand
+            dark:hover:text-white
           "
           @click="onSearchReq"
           :disabled="searching"

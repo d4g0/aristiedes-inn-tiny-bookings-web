@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5 pb-32">
+  <div class="mt-5">
     <SearchForm
       :searching="tempLoading"
       :calendarLength="calendarLength"

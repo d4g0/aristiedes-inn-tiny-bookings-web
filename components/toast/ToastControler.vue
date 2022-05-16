@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute w-full h-0 left-0 bottom-0">
+  <div class="fixed w-full h-0 left-0 bottom-0  z-10">
     <transition name="fade">
       <div v-if="toastNeeded">
         <Toast
