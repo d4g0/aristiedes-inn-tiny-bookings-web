@@ -39,7 +39,8 @@ module.exports = {
             searchBtn: 'Search',
             errors: {
                 selection_error: 'Please select an interval with a least one night',
-                hotel_load_error: 'Hotel data fail to load, please try again'
+                hotel_load_error: 'Hotel data fail to load, please try again',
+                listings_load_error: 'Room data fail to load, please try again',
             },
 
         }

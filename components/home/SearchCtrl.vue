@@ -67,62 +67,74 @@ export default {
     // listings loading
     const {
       loading: listingsLoading,
-      result: listingsResult,
+      result: listingsRes,
       error: listingsError,
       load,
       setVariables,
     } = useLazyQuery(roomsAvailable);
 
+    watch(listingsRes, (nLRes) => {
+      if (nLRes?.data && nLRes.data?.getRoomsAvailable) {
+        const listings = nLRes.data?.getRoomsAvailable;
+        return console.log({ listings });
+      }
+
+      if (nLRes?.errors) {
+        showToast(
+          TOAST_TYPES.error,
+          "home.search.errors.listings_load_error",
+          true
+        );
+      }
+    });
+
+    watch(listingsError, (nLE) => {
+      if (nLE?.message) {
+        console.log("listings load Error");
+        console.log(nLE);
+        showToast(
+          TOAST_TYPES.error,
+          "home.search.errors.listings_load_error",
+          true
+        );
+      }
+    });
+
     function loadListings() {
-      // const check_in_utc_date_obj = DateObjToUTC(
-      //   searchInterval.check_in_date.value
-      // );
-      // const check_out_utc_date = new Date(
-      //   searchInterval.check_out_date
-      // ).toISOString();
+      console.log("loadlistings");
 
       // create input
-
-      // complete utc date times
-      // set utc date with hotel chec_in, check_out time
-      // value and add those to the allready available utc day date
-
-      // console.log({
-      //   loc: "loa listings",
-      //   check_in_obj,
-      //   check_out_obj,
-      //   check_in_utc_date,
-      //   check_out_utc_date,
-      // });
 
       //
       // check_out_hour_time
       var input = {
-        input: {
-          hotel_id: hotel.value.id,
-          start_date: {
-            year: 2022,
-            month: 4,
-            day: 10,
-            hour: 10,
-            minute: 0,
-          },
-          end_date: {
-            year: 2022,
-            month: 4,
-            day: 12,
-            hour: 10,
-            minute: 0,
-          },
+        hotel_id: hotel.value.id,
+        start_date: {
+          year: searchInterval.check_in_date.year,
+          month: searchInterval.check_in_date.month,
+          day: searchInterval.check_in_date.day,
+          hour: searchInterval.check_in_date.hour,
+          minute: searchInterval.check_in_date.minute,
+        },
+        end_date: {
+          year: searchInterval.check_out_date.year,
+          month: searchInterval.check_out_date.month,
+          day: searchInterval.check_out_date.day,
+          hour: searchInterval.check_out_date.hour,
+          minute: searchInterval.check_out_date.minute,
         },
       };
+
+      console.log({ input });
+
+      setVariables({ input });
+      load();
     }
 
     // search hanling
     function onSearchRequest({ check_in_date, check_out_date }) {
       console.log("onSearchRequest");
-      console.log({ search_fomr_interval: { check_in_date, check_out_date } });
-      // console.log({ hotel_name: hotel.value?.hotel_name });\
+      // console.log({ search_fomr_interval: { check_in_date, check_out_date } });
 
       // case hotel query has fail
       if (!hotel.value?.hotel_name) {
@@ -137,6 +149,7 @@ export default {
 
       // ready to load rooms available
       // prepare
+      // set date obj when query dates & hotel time
       const fix_check_in_date_obj = getDateObjFromDateAndTimeStr(
         check_in_date,
         hotel.value.check_in_hour_time
@@ -146,10 +159,8 @@ export default {
         hotel.value.check_out_hour_time
       );
 
-      console.log({
-        fix_check_in_date_obj,
-        fix_check_out_date_obj,
-      });
+      // set hotel timeZone localized dates mapped as utc for hit the api with
+      // though one damm
       searchInterval.check_in_date = date_obj_and_time_zone_to_utc_obj(
         fix_check_in_date_obj,
         hotel.value.iana_time_zone
@@ -159,16 +170,12 @@ export default {
         hotel.value.iana_time_zone
       );
 
-      console.log({
-        searchInterval: {
-          check_in_date: searchInterval.check_in_date,
-          check_out_date: searchInterval.check_out_date,
-        },
-      });
       // load
-      // loadListings();
-      // populate listings
+      loadListings();
     }
+
+    // populate listings TODO
+    // when listings loaDeD
 
     const tempLoading = ref(false);
     return {
@@ -178,7 +185,7 @@ export default {
       onSearchRequest,
       listingsLoading,
       tempLoading,
-      searchInterval
+      searchInterval,
     };
   },
 };

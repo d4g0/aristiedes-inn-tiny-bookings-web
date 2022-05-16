@@ -39,7 +39,9 @@ module.exports = {
             searchBtn: 'Buscar',
             errors: {
                 selection_error: 'Por favor seleccione al menos una noche',
-                hotel_load_error: 'Fallo al cargar la información del hotel, por favor intente de nuevo'
+                hotel_load_error: 'Falló al cargar la información del hotel, por favor intente de nuevo',
+                listings_load_error: 'Falló al cargar la información de las habitaciones, por favor intente de nuevo',
+
             },
         },
 
