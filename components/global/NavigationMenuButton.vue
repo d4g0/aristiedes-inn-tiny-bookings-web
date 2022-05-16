@@ -8,10 +8,12 @@
     <transition name="fade" mode="out-in">
       <MenuAlt4Icon
         v-if="!open"
-        class="text-color-modes"
+        class="text-type-on-light"
         :class="iconColorClass"
       />
-      <XIcon v-else class="text-color-modes" :class="iconColorClass" />
+      <!-- text-color-modes -->
+      <!-- text color fixed as nav bg is fixed to white -->
+      <XIcon v-else class=" text-type-on-light" :class="iconColorClass" />
     </transition>
   </button>
 </template>
@@ -29,7 +31,7 @@ export default {
     },
     iconColorClass: {
       type: String,
-      default: "text-brand",
+      default: "text-type-on-light",
     },
     hoverClass: {
       type: String,

@@ -22,7 +22,7 @@
         <div ref="logo_link">
           <nuxt-link
             :to="localePath('/')"
-            class="block rounded-xl focus-styles"
+            class="block rounded-xl focus-styles "
           >
             <div class="w-52 relative top-0 left-0">
               <LazyImage src="/img/global/logo.jpg" alt="logo" class="rounded-xl" />
@@ -34,9 +34,8 @@
         <NavigationMenuButton
           @menu-button-click="onMenuBtnClick"
           :open="open"
-          :iconColorClass="'text-obsidiana'"
-          :focusRingClass="'focus-visible:ring-blueBrand'"
-          :hoverClass="'hover:bg-gray-200 dark:hover:bg-gray-600'"
+          :focusRingClass="'focus-visible:ring-brand'"
+          :hoverClass="'hover:bg-gray-200 dark:hover:bg-gray-200'"
           class=""
         />
       </div>

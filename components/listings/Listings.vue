@@ -111,86 +111,86 @@ export default {
         ],
       },
 
-      // {
-      //   id: 4,
-      //   hotel_id: 1,
-      //   room_name: "Imperial #002",
-      //   night_price: 200,
-      //   capacity: 2,
-      //   number_of_beds: 1,
-      //   room_type_id: 1,
-      //   room_type_key: "Matrimonial",
-      //   room_pictures: [
-      //     {
-      //       room_picture_id: 2,
-      //       filename: "27.jpg",
-      //     },
-      //   ],
-      //   room_amenities: [
-      //     {
-      //       amenity_id: 1,
-      //       amenity: "TV",
-      //     },
-      //     {
-      //       amenity_id: 2,
-      //       amenity: "Aire Aconicionado",
-      //     },
-      //   ],
-      // },
+      {
+        id: 4,
+        hotel_id: 1,
+        room_name: "Imperial #002",
+        night_price: 200,
+        capacity: 2,
+        number_of_beds: 1,
+        room_type_id: 1,
+        room_type_key: "Matrimonial",
+        room_pictures: [
+          {
+            room_picture_id: 2,
+            filename: "27.jpg",
+          },
+        ],
+        room_amenities: [
+          {
+            amenity_id: 1,
+            amenity: "TV",
+          },
+          {
+            amenity_id: 2,
+            amenity: "Aire Aconicionado",
+          },
+        ],
+      },
 
-      // {
-      //   id: 5,
-      //   hotel_id: 1,
-      //   room_name: "Imperial #002",
-      //   night_price: 200,
-      //   capacity: 2,
-      //   number_of_beds: 1,
-      //   room_type_id: 1,
-      //   room_type_key: "Matrimonial",
-      //   room_pictures: [
-      //     {
-      //       room_picture_id: 2,
-      //       filename: "27.jpg",
-      //     },
-      //   ],
-      //   room_amenities: [
-      //     {
-      //       amenity_id: 1,
-      //       amenity: "TV",
-      //     },
-      //     {
-      //       amenity_id: 2,
-      //       amenity: "Aire Aconicionado",
-      //     },
-      //   ],
-      // },
+      {
+        id: 5,
+        hotel_id: 1,
+        room_name: "Imperial #002",
+        night_price: 200,
+        capacity: 2,
+        number_of_beds: 1,
+        room_type_id: 1,
+        room_type_key: "Matrimonial",
+        room_pictures: [
+          {
+            room_picture_id: 2,
+            filename: "27.jpg",
+          },
+        ],
+        room_amenities: [
+          {
+            amenity_id: 1,
+            amenity: "TV",
+          },
+          {
+            amenity_id: 2,
+            amenity: "Aire Aconicionado",
+          },
+        ],
+      },
 
-      // {
-      //   id: 6,
-      //   hotel_id: 1,
-      //   room_name: "Imperial #002",
-      //   night_price: 200,
-      //   capacity: 2,
-      //   number_of_beds: 1,
-      //   room_type_id: 1,
-      //   room_type_key: "Matrimonial",
-      //   room_pictures: [
-      //     {
-      //       room_picture_id: 2,
-      //       filename: "27.jpg",
-      //     },
-      //   ],
-      //   room_amenities: [
-      //     {
-      //       amenity_id: 1,
-      //       amenity: "TV",
-      //     },
-      //     {
-      //       amenity_id: 2,
-      //       amenity: "Aire Aconicionado",
-      //     },
-      //   ],
-      // },
+      {
+        id: 6,
+        hotel_id: 1,
+        room_name: "Imperial #002",
+        night_price: 200,
+        capacity: 2,
+        number_of_beds: 1,
+        room_type_id: 1,
+        room_type_key: "Matrimonial",
+        room_pictures: [
+          {
+            room_picture_id: 2,
+            filename: "27.jpg",
+          },
+        ],
+        room_amenities: [
+          {
+            amenity_id: 1,
+            amenity: "TV",
+          },
+          {
+            amenity_id: 2,
+            amenity: "Aire Aconicionado",
+          },
+        ],
+      },
 
       // {
       //   id: 7,

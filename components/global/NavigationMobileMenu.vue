@@ -27,7 +27,8 @@
         pb-16
         transition-opacity
         bg-white
-        text-obsidiana
+        dark:bg-surface-dark
+
       "
       :class="show ? 'duration-1000' : 'opacity-0 duration-300'"
     >

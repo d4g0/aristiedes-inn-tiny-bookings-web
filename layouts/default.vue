@@ -1,8 +1,8 @@
 <template>
   <div class="w-full min-h-screen" ref="shell">
-    <!-- <Navigation /> -->
-    <!-- <AuthCtrl /> -->
-    <!-- <AuthMultiTabSync /> -->
+    <Navigation />
+    <AuthCtrl />
+    <AuthMultiTabSync />
     <ToastControler />
     <main class="pt-nav-h">
       <Nuxt />
