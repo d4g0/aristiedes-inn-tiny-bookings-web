@@ -75,7 +75,7 @@ range: {{ range }}
 </template>
 
 <script>
-import { reactive, ref } from "@nuxtjs/composition-api";
+import { computed, reactive, ref } from "@nuxtjs/composition-api";
 import { getDatesRange } from "~/utils";
 import { useDaysStore } from "~/stores/days-search.js";
 import { storeToRefs } from "pinia";
@@ -89,8 +89,9 @@ export default {
     },
   },
   setup(props, { emit }) {
+    
     const { startDate: todayDate, endDate: todayPlus3 } = getDatesRange(3);
-    const { endDate: hotelLastDay } = getDatesRange(props.calendarLength);
+    
 
     // data
 
@@ -105,7 +106,10 @@ export default {
     initWithFalback(todayDate, todayPlus3);
 
     const minDate = ref(todayDate);
-    const maxDate = ref(hotelLastDay);
+    const maxDate = computed(()=>{
+      const { endDate: hotelLastDay } = getDatesRange(props.calendarLength);
+      return hotelLastDay
+    });
 
     const range = reactive({
       start: "",

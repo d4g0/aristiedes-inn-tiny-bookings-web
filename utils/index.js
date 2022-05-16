@@ -1,8 +1,8 @@
-import dayjs from 'dayjs';
-import localeEn from 'dayjs/locale/en';
-import localeEs from 'dayjs/locale/es';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
-dayjs.extend(localizedFormat);
+const {
+    DateTime,
+    Settings
+} = require('luxon');
+Settings.defaultZone = 'utc'
 
 export const gql = String.raw;
 
@@ -37,22 +37,9 @@ export function getDatesRange(daysOffset = 0) {
 }
 
 
-export function getMonthDayDate(date, locale) {
-    // var locales = {
-    //     es: localeEs,
-    //     en: localeEn
-    // }
-
-    // var customLocale = locales[locale] ? locales[locale] : localeEn;
 
 
-    var dateStr = dayjs(date).format('LL',);
-
-
-    return dateStr;
-}
-
-export function getToDayDate(){
+export function getToDayDate() {
     var now = new Date();
     var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     return today
@@ -64,4 +51,49 @@ export function isDateAEqualOrGreaterThenB(dateA = new Date(), dateB = new Date(
 
 export function isValidDate(date) {
     return date instanceof Date && date.toString() != new Date(NaN).toString();
+}
+
+export function sqlTimeStrToTimeObj(timeStr = '') {
+    var parts = timeStr.split(':');
+    var time = {
+        hour: parseInt(parts[0]),
+        minute: parseInt(parts[1]),
+        second: parseInt(parts[2]),
+    }
+
+    return time;
+}
+
+export function getDateObjFromDateAndTimeStr(date = new Date(), timeStr) {
+
+    const timeObj = sqlTimeStrToTimeObj(timeStr);
+    const dateObj = {
+        year: date.getFullYear(),
+        month: date.getMonth(),
+        day: date.getDate(),
+        hour: timeObj.hour,
+        minute: timeObj.minute,
+        second: timeObj.second
+    }
+
+    return dateObj;
+}
+
+
+// special luxons
+function toTimeZoneKeepenLocal(dateObj, timeZone) {
+    const date = DateTime.fromObject(dateObj).setZone(timeZone, { keepLocalTime: true });
+    return date;
+}
+
+
+function getDateObjFromISO(isoStr) {
+    return DateTime.fromISO(isoStr).toObject()
+}
+
+export function date_obj_and_time_zone_to_utc_obj(dateObj, timeZone) {
+    const localizedDate = toTimeZoneKeepenLocal(dateObj, timeZone);
+    const localizedDateISOStr = localizedDate.toISO();
+    const utcObj = getDateObjFromISO(localizedDateISOStr);
+    return utcObj
 }

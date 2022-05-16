@@ -38,7 +38,8 @@ module.exports = {
             title:'Busque su habitación',
             searchBtn: 'Buscar',
             errors: {
-                selection_error: 'Por favor seleccione al menos una noche'
+                selection_error: 'Por favor seleccione al menos una noche',
+                hotel_load_error: 'Fallo al cargar la información del hotel, por favor intente de nuevo'
             },
         },
 

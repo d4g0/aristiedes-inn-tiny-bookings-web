@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <!-- <h1 class="text-2xl font-bold">Home</h1> -->
-    <div class="min-h-screen">
+    <div class="">
       <!-- <AuthData /> -->
       <div class="frame mt-20">
         <h1 class="font-bold text-5xl md:text-7xl">

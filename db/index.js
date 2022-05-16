@@ -64,7 +64,8 @@ export const EVENTS = {
         SEARCH_ROOM: {
             DATES_PICKER: {
                 DATES_RANGE_SELECTED: 'DATES_RANGE_SELECTED'
-            }
+            },
+            SEARCH_REQUEST: 'SEARCH_REQUEST'
         }
     }
 }

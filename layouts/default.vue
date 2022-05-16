@@ -3,15 +3,15 @@
     <Navigation />
     <AuthCtrl />
     <AuthMultiTabSync />
-    <ToastControler>
-      <main class="pt-nav-h">
-        <Nuxt />
-        <LangMenuOptions
-          @close="onCloseLangOptions"
-          :langMenuNeeded="langOptionsNeeded"
-        />
-      </main>
-    </ToastControler>
+    <ToastControler />
+    <main class="pt-nav-h">
+      <Nuxt />
+      <LangMenuOptions
+        @close="onCloseLangOptions"
+        :langMenuNeeded="langOptionsNeeded"
+      />
+    </main>
+
     <Footer class="mt-44" />
   </div>
 </template>
@@ -22,7 +22,7 @@ import { useElementSize } from "@vueuse/core";
 import LangMenuOptions from "~/components/global/LangMenuOptions.vue";
 import useBodOverflow from "~/composables/useBodyOverflow.js";
 import AuthCtrl from "~/components/auth/AuthCtrl.vue";
-import AuthMultiTabSync from '~/components/auth/AuthMultiTabSync.vue';
+import AuthMultiTabSync from "~/components/auth/AuthMultiTabSync.vue";
 
 export default {
   components: {
