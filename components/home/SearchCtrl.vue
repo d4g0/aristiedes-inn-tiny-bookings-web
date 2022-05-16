@@ -27,6 +27,7 @@ import {
   getDateObjFromDateAndTimeStr,
 } from "~/utils";
 import { useLazyQuery } from "~/composables/useLazyQuery";
+import { useListingsStore } from "~/stores/listings-storage";
 
 export default {
   components: { SearchForm },
@@ -43,7 +44,7 @@ export default {
     const toastStore = useToastStore();
     const { showToast } = toastStore;
     const { loading, result, error, refetch } = useQuery(hotelQuery);
-
+    // hotel query
     watch(result, (nV) => {
       if (nV) {
         // console.log({ hotel: nV?.data?.hotel });
@@ -55,6 +56,9 @@ export default {
         }
       }
     });
+    // *****
+    // todo watch hotel query error too
+    // ****
 
     const calendarLength = computed(() =>
       hotel.value?.maximun_free_calendar_days
@@ -64,7 +68,13 @@ export default {
 
     const SEARCH_REQUEST = EVENTS.CLIENT.SEARCH_ROOM.SEARCH_REQUEST;
 
-    // listings loading
+    // listings
+
+    // listings-storage
+    const listingsStorage = useListingsStore();
+    const { populateListings } = listingsStorage;
+
+    // listings-query
     const {
       loading: listingsLoading,
       result: listingsRes,
@@ -73,10 +83,12 @@ export default {
       setVariables,
     } = useLazyQuery(roomsAvailable);
 
+    // listings-storage response handling
     watch(listingsRes, (nLRes) => {
       if (nLRes?.data && nLRes.data?.getRoomsAvailable) {
         const listings = nLRes.data?.getRoomsAvailable;
-        return console.log({ listings });
+        // return console.log({ listings });
+        populateListings(listings);
       }
 
       if (nLRes?.errors) {
@@ -173,9 +185,6 @@ export default {
       // load
       loadListings();
     }
-
-    // populate listings TODO
-    // when listings loaDeD
 
     const tempLoading = ref(false);
     return {

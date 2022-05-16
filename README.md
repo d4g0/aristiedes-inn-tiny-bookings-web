@@ -1,4 +1,4 @@
-# app
+# Tiny Bookings web client
 
 ## Build Setup
 
@@ -66,13 +66,18 @@ when a clients logins or singups redirect them to home and use navigation for au
     - api call [one]
     - [9 of may]
   - Search
-    - calendar inputs
-    - people input
-    - search api
-    - selection
-    - save to cart
-  - Cart
+    - calendar inputs [one]
+    - search api [one] --- 15 may
+  -  Listings
+    - storage
+    - reder listings
+    - select & save to basket  
+  - Basket
     - offers show case
+    - removal off particular offers from basket
+    - sort [defered]
+      - by capacity 
+      - by price 
   - Check out page
 
 
