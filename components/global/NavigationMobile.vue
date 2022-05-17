@@ -42,6 +42,7 @@
     </div>
     <!-- mobile links -->
     <NavigationMobileMenu
+      :aria-hidden="!open"
       :show="open"
       :links="navigationLinks"
       @close-mobile-nav="onMobileNavCloseRequest"
