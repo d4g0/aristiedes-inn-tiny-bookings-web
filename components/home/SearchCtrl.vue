@@ -23,11 +23,13 @@ import { EVENTS, TOAST_TYPES } from "~/db";
 import { useToastStore } from "~/stores/toast-storage";
 import { roomsAvailable } from "~/querys/roomsAvailable";
 import {
-  date_obj_and_time_zone_to_utc_obj,
-  getDateObjFromDateAndTimeStr,
+  date_obj_and_time_zone_to_iso,
+  date_obj_and_time_zone_to_localized_date_to_utc_str,
+  get_luxon_ready_date_obj_from_js_date_and_sql_time_str,
 } from "~/utils";
 import { useLazyQuery } from "~/composables/useLazyQuery";
 import { useListingsStore } from "~/stores/listings-storage";
+import { useBasketStore } from "~/stores/basket-storage";
 
 export default {
   components: { SearchForm },
@@ -68,8 +70,9 @@ export default {
 
     const SEARCH_REQUEST = EVENTS.CLIENT.SEARCH_ROOM.SEARCH_REQUEST;
 
+    // //
     // listings
-
+    // //
     // listings-storage
     const listingsStorage = useListingsStore();
     const { populateListings } = listingsStorage;
@@ -121,20 +124,8 @@ export default {
       // check_out_hour_time
       var input = {
         hotel_id: hotel.value.id,
-        start_date: {
-          year: searchInterval.check_in_date.year,
-          month: searchInterval.check_in_date.month,
-          day: searchInterval.check_in_date.day,
-          hour: searchInterval.check_in_date.hour,
-          minute: searchInterval.check_in_date.minute,
-        },
-        end_date: {
-          year: searchInterval.check_out_date.year,
-          month: searchInterval.check_out_date.month,
-          day: searchInterval.check_out_date.day,
-          hour: searchInterval.check_out_date.hour,
-          minute: searchInterval.check_out_date.minute,
-        },
+        start_date: searchInterval.check_in_date,
+        end_date: searchInterval.check_out_date,
       };
 
       console.log({ input });
@@ -143,9 +134,17 @@ export default {
       load();
     }
 
+    // basket
+    // initDates
+    const basketStorage = useBasketStore();
+    const { initBasketDates } = basketStorage;
+
+    //
+
     // search hanling
     function onSearchRequest({ check_in_date, check_out_date }) {
-      console.log("onSearchRequest");
+      // console.log("onSearchRequest");
+      // console.log("params");
       // console.log({ search_fomr_interval: { check_in_date, check_out_date } });
 
       // case hotel query has fail
@@ -162,25 +161,39 @@ export default {
       // ready to load rooms available
       // prepare
       // set date obj when query dates & hotel time
-      const fix_check_in_date_obj = getDateObjFromDateAndTimeStr(
-        check_in_date,
-        hotel.value.check_in_hour_time
-      );
-      const fix_check_out_date_obj = getDateObjFromDateAndTimeStr(
-        check_out_date,
-        hotel.value.check_out_hour_time
-      );
+      // api's dates parsing is expecting native js dates numbers in the date obj eg: month 0-11
+      const fix_check_in_date_obj =
+        get_luxon_ready_date_obj_from_js_date_and_sql_time_str(
+          check_in_date,
+          hotel.value.check_in_hour_time
+        );
+      const fix_check_out_date_obj =
+        get_luxon_ready_date_obj_from_js_date_and_sql_time_str(
+          check_out_date,
+          hotel.value.check_out_hour_time
+        );
+
+      console.log("fixed booking dates with hotel times");
+      console.log({ fix_check_in_date_obj, fix_check_out_date_obj });
+
+      // init basket dates
+      // initBasketDates(fix_check_in_date_obj, fix_check_out_date_obj);
 
       // set hotel timeZone localized dates mapped as utc for hit the api with
       // though one damm
-      searchInterval.check_in_date = date_obj_and_time_zone_to_utc_obj(
+      // this date_obj_and_time_zone_to_utc_obj keeps working ok with the luxon obj
+      // api was refactor to use date string so send utc strings as check_in check_out params
+      searchInterval.check_in_date = date_obj_and_time_zone_to_localized_date_to_utc_str(
         fix_check_in_date_obj,
         hotel.value.iana_time_zone
       );
-      searchInterval.check_out_date = date_obj_and_time_zone_to_utc_obj(
+      searchInterval.check_out_date = date_obj_and_time_zone_to_localized_date_to_utc_str(
         fix_check_out_date_obj,
         hotel.value.iana_time_zone
       );
+
+      // console.log('final search interval')
+      // console.log(searchInterval.check_in_date, searchInterval.check_out_date)
 
       // load
       loadListings();
