@@ -23,12 +23,18 @@ import LangMenuOptions from "~/components/global/LangMenuOptions.vue";
 import useBodOverflow from "~/composables/useBodyOverflow.js";
 import AuthCtrl from "~/components/auth/AuthCtrl.vue";
 import AuthMultiTabSync from "~/components/auth/AuthMultiTabSync.vue";
+import ToastControler from '~/components/toast/ToastControler.vue';
+import Footer from '~/components/global/Footer.vue';
+import Navigation from '~/components/global/Navigation.vue';
 
 export default {
   components: {
     LangMenuOptions,
     AuthCtrl,
     AuthMultiTabSync,
+    ToastControler,
+    Footer,
+    Navigation,
   },
   setup() {
     // reactive $width spred

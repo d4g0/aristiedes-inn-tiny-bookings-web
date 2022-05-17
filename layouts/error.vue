@@ -51,7 +51,9 @@
 </template>
 
 <script>
+import LazyImage from '~/components/global/LazyImage.vue';
 export default {
+  components: { LazyImage },
   props: ["error"],
   layout: "error", // you can set a custom layout for the error page
 };

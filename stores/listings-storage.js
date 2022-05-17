@@ -1,26 +1,27 @@
 import { defineStore } from 'pinia';
 import { ref } from '@nuxtjs/composition-api';
+import { remove } from '~/utils';
 
 export const useListingsStore = defineStore('LISTINGS_STORE', () => {
 
     // the listings reference store
     const listings = ref([]);
     // the virtual listings reference (mutable)
-    const listingsList = ref([]);
+    // const listingsList = ref([]);
 
     // expect a spec listings array (room items)
     function populateListings(list = []) {
         listings.value = list;
-        listingsList.value = list;
     }
 
     function removeListing(listingID) {
-        remove(listingsList.value, listingID);
+        remove(listings.value, listingID);
     }
 
-    function addListing(listingID){
+    function addListing(listing) {
         // define...
         // listingsList
+        listings.value.push(listing);
     }
 
     // TODO
@@ -42,34 +43,12 @@ export const useListingsStore = defineStore('LISTINGS_STORE', () => {
     return {
         // data
         listings,
-        listingsList,
         // fn
         populateListings,
+        addListing,
         removeListing,
     }
 })
 
 
 
-function search(collection = [{ id: 0 }], id) {
-    var pos = -1;
-
-    for (let i = 0; i < collection.length; i++) {
-        if (collection[i].id == id) {
-            pos = i;
-            break;
-        }
-    }
-
-    return pos;
-}
-
-function remove(collection = [], id) {
-    const pos = search(persons, id);
-
-    // not found
-    if (pos == -1) {
-        return
-    }
-    collection.splice(pos, 1);
-}

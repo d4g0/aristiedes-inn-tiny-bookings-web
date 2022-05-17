@@ -7,17 +7,19 @@
         sm:h-[360px]
         lg:h-[260px]
         bg-gray-200
+        dark:bg-black
         w-full
         rounded-[16px]
         overflow-hidden
         relative
       "
     >
-      <img
+      <LazyImage
         :src="mapedPictureSrc(firstPicSrc)"
         alt=""
         class="absolute top-0 left-0 w-full h-full object-cover"
       />
+        <!-- class="absolute top-0 left-0 w-full h-full object-cover" -->
     </div>
 
     <!-- listing details -->
@@ -118,8 +120,10 @@
 import { computed, ref, useContext } from "@nuxtjs/composition-api";
 import { useListingsStore } from "~/stores/listings-storage";
 import { useBasketStore } from "~/stores/basket-storage";
+import LazyImage from '../global/LazyImage.vue';
 
 export default {
+  components: { LazyImage },
   props: {
     listing: {
       type: Object,

@@ -54,3 +54,85 @@ remove(persons, 2)
 
 console.log({ originalPersons, persons })
 ```
+
+```js
+const {
+    DateTime,
+    Settings
+} = require('luxon');
+Settings.defaultZone = 'utc'
+
+const sSample = {
+    "year": 2022,
+    "month": 5,
+    "day": 1,
+    "hour": 5,
+    "minute": 0,
+    "second": 0,
+    "millisecond": 0
+}
+
+const eSample = {
+    "year": 2022,
+    "month": 5,
+    "day": 31,
+    "hour": 10,
+    "minute": 0,
+    "second": 0,
+    "millisecond": 0
+}
+
+
+// have to get in dates at midnigth (day start) to make the math safe
+function calculateNightsInBetweenDateObj(start, end) {
+    // set to midnight
+    const midNightStart = setToMidNigth(start);
+    const midNightEnd = setToMidNigth(end);
+    // init dates
+    const start_date = DateTime.fromObject(midNightStart);
+    const end_date = DateTime.fromObject(midNightEnd);
+    // get time diff
+    const ms_of_diff = end_date.diff(start_date).toObject().milliseconds;
+
+    // const days_of_diff = DateTime.fromMillis(ms_of_diff).day;
+    // get nights
+    const msInADay = 24 * 60 * 60 * 1000;
+    const nights = ms_of_diff / msInADay;
+    // const nightsCount = days_of_diff - 1;
+
+
+    console.log({
+        midNightStart,
+        midNightEnd,
+        start_date: start_date.c,
+        end_date: end_date,
+        ms_of_diff,
+
+        // nights,
+        // nightsCount,
+        // days_of_diff,
+        // ms_of_diff,
+        // start_date: start_date.c,
+        // end_date: end_date.c
+    })
+}
+
+
+function setToMidNigth(date) {
+    return {
+        "year": date.year,
+        "month": date.month,
+        "day": date.day,
+        "hour": 0,
+        "minute": 0,
+        "second": 0,
+        "millisecond": 0
+    }
+}
+
+calculateNightsInBetweenDateObj(sSample, eSample)
+```
+
+```js
+// luxon - js date test
+```

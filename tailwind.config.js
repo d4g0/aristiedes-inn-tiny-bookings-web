@@ -23,6 +23,7 @@ module.exports = {
         },
         surface:{
           light:'#fff',
+          'light-dim':'#adbac7',
           dark:'#1c2128'
         }
       },

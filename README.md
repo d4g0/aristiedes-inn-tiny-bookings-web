@@ -70,19 +70,31 @@ when a clients logins or singups redirect them to home and use navigation for au
     - search api [one] --- 15 may
   -  Listings
     - storage
-    - reder listings
+    - render listings --- [one] 16 may
     - select & save to basket  
   - Basket
-    - offers show case
-    - removal off particular offers from basket
+    - storage
+    - handler
+    - card
+      - removal off particular offers from basket
     - sort [defered]
       - by capacity 
       - by price 
   - Check out page
 
 
+## Todos
+- define what to do when the basket is populated and the user hits the search again
+  - posibility 1: keep current basket and compare his elements with new results, if are present keep them if not remove them and show a notice to the user
+- Addres the now known fact that luxon months are 1-12 instead native js dates 0-11
+  - fix that into search form search api hits
 
 ## Task Expantions
+
+### Basket
+#### Storage
+
+- Define booking obj initialization [deffer for api integration when pilot deployed]
 
 
 ## Search Days

@@ -159,3 +159,50 @@ export function remove(collection = [], id) {
     collection.splice(pos, 1);
 }
 
+
+
+// nights calculation
+export function calculateNightsInBetweenDateStr(start, end) {
+
+    var nights = 0;
+
+    // 1 set input dates is times to midnight to track as full days
+    const midnight_start = setDateStrToMidNigth(start);
+    const midnight_end = setDateStrToMidNigth(end);
+
+
+    // init 
+    // 2 get time diff
+    const start_luxon = DateTime.fromISO(midnight_start);
+    const end_luxon = DateTime.fromISO(midnight_end);
+
+    const time_diff_ms = end_luxon.diff(start_luxon).milliseconds;
+    const day_ms = 24 * 60 * 60 * 1000;
+    const full_days = time_diff_ms / day_ms;
+    // nights are = then full_days because end day it's set to midnight (start)
+    // so it dosen't count his night part
+    // so instead setting to midnigth of next day to do so
+    // we just compute that in the nights keeping as same as full days
+    nights = full_days;
+
+    return nights;
+}
+
+
+function setDateStrToMidNigth(dateStr) {
+    const temp = DateTime.fromISO(dateStr);
+    const tempMid = setDateObjToMidNigth(temp.toObject())
+    return DateTime.fromObject(tempMid).toISO()
+}
+
+function setDateObjToMidNigth(date) {
+    return {
+        "year": date.year,
+        "month": date.month,
+        "day": date.day,
+        "hour": 0,
+        "minute": 0,
+        "second": 0,
+        "millisecond": 0
+    }
+}

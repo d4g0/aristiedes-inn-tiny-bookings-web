@@ -115,7 +115,7 @@ export default {
         ],
       },
     ];
-    populateListings(Devlistings);
+    // populateListings(Devlistings);
     return {
       listings,
     };

@@ -21,10 +21,15 @@
         <Listings />
       </div>
     </div>
+    <!-- basket -->
+    <div>
+      <Basket />
+    </div>
   </div>
 </template>
 
 <script>
+import Basket from "~/components/basket/Basket.vue";
 import SearchCtrl from "~/components/home/SearchCtrl.vue";
 import Listings from "~/components/listings/Listings.vue";
 // import AuthData from "~/components/test/AuthData.vue";
@@ -36,6 +41,7 @@ export default {
     // AuthData,
     SearchCtrl,
     Listings,
+    Basket,
   },
   head() {
     const DOMAIN = this?.$nuxt?.context?.env?.DOMAIN;

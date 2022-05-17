@@ -55,11 +55,13 @@ import useBodyOverflow from "~/composables/useBodyOverflow.js";
 import NavigationMenuButton from "./NavigationMenuButton.vue";
 import NavigationMobileMenu from "./NavigationMobileMenu.vue";
 import { useEventListener } from "@vueuse/core";
+import LazyImage from './LazyImage.vue';
 
 export default {
   components: {
     NavigationMenuButton,
     NavigationMobileMenu,
+    LazyImage,
     // Logo,
   },
   props: {

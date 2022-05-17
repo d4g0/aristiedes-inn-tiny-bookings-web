@@ -49,8 +49,9 @@ import { storeToRefs } from "pinia";
 import { useAuthStore } from "~/stores/auth";
 import NavigationLargeLogOutBtn from "./NavigationLargeLogOutBtn.vue";
 import { computed } from '@nuxtjs/composition-api';
+import LazyImage from './LazyImage.vue';
 export default {
-  components: { NavigationLargeLogOutBtn },
+  components: { NavigationLargeLogOutBtn, LazyImage },
   props: {
     navigationLinks: {
       type: Array,

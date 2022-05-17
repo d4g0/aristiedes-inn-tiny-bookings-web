@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute bottom-0 left-0 w-full flex items-center z-20">
+  <div class="absolute bottom-0 left-0 w-full flex items-center z-30">
     <div class="frame-p max-w-md mx-auto">
       <div
         class="
