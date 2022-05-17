@@ -116,6 +116,9 @@
 
 <script>
 import { computed, ref, useContext } from "@nuxtjs/composition-api";
+import { useListingsStore } from "~/stores/listings-storage";
+import { useBasketStore } from "~/stores/basket-storage";
+
 export default {
   props: {
     listing: {
@@ -208,9 +211,18 @@ export default {
     const amenities = computed(() => props.listing.room_amenities);
     //
 
+    // mutations
+    // listings deps
+    const listingsStore = useListingsStore();
+    const { removeListing } = listingsStore;
+
+    const basketStore = useBasketStore();
+    const { addToBasket } = basketStore;
     // addRequest
     function addRequest() {
-      console.log("(addRequest) room id: " + props.listing.id);
+      // console.log("(addRequest) room id: " + props.listing.id);
+      removeListing(props.listing.id);
+      addToBasket(props.listing);
     }
 
     //

@@ -11,7 +11,7 @@
         lg:gap-x-10
       "
     >
-      <li v-for="listing in Devlistings" :key="listing.id" class="">
+      <li v-for="listing in listings" :key="listing.id" class="">
         <Listing :listing="listing" />
       </li>
     </ul>
@@ -29,7 +29,11 @@ export default {
   setup() {
     const listingsStore = useListingsStore();
     const { listings } = storeToRefs(listingsStore);
-    const Devlistings = ref([
+
+    // Dev only ( this should be populated when success api res on search form)
+    const { populateListings } = listingsStore;
+
+    const Devlistings = [
       {
         id: 1,
         hotel_id: 1,
@@ -110,173 +114,10 @@ export default {
           },
         ],
       },
-
-      {
-        id: 4,
-        hotel_id: 1,
-        room_name: "Imperial #002",
-        night_price: 200,
-        capacity: 2,
-        number_of_beds: 1,
-        room_type_id: 1,
-        room_type_key: "Matrimonial",
-        room_pictures: [
-          {
-            room_picture_id: 2,
-            filename: "27.jpg",
-          },
-        ],
-        room_amenities: [
-          {
-            amenity_id: 1,
-            amenity: "TV",
-          },
-          {
-            amenity_id: 2,
-            amenity: "Aire Aconicionado",
-          },
-        ],
-      },
-
-      {
-        id: 5,
-        hotel_id: 1,
-        room_name: "Imperial #002",
-        night_price: 200,
-        capacity: 2,
-        number_of_beds: 1,
-        room_type_id: 1,
-        room_type_key: "Matrimonial",
-        room_pictures: [
-          {
-            room_picture_id: 2,
-            filename: "27.jpg",
-          },
-        ],
-        room_amenities: [
-          {
-            amenity_id: 1,
-            amenity: "TV",
-          },
-          {
-            amenity_id: 2,
-            amenity: "Aire Aconicionado",
-          },
-        ],
-      },
-
-      {
-        id: 6,
-        hotel_id: 1,
-        room_name: "Imperial #002",
-        night_price: 200,
-        capacity: 2,
-        number_of_beds: 1,
-        room_type_id: 1,
-        room_type_key: "Matrimonial",
-        room_pictures: [
-          {
-            room_picture_id: 2,
-            filename: "27.jpg",
-          },
-        ],
-        room_amenities: [
-          {
-            amenity_id: 1,
-            amenity: "TV",
-          },
-          {
-            amenity_id: 2,
-            amenity: "Aire Aconicionado",
-          },
-        ],
-      },
-
-      // {
-      //   id: 7,
-      //   hotel_id: 1,
-      //   room_name: "Imperial #002",
-      //   night_price: 200,
-      //   capacity: 2,
-      //   number_of_beds: 1,
-      //   room_type_id: 1,
-      //   room_type_key: "Matrimonial",
-      //   room_pictures: [
-      //     {
-      //       room_picture_id: 2,
-      //       filename: "27.jpg",
-      //     },
-      //   ],
-      //   room_amenities: [
-      //     {
-      //       amenity_id: 1,
-      //       amenity: "TV",
-      //     },
-      //     {
-      //       amenity_id: 2,
-      //       amenity: "Aire Aconicionado",
-      //     },
-      //   ],
-      // },
-
-      // {
-      //   id: 8,
-      //   hotel_id: 1,
-      //   room_name: "Imperial #002",
-      //   night_price: 200,
-      //   capacity: 2,
-      //   number_of_beds: 1,
-      //   room_type_id: 1,
-      //   room_type_key: "Matrimonial",
-      //   room_pictures: [
-      //     {
-      //       room_picture_id: 2,
-      //       filename: "27.jpg",
-      //     },
-      //   ],
-      //   room_amenities: [
-      //     {
-      //       amenity_id: 1,
-      //       amenity: "TV",
-      //     },
-      //     {
-      //       amenity_id: 2,
-      //       amenity: "Aire Aconicionado",
-      //     },
-      //   ],
-      // },
-
-      // {
-      //   id: 9,
-      //   hotel_id: 1,
-      //   room_name: "Imperial #002",
-      //   night_price: 200,
-      //   capacity: 2,
-      //   number_of_beds: 1,
-      //   room_type_id: 1,
-      //   room_type_key: "Matrimonial",
-      //   room_pictures: [
-      //     {
-      //       room_picture_id: 2,
-      //       filename: "27.jpg",
-      //     },
-      //   ],
-      //   room_amenities: [
-      //     {
-      //       amenity_id: 1,
-      //       amenity: "TV",
-      //     },
-      //     {
-      //       amenity_id: 2,
-      //       amenity: "Aire Aconicionado",
-      //     },
-      //   ],
-      // },
-    ]);
-
+    ];
+    populateListings(Devlistings);
     return {
       listings,
-      Devlistings,
     };
   },
 };
