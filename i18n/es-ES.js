@@ -63,6 +63,16 @@ module.exports = {
             },
         },
 
+        listings:{
+            listing_unit:{
+                addToBookingBtn:'Añadir a mi cesta',
+                details:{
+                    expanded:'Ver menos detalles',
+                    not_expanded:'Ver mas detalles'
+                }
+            }
+        },
+
         basket:{
             cartToogleBtn:{
                 expanded:'Colapse la cesta',

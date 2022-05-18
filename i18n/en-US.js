@@ -62,6 +62,16 @@ module.exports = {
             },
         },
 
+        listings:{
+            listing_unit:{
+                addToBookingBtn:'Add to my basket',
+                details:{
+                    expanded:'See less details',
+                    not_expanded:'See more details'
+                }
+            }
+        },
+
         basket:{
             cartToogleBtn:{
                 expanded:'Collapse the basket',

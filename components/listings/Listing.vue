@@ -18,8 +18,8 @@
         :src="mapedPictureSrc(firstPicSrc)"
         alt=""
         class="absolute top-0 left-0 w-full h-full object-cover"
+        aria-hidden="true"
       />
-        <!-- class="absolute top-0 left-0 w-full h-full object-cover" -->
     </div>
 
     <!-- listing details -->
@@ -52,7 +52,11 @@
           class="opacity-70 focus:opacity-100 focus-styles"
         >
           <span class="border-b border-gray-400">
-            {{ detailsNeeded ? "See less details" : "See more details" }}
+            {{
+              detailsNeeded
+                ? $t("home.listings.listing_unit.details.expanded")
+                : $t("home.listings.listing_unit.details.not_expanded")
+            }}
           </span>
         </button>
       </div>
@@ -110,7 +114,7 @@
         "
         @click="addRequest"
       >
-        Add to my booking
+        {{ $t("home.listings.listing_unit.addToBookingBtn") }}
       </button>
     </div>
   </article>
@@ -120,7 +124,7 @@
 import { computed, ref, useContext } from "@nuxtjs/composition-api";
 import { useListingsStore } from "~/stores/listings-storage";
 import { useBasketStore } from "~/stores/basket-storage";
-import LazyImage from '../global/LazyImage.vue';
+import LazyImage from "../global/LazyImage.vue";
 
 export default {
   components: { LazyImage },
