@@ -36,7 +36,12 @@
             <li v-for="(link, index) in navigationLinks" :key="index">
               <NavigationLargeLink :link="{ ...link, pathName }" />
             </li>
-            <li><NavigationLargeLogOutBtn :btn="{ body: 'Logout' }" v-if="renderLogOut"/></li>
+            <li>
+              <NavigationLargeLogOutBtn
+                :btn="{ body: 'Logout' }"
+                v-if="renderLogOut"
+              />
+            </li>
           </ul>
         </div>
       </div>
@@ -48,10 +53,11 @@
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "~/stores/auth";
 import NavigationLargeLogOutBtn from "./NavigationLargeLogOutBtn.vue";
-import { computed } from '@nuxtjs/composition-api';
-import LazyImage from './LazyImage.vue';
+import { computed } from "@nuxtjs/composition-api";
+import LazyImage from "./LazyImage.vue";
+import NavigationLargeLink from "./NavigationLargeLink.vue";
 export default {
-  components: { NavigationLargeLogOutBtn, LazyImage },
+  components: { NavigationLargeLogOutBtn, LazyImage, NavigationLargeLink },
   props: {
     navigationLinks: {
       type: Array,

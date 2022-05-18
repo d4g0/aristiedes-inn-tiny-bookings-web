@@ -66,6 +66,13 @@ export const EVENTS = {
                 DATES_RANGE_SELECTED: 'DATES_RANGE_SELECTED'
             },
             SEARCH_REQUEST: 'SEARCH_REQUEST'
+        },
+        BASKET:{
+            BASKET_EXPANSION:{
+                ROOM_ITEM:{
+                    REMOVAL_REQUEST:'REMOVAL-REQUEST'
+                }
+            }
         }
     }
 }

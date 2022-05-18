@@ -134,5 +134,19 @@ calculateNightsInBetweenDateObj(sSample, eSample)
 ```
 
 ```js
-// luxon - js date test
+// timeString Formaters
+
+
+function useTimeStrFormat(time_str = "xx:xx:xx") {
+    if (typeof time_str != "string") {
+        return "";
+    }
+    const time = time_str.split(":").slice(0, 2).join(':');
+    return time;
+}
+
+const timeStr = '13:00:00';
+
+const r = useTimeStrFormat(timeStr);
+console.log(r)
 ```

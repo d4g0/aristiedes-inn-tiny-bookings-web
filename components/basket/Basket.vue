@@ -35,13 +35,29 @@
 
               <!-- cart toogle btn -->
               <div>
-                <button>
-                  <ChevronDownIcon class="rotate-180" />
+                <button
+                  @click="toogleBasketExpansion"
+                  class="rounded-full p-1 focus-styles"
+                >
+                  <span class="sr-only">
+                    {{
+                      isBasketExpanded
+                        ? "Expand the basket"
+                        : "Collapse the basket"
+                    }}
+                  </span>
+                  <ChevronDownIcon
+                    aria-hidden="true"
+                    class="rotate-180 transition-all duration-200"
+                    :class="{
+                      'rotate-0': isBasketExpanded,
+                    }"
+                  />
                 </button>
               </div>
             </div>
 
-            <!-- ringht side (book now btn) -->
+            <!-- right side (book now btn) -->
             <div>
               <button
                 class="
@@ -82,8 +98,9 @@ export default {
   },
   setup() {
     const basketStore = useBasketStore();
-    const { items, check_in_date, check_out_date, nights } =
+    const { items, check_in_date, check_out_date, nights, isBasketExpanded } =
       storeToRefs(basketStore);
+    const { toogleBasketExpansion } = basketStore;
 
     // price
     const totalPrice = computed(() =>
@@ -91,7 +108,7 @@ export default {
     );
 
     function calculatePrice(nights = 0, rooms = []) {
-      console.log('(calculatePrice)');
+      console.log("(calculatePrice)");
       // console.log(rooms);
       const basePrice = 0;
       const totalPrice = rooms.reduce((prevPrice, room) => {
@@ -138,6 +155,8 @@ export default {
       check_in_date,
       check_out_date,
       nights,
+      isBasketExpanded,
+      toogleBasketExpansion,
     };
   },
 };

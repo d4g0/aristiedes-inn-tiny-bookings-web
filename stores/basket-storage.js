@@ -10,6 +10,8 @@ export const useBasketStore = defineStore('BASKET_STORE', () => {
     const check_in_date = ref('');
     const check_out_date = ref('');
     const nights = ref(0);
+    const hotel_check_in_time = ref('');
+    const hotel_check_out_time = ref('');
 
 
     // adds a room listings to basket
@@ -37,6 +39,10 @@ export const useBasketStore = defineStore('BASKET_STORE', () => {
         nights.value = calculateNightsInBetweenDateStr(start, end)
     }
 
+    function initBasketHotelTimes(c_in, c_out) {
+        hotel_check_in_time.value = c_in;
+        hotel_check_out_time.value = c_out;
+    }
 
     // clear basket
     function clearBasket() {
@@ -47,7 +53,7 @@ export const useBasketStore = defineStore('BASKET_STORE', () => {
     }
 
     // Ui Only
-    const isBasketExpanded = ref(false);
+    const isBasketExpanded = ref(false); // todo set false for production
     function toogleBasketExpansion() {
         isBasketExpanded.value = !isBasketExpanded.value;
     }
@@ -90,7 +96,8 @@ export const useBasketStore = defineStore('BASKET_STORE', () => {
 
         console.log('populating basket for Development')
         initBasketDates(start, end);
-        addToBasket(listingSample)
+        addToBasket(listingSample);
+        initBasketHotelTimes('13:30:00', '12:00:00');
     }
     // 
 
@@ -110,6 +117,10 @@ export const useBasketStore = defineStore('BASKET_STORE', () => {
         // ui
         isBasketExpanded,
         toogleBasketExpansion,
+        // 
+        initBasketHotelTimes,
+        hotel_check_in_time,
+        hotel_check_out_time,
     }
 })
 

@@ -23,6 +23,7 @@
     </div>
     <!-- basket -->
     <div>
+      <BasketExpansion />
       <Basket />
     </div>
   </div>
@@ -30,6 +31,7 @@
 
 <script>
 import Basket from "~/components/basket/Basket.vue";
+import BasketExpansion from '~/components/basket/BasketExpansion.vue';
 import SearchCtrl from "~/components/home/SearchCtrl.vue";
 import Listings from "~/components/listings/Listings.vue";
 // import AuthData from "~/components/test/AuthData.vue";
@@ -42,6 +44,7 @@ export default {
     SearchCtrl,
     Listings,
     Basket,
+    BasketExpansion,
   },
   head() {
     const DOMAIN = this?.$nuxt?.context?.env?.DOMAIN;

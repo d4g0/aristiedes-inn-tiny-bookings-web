@@ -137,7 +137,8 @@ export default {
     // basket
     // initDates
     const basketStorage = useBasketStore();
-    const { initBasketDates , clearBasket} = basketStorage;
+    const { initBasketDates, clearBasket, initBasketHotelTimes } =
+      basketStorage;
 
     //
 
@@ -176,35 +177,39 @@ export default {
       console.log("fixed booking dates with hotel times");
       console.log({ fix_check_in_date_obj, fix_check_out_date_obj });
 
-      
-
       // set hotel timeZone localized dates mapped as utc for hit the api with
       // though one damm
       // this date_obj_and_time_zone_to_utc_obj keeps working ok with the luxon obj
       // api was refactor to use date string so send utc strings as check_in check_out params
 
-      const utc_check_in_date_str = date_obj_and_time_zone_to_localized_date_to_utc_str(
-        fix_check_in_date_obj,
-        hotel.value.iana_time_zone
-      );
-      
-      const utc_check_out_date_str = date_obj_and_time_zone_to_localized_date_to_utc_str(
-        fix_check_out_date_obj,
-        hotel.value.iana_time_zone
-      );
+      const utc_check_in_date_str =
+        date_obj_and_time_zone_to_localized_date_to_utc_str(
+          fix_check_in_date_obj,
+          hotel.value.iana_time_zone
+        );
+
+      const utc_check_out_date_str =
+        date_obj_and_time_zone_to_localized_date_to_utc_str(
+          fix_check_out_date_obj,
+          hotel.value.iana_time_zone
+        );
 
       // prepare listings load dates params
       searchInterval.check_in_date = utc_check_in_date_str;
-      searchInterval.check_out_date = utc_check_out_date_str
+      searchInterval.check_out_date = utc_check_out_date_str;
 
       // reset basket
       // **TODO**
-      // define the best way for the user to proceed by keeping 
+      // define the best way for the user to proceed by keeping
       // inBasket still available listings
-      clearBasket()
+      clearBasket();
       // init basket dates
       initBasketDates(utc_check_in_date_str, utc_check_out_date_str);
-      
+      // times
+      initBasketHotelTimes(
+        hotel.value?.check_in_hour_time,
+        hotel.value?.check_out_hour_time
+      );
 
       // load
       loadListings();
