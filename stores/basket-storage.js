@@ -81,7 +81,15 @@ export const useBasketStore = defineStore('BASKET_STORE', () => {
     }
     function populateForDevelopment() {
         // * init dates
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth();
+        const day = now.getDate();
+        const start = new Date(Date.UTC(year, month, day, 0, 0, 0, 0)).toISOString();
+        const end = new Date(Date.UTC(year, month, day + 3, 0, 0, 0, 0)).toISOString();
+
         console.log('populating basket for Development')
+        initBasketDates(start, end);
         addToBasket(listingSample)
     }
     // 
