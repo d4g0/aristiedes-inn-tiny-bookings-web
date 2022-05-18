@@ -38,7 +38,9 @@
                   aria-hidden="true"
                   class="rotate-90 transition-all duration-200"
                 />
-                <span class="font-medium"> Back to listings </span>
+                <span class="font-medium">
+                  {{ $t("home.basket_exp.backBtn") }}
+                </span>
               </button>
             </div>
 
@@ -47,7 +49,9 @@
 
             <!-- rooms -->
             <div class="mt-[50px]">
-              <h2 class="font-bold text-3xl md:text-5xl">Rooms</h2>
+              <h2 class="font-bold text-3xl md:text-5xl">
+                {{ $t("home.basket_exp.rooms_key") }}
+              </h2>
               <ul class="mt-[20px]">
                 <li v-for="item in items" :key="item.id">
                   <BasketExpansionRoomItem
@@ -83,10 +87,7 @@ export default {
       EVENTS.CLIENT.BASKET.BASKET_EXPANSION.ROOM_ITEM.REMOVAL_REQUEST;
     // store
     const basketStore = useBasketStore();
-    const {
-      items,
-      isBasketExpanded,
-    } = storeToRefs(basketStore);
+    const { items, isBasketExpanded } = storeToRefs(basketStore);
     const { toogleBasketExpansion, getItemByID, removeFromBasket } =
       basketStore;
     //

@@ -69,6 +69,23 @@ module.exports = {
                 not_expanded:'Expanda la cesta'
             },
             bookBtn:'Reserve Ahora'
+        },
+
+        basket_exp:{
+            backBtn:'Ir atrás',
+            rooms_key:'Habitaciones',
+            room_item:{
+                removeBtn:'Remover'
+            },
+            summary:{
+                summary_key:'Resumen',
+                nights:'Noches',
+                check_in:'Fecha de entrada',
+                check_out:'Fecha de salida',
+                check_in_time:'Hora de entrada',
+                check_out_time:'Hora de salida'
+            }
+
         }
 
     },

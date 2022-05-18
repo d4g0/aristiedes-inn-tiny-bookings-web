@@ -1,11 +1,14 @@
 <template>
   <div class="">
-    <h2 class="font-bold text-3xl md:text-5xl">Sumary</h2>
+    <h2 class="font-bold text-3xl md:text-5xl">
+      {{ $t("home.basket_exp.summary.summary_key") }}
+      
+    </h2>
     <ul class="mt-[20px]">
       <!-- in -->
       <li class="py-[12px] border-b border-opacity-50">
         <div class="flex items-center justify-between">
-          <span>Check in</span>
+          <span>{{ $t("home.basket_exp.summary.check_in") }}</span>
           <span>
             <time :datetime="check_in_date">
               {{ check_in_date_f }}
@@ -16,7 +19,7 @@
       <!-- out -->
       <li class="py-[12px] border-b border-opacity-50">
         <div class="flex items-center justify-between">
-          <span>Check out</span>
+          <span>{{ $t("home.basket_exp.summary.check_out") }} </span>
           <span>
             <time :datetime="check_out_date_f">
               {{ check_out_date_f }}
@@ -27,7 +30,7 @@
       <!-- nights -->
       <li class="py-[12px] border-b border-opacity-50">
         <div class="flex items-center justify-between">
-          <span>Nights</span>
+          <span>{{ $t("home.basket_exp.summary.nights") }}</span>
           <span>
             {{ nights }}
           </span>
@@ -36,7 +39,7 @@
       <!-- check in time -->
       <li class="py-[12px] border-b border-opacity-50">
         <div class="flex items-center justify-between">
-          <span>Check in time</span>
+          <span>{{ $t("home.basket_exp.summary.check_in_time") }}</span>
           <span>
             {{ hotel_check_in_time_f }}
           </span>
@@ -46,7 +49,7 @@
       <!-- check out time -->
       <li class="py-[12px] border-b border-opacity-50">
         <div class="flex items-center justify-between">
-          <span>Check out time</span>
+          <span>{{ $t("home.basket_exp.summary.check_out_time") }}</span>
           <span>
             {{ hotel_check_out_time_f }}
           </span>
@@ -67,7 +70,6 @@ import BasketExpansionRoomItem from "./BasketExpansionRoomItem.vue";
 export default {
   components: { ChevronDownIcon, BasketExpansionRoomItem },
   setup() {
-    
     // TODO implement a focus trap here
     // store
     const basketStore = useBasketStore();
@@ -84,8 +86,6 @@ export default {
       basketStore;
 
     //
-
-    
 
     //comp fn
     function useTimeStrFormat(time_str = "xx:xx:xx") {
@@ -107,13 +107,9 @@ export default {
       useTimeStrFormat(hotel_check_out_time.value)
     );
 
-
-
     //
 
     // mutations
-
-
 
     //
 

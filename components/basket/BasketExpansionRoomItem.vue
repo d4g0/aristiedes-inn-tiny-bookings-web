@@ -37,7 +37,9 @@
         @click="$emit(REMOVAL_REQUEST, room_item.id)"
         class="opacity-70 focus:opacity-100 hover:opacity-100 focus-styles"
       >
-        <span class="border-b border-gray-400"> Remove </span>
+        <span class="border-b border-gray-400"
+          >{{ $t("home.basket_exp.room_item.removeBtn") }}
+        </span>
       </button>
     </div>
   </div>
