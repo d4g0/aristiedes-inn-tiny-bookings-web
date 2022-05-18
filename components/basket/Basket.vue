@@ -42,8 +42,8 @@
                   <span class="sr-only">
                     {{
                       isBasketExpanded
-                        ? "Expand the basket"
-                        : "Collapse the basket"
+                        ? $t("home.basket.cartToogleBtn.expanded")
+                        : $t("home.basket.cartToogleBtn.not_expanded")
                     }}
                   </span>
                   <ChevronDownIcon
@@ -76,7 +76,7 @@
                   dark:hover:bg-brand dark:hover:text-white
                 "
               >
-                Book Now
+                {{ $t("home.basket.bookBtn") }}
               </button>
             </div>
           </div>
@@ -90,7 +90,7 @@
 import { storeToRefs } from "pinia";
 
 import { useBasketStore } from "~/stores/basket-storage";
-import { computed, onMounted } from "@nuxtjs/composition-api";
+import { computed } from "@nuxtjs/composition-api";
 import ChevronDownIcon from "../icons/ChevronDownIcon.vue";
 export default {
   components: {

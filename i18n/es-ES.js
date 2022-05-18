@@ -53,7 +53,7 @@ module.exports = {
     // ---------------
     home: {
         search: {
-            title:'Busque su habitación',
+            title: 'Busque su habitación',
             searchBtn: 'Buscar',
             errors: {
                 selection_error: 'Por favor seleccione al menos una noche',
@@ -62,6 +62,14 @@ module.exports = {
 
             },
         },
+
+        basket:{
+            cartToogleBtn:{
+                expanded:'Colapse la cesta',
+                not_expanded:'Expanda la cesta'
+            },
+            bookBtn:'Reserve Ahora'
+        }
 
     },
 

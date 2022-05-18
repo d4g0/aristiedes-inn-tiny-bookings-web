@@ -60,7 +60,14 @@ module.exports = {
                 hotel_load_error: 'Hotel data fail to load, please try again',
                 listings_load_error: 'Room data fail to load, please try again',
             },
+        },
 
+        basket:{
+            cartToogleBtn:{
+                expanded:'Collapse the basket',
+                not_expanded:'Expand the basket'
+            },
+            bookBtn:'Book Now'
         }
 
     },
