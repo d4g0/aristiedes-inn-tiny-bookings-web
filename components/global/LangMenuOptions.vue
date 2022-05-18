@@ -1,5 +1,8 @@
 <template>
-  <div id="lang-large-focus-trap-container">
+  <div
+    id="lang-large-focus-trap-container"
+    class="text-type-on-light dark:text-type-on-dark"
+  >
     <transition name="fade">
       <!-- TODO use the direct value, nor their negation -->
       <dialog
@@ -11,10 +14,9 @@
           h-full
           w-full
           bg-white
-          dark:bg-obsidiana/90
+          dark:bg-surface-dark/90
           transition-colors
           duration-300
-          text-obsidiana
           backdrop-blur-md
           flex
           items-center
@@ -27,7 +29,7 @@
               border
               dark:border-gray-400
               bg-white
-              dark:bg-obsidiana
+              dark:bg-surface-dark
               transition-colors
               duration-300
               rounded-2xl
@@ -48,10 +50,12 @@
                 class="
                   rounded-full
                   p-2
-                  focus-styles-obsidiana
+                  focus-styles
                   -translate-x-2
                   hover:bg-gray-300
                   dark:hover:bg-gray-600
+                  text-type-on-light
+                  dark:text-type-on-dark
                 "
                 @click="onClick"
               >
@@ -60,7 +64,15 @@
               </button>
             </div>
             <div class="mt-5">
-              <h1 class="text-3xl font-medium md:text-4xl">
+              <h1
+                class="
+                  text-3xl
+                  font-medium
+                  md:text-4xl
+                  text-type-on-light
+                  dark:text-type-on-dark
+                "
+              >
                 {{ $t("langSwitcher.menuHeading") }}
               </h1>
             </div>
@@ -71,6 +83,8 @@
               <li v-for="locale in availableLocales" :key="locale.code">
                 <nuxt-link
                   class="
+                    text-type-on-light
+                    dark:text-type-on-dark
                     hover:bg-gray-300
                     dark:hover:bg-gray-600
                     block
@@ -79,7 +93,7 @@
                     p-4
                     font-medium
                     rounded-xl
-                    focus-styles-obsidiana
+                    focus-styles
                   "
                   :to="switchLocalePath(locale.code)"
                   @click.native="onClick"
