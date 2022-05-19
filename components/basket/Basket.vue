@@ -74,6 +74,7 @@
                   focus-styles focus:ring-offset-2
                   hover:bg-brand
                   dark:hover:bg-brand dark:hover:text-white
+                  hover:text-white
                 "
               >
                 {{ $t("home.basket.bookBtn") }}
