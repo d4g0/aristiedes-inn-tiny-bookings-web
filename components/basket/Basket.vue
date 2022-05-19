@@ -30,7 +30,7 @@
             <div class="flex items-center justify-between space-x-[14px] sm:space-x-[24px] ">
               <div class="flex flex-col items-start justify-center">
                 <span class="text-xl font-medium"> $ {{ totalPrice }} </span>
-                <span class="text-base font-medium"> {{ totalRoomsStr }} </span>
+                <span class="text-sm sm:text-base font-medium"> {{ totalRoomsStr }} </span>
               </div>
 
               <!-- cart toogle btn -->
