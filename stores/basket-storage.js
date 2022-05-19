@@ -13,7 +13,9 @@ export const useBasketStore = defineStore('BASKET_STORE', () => {
     const hotel_check_in_time = ref('');
     const hotel_check_out_time = ref('');
 
-
+    // check out
+    const checkOutNeeded = ref(false);
+    // 
     // adds a room listings to basket
     // should remove from listings rendered list when added
     function addToBasket(item) {
@@ -52,10 +54,21 @@ export const useBasketStore = defineStore('BASKET_STORE', () => {
         nights.value = 0;
     }
 
+
+    // check out
+    function tooglecheckOutNeeded() {
+        checkOutNeeded.value = !checkOutNeeded.value;
+    }
     // Ui Only
     const isBasketExpanded = ref(false); // todo set false for production
     function toogleBasketExpansion() {
         isBasketExpanded.value = !isBasketExpanded.value;
+    }
+
+    function closeBasketExpansion() {
+        if(isBasketExpanded.value){
+            isBasketExpanded.value = false;
+        }
     }
 
     // Dev only
@@ -117,6 +130,10 @@ export const useBasketStore = defineStore('BASKET_STORE', () => {
         // ui
         isBasketExpanded,
         toogleBasketExpansion,
+        checkOutNeeded,
+        tooglecheckOutNeeded,
+        closeBasketExpansion,
+        
         // 
         initBasketHotelTimes,
         hotel_check_in_time,

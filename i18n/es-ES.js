@@ -103,6 +103,9 @@ module.exports = {
                 check_out_time:'Hora de salida'
             }
 
+        },
+        check_out:{
+            total_price:'Total'
         }
 
     },

@@ -100,6 +100,9 @@ module.exports = {
                 check_in_time: 'Check in time',
                 check_out_time: 'Check out time'
             }
+        },
+        check_out:{
+            total_price:'Total'
         }
 
     },

@@ -76,6 +76,7 @@
                   dark:hover:bg-brand dark:hover:text-white
                   hover:text-white
                 "
+                @click="onBookRequest"
               >
                 {{ $t("home.basket.bookBtn") }}
               </button>
@@ -89,7 +90,6 @@
 
 <script>
 import { storeToRefs } from "pinia";
-
 import { useBasketStore } from "~/stores/basket-storage";
 import { computed, useContext } from "@nuxtjs/composition-api";
 import ChevronDownIcon from "../icons/ChevronDownIcon.vue";
@@ -104,9 +104,9 @@ export default {
     // ctx.root.$i18n.t
 
     const basketStore = useBasketStore();
-    const { items, check_in_date, check_out_date, nights, isBasketExpanded } =
+    const { items,  nights, isBasketExpanded } =
       storeToRefs(basketStore);
-    const { toogleBasketExpansion } = basketStore;
+    const { toogleBasketExpansion , tooglecheckOutNeeded , closeBasketExpansion } = basketStore;
 
     // price
     const totalPrice = computed(() =>
@@ -148,6 +148,13 @@ export default {
 
     //
 
+    // ui
+    function onBookRequest() {
+      closeBasketExpansion();
+      tooglecheckOutNeeded();
+    }
+    // 
+
     // Dev only
     const { populateForDevelopment } = basketStore;
     function initForDev() {
@@ -163,11 +170,10 @@ export default {
       items,
       totalPrice,
       totalRoomsStr,
-      check_in_date,
-      check_out_date,
       nights,
       isBasketExpanded,
       toogleBasketExpansion,
+      onBookRequest,
     };
   },
 };
