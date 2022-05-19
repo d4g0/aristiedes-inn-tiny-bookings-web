@@ -160,10 +160,24 @@ export default {
     },
   },
 
-  setup(props) {
+  setup(props, rawCtx) {
     const ctx = useContext();
     const API_CONTENT_PATH = ctx.env.API_CONTENT_PATH;
+    const { root } = rawCtx;
 
+    // $t fn
+    // console.log(ctx.root.$i18n.t);
+    const nightStr = computed(() =>
+      root.$i18n.t("home.listings.listing_unit.night")
+    );
+
+    const bedStr = computed(() =>
+      root.$i18n.t("home.listings.listing_unit.bed")
+    );
+
+    const guestStr = computed(() =>
+      root.$i18n.t("home.listings.listing_unit.guest")
+    );
     // pictures
     function mapedPictureSrc(filename) {
       return `/${API_CONTENT_PATH}/img/${filename}`;
@@ -179,7 +193,7 @@ export default {
     );
 
     function formatNightPrice(price) {
-      return `$ ${price} / night`;
+      return `$ ${price} / ${nightStr.value}`;
     }
     //
 
@@ -187,7 +201,7 @@ export default {
     const beds = computed(() => formatBeds(props.listing.number_of_beds));
 
     function formatBeds(beds) {
-      var baseStr = "bed";
+      var baseStr = bedStr.value;
       if (beds > 1) {
         baseStr = baseStr.concat("s");
       }
@@ -200,7 +214,7 @@ export default {
     // capacity
     const capacity = computed(() => formatCapacity(props.listing.capacity));
     function formatCapacity(capacity) {
-      var baseStr = "guest";
+      var baseStr = guestStr.value;
       if (capacity > 1) {
         baseStr = baseStr.concat("s");
       }
@@ -245,6 +259,7 @@ export default {
       beds,
       capacity,
       amenities,
+      nightStr,
       // actions
       toogleDetailsNeeded,
       addRequest,

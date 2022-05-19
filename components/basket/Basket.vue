@@ -27,7 +27,7 @@
         >
           <div class="frame-30 w-full flex items-center justify-between">
             <!-- left side (price, rooms, spin btn) -->
-            <div class="flex items-center justify-between space-x-[24px]">
+            <div class="flex items-center justify-between space-x-[14px] sm:space-x-[24px] ">
               <div class="flex flex-col items-start justify-center">
                 <span class="text-xl font-medium"> $ {{ totalPrice }} </span>
                 <span class="text-base font-medium"> {{ totalRoomsStr }} </span>
@@ -90,13 +90,18 @@
 import { storeToRefs } from "pinia";
 
 import { useBasketStore } from "~/stores/basket-storage";
-import { computed } from "@nuxtjs/composition-api";
+import { computed, useContext } from "@nuxtjs/composition-api";
 import ChevronDownIcon from "../icons/ChevronDownIcon.vue";
 export default {
   components: {
     ChevronDownIcon,
   },
-  setup() {
+  setup(props, ctx) {
+    const { root } = ctx;
+
+    // $t
+    // ctx.root.$i18n.t
+
     const basketStore = useBasketStore();
     const { items, check_in_date, check_out_date, nights, isBasketExpanded } =
       storeToRefs(basketStore);
@@ -125,11 +130,16 @@ export default {
     );
 
     const totalRoomsStr = computed(() => formatTotalRooms(totalRooms.value));
-
+    const roomStrSingular = computed(() =>
+      root.$i18n.t("home.basket.room.singular")
+    );
+    const roomStrPlural = computed(() =>
+      root.$i18n.t("home.basket.room.plural")
+    );
     function formatTotalRooms(rooms) {
-      var baseStr = "Room";
+      var baseStr = roomStrSingular.value;
       if (rooms > 1) {
-        baseStr = baseStr.concat("s");
+        baseStr = roomStrPlural.value;
       }
 
       return `${rooms} ${baseStr}`;

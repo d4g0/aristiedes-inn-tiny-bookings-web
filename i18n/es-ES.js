@@ -66,6 +66,9 @@ module.exports = {
         listings:{
             listing_unit:{
                 addToBookingBtn:'Añadir a mi cesta',
+                night:'Noche',
+                bed:'cama',
+                guest:'invitado',
                 details:{
                     expanded:'Ver menos detalles',
                     not_expanded:'Ver mas detalles'
@@ -78,7 +81,11 @@ module.exports = {
                 expanded:'Colapse la cesta',
                 not_expanded:'Expanda la cesta'
             },
-            bookBtn:'Reserve Ahora'
+            bookBtn:'Reserve Ahora',
+            room:{
+                singular:'Habitación',
+                plural:'Habitaciones'
+            }
         },
 
         basket_exp:{

@@ -62,36 +62,43 @@ module.exports = {
             },
         },
 
-        listings:{
-            listing_unit:{
-                addToBookingBtn:'Add to my basket',
-                details:{
-                    expanded:'See less details',
-                    not_expanded:'See more details'
+        listings: {
+            listing_unit: {
+                addToBookingBtn: 'Add to my basket',
+                night: 'Night',
+                bed: 'bed',
+                guest:'guest',
+                details: {
+                    expanded: 'See less details',
+                    not_expanded: 'See more details'
                 }
             }
         },
 
-        basket:{
-            cartToogleBtn:{
-                expanded:'Collapse the basket',
-                not_expanded:'Expand the basket'
+        basket: {
+            cartToogleBtn: {
+                expanded: 'Collapse the basket',
+                not_expanded: 'Expand the basket'
             },
-            bookBtn:'Book Now'
+            bookBtn: 'Book Now',
+            room:{
+                singular:'Room',
+                plural:'Rooms'
+            }
         },
-        basket_exp:{
-            backBtn:'Back to listings',
-            rooms_key:'Rooms',
-            room_item:{
-                removeBtn:'Remove'
+        basket_exp: {
+            backBtn: 'Back to listings',
+            rooms_key: 'Rooms',
+            room_item: {
+                removeBtn: 'Remove'
             },
-            summary:{
-                summary_key:'Summary',
-                nights:'Nights',
-                check_in:'Check in',
-                check_out:'Check out',
-                check_in_time:'Check in time',
-                check_out_time:'Check out time'
+            summary: {
+                summary_key: 'Summary',
+                nights: 'Nights',
+                check_in: 'Check in',
+                check_out: 'Check out',
+                check_in_time: 'Check in time',
+                check_out_time: 'Check out time'
             }
         }
 
