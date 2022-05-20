@@ -45,8 +45,29 @@
             </div>
 
             <!-- summary -->
-
             <CheckoutSumary class="mt-[50px]" />
+
+            <!-- rooms -->
+            <CheckOutRooms class="mt-[50px]" />
+
+            <!-- comming soon -->
+            <div
+              class="
+                mt-[150px]
+                bg-gradient-to-tr
+                p-1
+                rounded-[16px]
+                from-blue-600
+                to-rose-400
+                text-white
+              "
+            >
+              <div class="px-6 py-4 rounded-[16px] bg-black">
+                <h2 class="font-bold text-2xl md:text-3xl">
+                  {{ $t("home.check_out.comming_soon") }}
+                </h2>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -61,9 +82,10 @@ import ChevronDownIcon from "../icons/ChevronDownIcon.vue";
 import useBodyOverflow from "~/composables/useBodyOverflow.js";
 import { watch } from "@nuxtjs/composition-api";
 import CheckoutSumary from "~/components/checkout/CheckoutSumary.vue";
+import CheckOutRooms from "./CheckOutRooms.vue";
 
 export default {
-  components: { ChevronDownIcon, CheckoutSumary },
+  components: { ChevronDownIcon, CheckoutSumary, CheckOutRooms },
   setup() {
     const basketStore = useBasketStore();
     const { checkOutNeeded } = storeToRefs(basketStore);
