@@ -42,7 +42,7 @@ module.exports = {
     // ---------------
     metadata: {
         home: {
-            title: 'Reserva tu habitación en el hotel hoy.',
+            title: 'Reserva tu habitación en el hotel hoy',
             description: `Nuestra infraestructura proporciona una atmósfera de calidez, modernidad y tranquilidad que caracterizan a nuestro hotel. `
         },
 

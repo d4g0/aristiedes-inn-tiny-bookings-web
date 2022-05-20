@@ -61,6 +61,7 @@ export default {
     }
 
     return {
+      title: this.$t("metadata.home.title"),
       meta: [
         // description
         {
