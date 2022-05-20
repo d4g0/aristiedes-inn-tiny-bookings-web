@@ -74,9 +74,9 @@
         </div>
 
         <!-- color -->
-        <div class="mt-6">
+        <!-- <div class="mt-6">
           <ColorModeSwitch />
-        </div>
+        </div> -->
 
         <!-- copy -->
         <div class="mt-10">
@@ -90,11 +90,11 @@
 <script>
 import LangSwitcheFooter from "~/components/global/LangSwitcheFooter.vue";
 import { navigationLinks } from "~/db";
-import ColorModeSwitch from "./ColorModeSwitch.vue";
+// import ColorModeSwitch from "./ColorModeSwitch.vue";
 export default {
   components: {
     LangSwitcheFooter,
-    ColorModeSwitch,
+    // ColorModeSwitch,
   },
   setup() {
     return {

@@ -11,6 +11,9 @@ export default {
   },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+  generate: {
+    fallback: "404.html"
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head() {
@@ -70,13 +73,12 @@ export default {
     '@nuxtjs/tailwindcss',
     '@nuxtjs/composition-api/module',
     '@pinia/nuxt',
-
+    // '@nuxtjs/color-mode',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/i18n',
-    '@nuxtjs/color-mode',
   ],
   // i18n
   i18n: {
