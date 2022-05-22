@@ -93,7 +93,7 @@ export default {
         {
           hid: "og:image",
           property: "og:image",
-          content: `https://${DOMAIN}/img/social/social.jpg`,
+          content: `https://${DOMAIN}/img/social/aristides-social.jpg`,
         },
         // Twitter
         {
@@ -119,7 +119,7 @@ export default {
         {
           hid: "twitter:image",
           property: "twitter:image",
-          content: `https://${DOMAIN}/img/social/social.jpg`,
+          content: `https://${DOMAIN}/img/social/aristides-social.jpg`,
         },
       ],
     };
