@@ -17,11 +17,16 @@ module.exports = {
           'on-light': '#24292f',
           'on-dark': '#adbac7'
         },
-        surface:{
-          light:'#fff',
-          'light-dim':'#adbac7',
-          dark:'#1c2128'
+        surface: {
+          light: '#fff',
+          'light-dim': '#adbac7',
+          dark: '#1c2128'
         }
+      },
+
+      fontFamily: {
+        // Satoshi
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
     },
   },

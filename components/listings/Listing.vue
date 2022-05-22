@@ -17,7 +17,7 @@
       <LazyImage
         :src="mapedPictureSrc(firstPicSrc)"
         alt=""
-        class="absolute top-0 left-0 w-full h-full object-cover"
+        class="absolute top-0 left-0 w-full h-full object-cover rounded-[16px]"
         aria-hidden="true"
       />
     </div>
