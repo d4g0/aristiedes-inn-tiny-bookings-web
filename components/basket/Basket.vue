@@ -63,7 +63,8 @@
                 class="
                   rounded-[16px]
                   py-5
-                  px-[50px]
+                  px-[20px]
+                  sm:px-[50px]
                   w-full
                   font-medium
                   focus-styles
