@@ -9,12 +9,10 @@ module.exports = {
     },
     nav: {
         links: {
-            home: 'Inicio',
-            singup: 'Registrarse',
-            bookings: 'Reservaciones',
-            payments: 'Pagos',
-            client_login: 'Iniciar sesión',
-            admin_login: 'Iniciar sesión como Admin',
+            home: 'Home',
+            terms: 'Términos',
+            contact: 'Contact',
+            admin_login: 'Login as Admin',
         },
         reserve: 'Reservar'
     },
@@ -63,50 +61,50 @@ module.exports = {
             },
         },
 
-        listings:{
-            listing_unit:{
-                addToBookingBtn:'Añadir a mi cesta',
-                night:'Noche',
-                bed:'cama',
-                guest:'invitado',
-                details:{
-                    expanded:'Ver menos detalles',
-                    not_expanded:'Ver mas detalles'
+        listings: {
+            listing_unit: {
+                addToBookingBtn: 'Añadir a mi cesta',
+                night: 'Noche',
+                bed: 'cama',
+                guest: 'invitado',
+                details: {
+                    expanded: 'Ver menos detalles',
+                    not_expanded: 'Ver mas detalles'
                 }
             }
         },
 
-        basket:{
-            cartToogleBtn:{
-                expanded:'Colapse la cesta',
-                not_expanded:'Expanda la cesta'
+        basket: {
+            cartToogleBtn: {
+                expanded: 'Colapse la cesta',
+                not_expanded: 'Expanda la cesta'
             },
-            bookBtn:'Reserve Ahora',
-            room:{
-                singular:'Habitación',
-                plural:'Habitaciones'
+            bookBtn: 'Reserve Ahora',
+            room: {
+                singular: 'Habitación',
+                plural: 'Habitaciones'
             }
         },
 
-        basket_exp:{
-            backBtn:'Ir atrás',
-            rooms_key:'Habitaciones',
-            room_item:{
-                removeBtn:'Remover'
+        basket_exp: {
+            backBtn: 'Ir atrás',
+            rooms_key: 'Habitaciones',
+            room_item: {
+                removeBtn: 'Remover'
             },
-            summary:{
-                summary_key:'Resumen',
-                nights:'Noches',
-                check_in:'Fecha de entrada',
-                check_out:'Fecha de salida',
-                check_in_time:'Hora de entrada',
-                check_out_time:'Hora de salida'
+            summary: {
+                summary_key: 'Resumen',
+                nights: 'Noches',
+                check_in: 'Fecha de entrada',
+                check_out: 'Fecha de salida',
+                check_in_time: 'Hora de entrada',
+                check_out_time: 'Hora de salida'
             }
 
         },
-        check_out:{
-            total_price:'Total',
-            comming_soon:'Esto fue una prueba, el sistema real será desplegado en breve.'
+        check_out: {
+            total_price: 'Total',
+            comming_soon: 'Esto fue una prueba, el sistema real será desplegado en breve.'
 
         }
 
@@ -154,7 +152,7 @@ module.exports = {
         address: 'Av. Alberto Reyes N 0 261 - 2do piso - Huarmey - Ancash - Perú',
     },
 
-    
+
     // ---------------
     // 404 
     // ---------------

@@ -47,6 +47,27 @@
               </nuxt-link>
             </li>
 
+            <!-- terms -->
+            <li class="">
+              <nuxt-link
+                :to="localePath(navigationLinks.terms.route)"
+                class="
+                  inline-block
+                  font-medium
+                  box-border
+                  rounded-lg
+                  focus-styles
+                  opacity-75
+                  hover:opacity-100
+                  focus:opacity-100
+                "
+              >
+                <span>
+                  {{ $t(navigationLinks.terms.i18nPath) }}
+                </span>
+              </nuxt-link>
+            </li>
+
             <!-- admin login -->
             <li class="">
               <nuxt-link

@@ -6,12 +6,8 @@ export const navigationLinks = {
             i18nPath: "nav.links.home",
         },
         {
-            route: "/client_login",
-            i18nPath: "nav.links.client_login",
-        },
-        {
-            route: "/singup",
-            i18nPath: "nav.links.singup",
+            route: "/contact",
+            i18nPath: "nav.links.contact",
         },
     ],
     authenticatedClient: [
@@ -37,6 +33,10 @@ export const navigationLinks = {
     adminLogin: {
         route: "/admin_login",
         i18nPath: "nav.links.admin_login",
+    },
+    terms: {
+        route: "/terms",
+        i18nPath: "nav.links.terms",
     },
 
 }
@@ -67,10 +67,10 @@ export const EVENTS = {
             },
             SEARCH_REQUEST: 'SEARCH_REQUEST'
         },
-        BASKET:{
-            BASKET_EXPANSION:{
-                ROOM_ITEM:{
-                    REMOVAL_REQUEST:'REMOVAL-REQUEST'
+        BASKET: {
+            BASKET_EXPANSION: {
+                ROOM_ITEM: {
+                    REMOVAL_REQUEST: 'REMOVAL-REQUEST'
                 }
             }
         }
