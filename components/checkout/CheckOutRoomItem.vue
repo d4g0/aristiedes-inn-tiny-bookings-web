@@ -1,5 +1,5 @@
 <template>
-  <div class="py-[8px] flex items-center justify-between">
+  <div class="py-[8px] flex items-start justify-between">
     <!-- data -->
     <div class="flex items-center justify-between">
       <!-- pic -->
@@ -20,33 +20,45 @@
           class="absolute top-0 left-0 w-full h-full object-cover"
         />
       </div>
+
       <!-- info -->
-      <div class="pl-[12px] sm:pl-[32px]">
+      <div class="mt-[16px] pl-[20px] sm:pl-[32px]">
         <h3 class="text-lg font-medium">
           {{ room_item.room_name }}
         </h3>
-        <p class="text-sm font-medium">
+
+        <p class="text-sm font-medium mt-[10px]">
           {{ nightPrice }}
         </p>
+
+        <div class="">
+          <ul class="text-sm list-disc pl-[12px]">
+            <li>
+              {{ beds }}
+            </li>
+            <li>
+              {{ capacity }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-
-    <!-- rigth unit -->
-    <div>
-      <ul class="text-sm list-disc">
-        <li>
-          {{ beds }}
-        </li>
-        <li>
-          {{ capacity }}
-        </li>
-      </ul>
+    <!-- btn -->
+    <div class="pt-[16px]">
+      <button
+        class="opacity-70 focus:opacity-100 hover:opacity-100 focus-styles"
+        @click="$emit(REMOVAL_REQUEST, room_item.id)"
+      >
+        {{ $t("home.basket_exp.room_item.removeBtn") }}
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import { computed, useContext } from "@nuxtjs/composition-api";
+import { EVENTS } from "~/db/index";
+
 export default {
   components: {},
   props: {
@@ -84,7 +96,8 @@ export default {
   setup(props, rawCtx) {
     const ctx = useContext();
     const API_CONTENT_PATH = ctx.env.API_CONTENT_PATH;
-
+    const REMOVAL_REQUEST =
+      EVENTS.CLIENT.BASKET.BASKET_EXPANSION.ROOM_ITEM.REMOVAL_REQUEST;
     const { root } = rawCtx;
 
     // guest & capacity
@@ -146,6 +159,7 @@ export default {
       beds,
       capacity,
       mapedPictureSrc,
+      REMOVAL_REQUEST,
     };
   },
 };
