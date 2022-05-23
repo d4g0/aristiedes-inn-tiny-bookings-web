@@ -146,7 +146,13 @@ module.exports = {
     },
 
 
-
+    // ---------------
+    // Contact 
+    // ---------------
+    contact: {
+        heading: 'Contact us',
+        address: 'Av. Alberto Reyes N 0 261 - 2do piso - Huarmey - Ancash - Perú',
+    },
 
 
 
