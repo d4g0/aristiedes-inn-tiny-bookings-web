@@ -101,7 +101,8 @@ module.exports = {
         },
         check_out:{
             total_price:'Total',
-            comming_soon:'This was a test, real system comming soon'
+            comming_soon:'This was a test, real system comming soon',
+            currency:'Currency'
         }
 
     },

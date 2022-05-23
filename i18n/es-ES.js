@@ -104,8 +104,8 @@ module.exports = {
         },
         check_out: {
             total_price: 'Total',
-            comming_soon: 'Esto fue una prueba, el sistema real será desplegado en breve.'
-
+            comming_soon: 'Esto fue una prueba, el sistema real será desplegado en breve.',
+            currency:'Moneda'
         }
 
     },

@@ -74,6 +74,16 @@
           </span>
         </div>
       </li>
+
+      <!-- coin -->
+      <li class="py-[12px] border-b border-opacity-50">
+        <div class="flex items-center justify-between">
+          <span>{{ $t("home.check_out.currency") }}</span>
+          <span>
+            USD
+          </span>
+        </div>
+      </li>
     </ul>
   </div>
 </template>
