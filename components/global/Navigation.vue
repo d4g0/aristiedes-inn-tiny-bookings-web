@@ -1,6 +1,5 @@
 <template>
-  <nav
-    class="
+  <nav class="
       fixed
       z-10
       top-0
@@ -9,24 +8,11 @@
       transform
       transition-transform
       duration-500
-    "
-    ref="nav_ref"
-    :class="showShadow ? 'shadow-md lg:shadow-none' : ''"
-    v-show="shouldRenderNav"
-  >
+    " ref="nav_ref" :class="showShadow ? 'shadow-md lg:shadow-none' : ''" v-show="shouldRenderNav">
     <transition name="fade-slow" mode="out-in">
-      <NavigationLarge
-        v-if="width > 1023 - 15 && width > 0"
-        :navigationLinks="currentLinks"
-        :pathName="computedPath"
-        class=""
-      />
-      <NavigationMobile
-        v-else
-        :navigationLinks="currentLinks"
-        @nav-open-change="onNavOpenChange"
-        class="lg:hidden"
-      />
+      <NavigationLarge v-if="width > 1023 - 15 && width > 0" :navigationLinks="currentLinks" :pathName="computedPath"
+        class="" />
+      <NavigationMobile v-else :navigationLinks="currentLinks" @nav-open-change="onNavOpenChange" class="lg:hidden" />
     </transition>
   </nav>
 </template>
@@ -178,28 +164,7 @@ export default {
       }
     }
 
-    // ---------------
-    // Navigation links selections handling
-    // ---------------
-    const authStore = useAuthStore();
-    const { user } = storeToRefs(authStore);
-    // public is the default value (in db)
-    const currentNavigationLinksSelection = ref("public");
-    const currentLinks = computed(
-      () => navigationLinks[currentNavigationLinksSelection.value]
-    );
-    watch(user, (newU, oU) => {
-      if (newU) {
-        // console.log(newU)
-        const user_role = newU.user_role;
-        if (user_role == USER_ROLES.CLIENT) {
-          currentNavigationLinksSelection.value = "authenticatedClient";
-        }
-        // case admin offloaded to AdminNavigation component
-      } else {
-        currentNavigationLinksSelection.value = "public";
-      }
-    });
+    const currentLinks = ref(navigationLinks.public);
 
     return {
       // ref
