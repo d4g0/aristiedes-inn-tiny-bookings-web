@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import { onMounted, watch } from "@vue/composition-api";
+import { onMounted, watch } from "@nuxtjs/composition-api";
 import { createFocusTrap } from "focus-trap";
 import XIcon from "~/components/icons/XIcon.vue";
 import { wait } from "~/utils";

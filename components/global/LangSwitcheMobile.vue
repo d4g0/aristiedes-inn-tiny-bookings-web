@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { inject } from "@vue/composition-api";
+import { inject } from "@nuxtjs/composition-api";
 import WorldIcon from "~/components/icons/WorldIcon.vue";
 export default {
   computed: {

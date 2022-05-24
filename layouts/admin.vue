@@ -16,19 +16,23 @@
 </template>
 
 <script>
-import { ref, provide, watch } from "@vue/composition-api";
+import { ref, provide, watch } from "@nuxtjs/composition-api";
 import { useElementSize } from "@vueuse/core";
 import LangMenuOptions from "~/components/global/LangMenuOptions.vue";
 import useBodOverflow from "~/composables/useBodyOverflow.js";
 import AuthCtrl from "~/components/auth/AuthCtrl.vue";
 import AuthMultiTabSync from '~/components/auth/AuthMultiTabSync.vue';
+import AdminNavigation from "~/components/global/AdminNavigation.vue";
+import ToastControler from "~/components/toast/ToastControler.vue";
 
 export default {
   components: {
     LangMenuOptions,
     AuthCtrl,
     AuthMultiTabSync,
-  },
+    AdminNavigation,
+    ToastControler
+},
   setup() {
     // reactive $width spred
     const shell = ref(null);

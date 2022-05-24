@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { onMounted, ref, watch } from "@vue/composition-api";
+import { onMounted, ref, watch } from "@nuxtjs/composition-api";
 import useBodyOverflow from "~/composables/useBodyOverflow.js";
 import NavigationMenuButton from "./NavigationMenuButton.vue";
 import NavigationMobileMenu from "./NavigationMobileMenu.vue";

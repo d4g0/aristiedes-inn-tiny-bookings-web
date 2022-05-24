@@ -58,7 +58,7 @@
 <script>
 import NavigationMobileMenuLink from "./NavigationMobileMenuLink.vue";
 import LangSwitcherMobile from "~/components/global/LangSwitcheMobile.vue";
-import { onMounted, onUnmounted, ref } from "@vue/composition-api";
+import { onMounted, onUnmounted, ref } from "@nuxtjs/composition-api";
 import NavigationMobileMenuLogoutBtn from "./NavigationMobileMenuLogoutBtn.vue";
 import { useAuthStore } from "~/stores/auth";
 import { computed } from "@nuxtjs/composition-api";

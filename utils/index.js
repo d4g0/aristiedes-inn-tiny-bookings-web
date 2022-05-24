@@ -1,7 +1,7 @@
-const {
+import {
     DateTime,
     Settings
-} = require('luxon');
+} from 'luxon';
 Settings.defaultZone = 'utc'
 
 export const gql = String.raw;
@@ -71,12 +71,12 @@ export function sqlTimeStrToTimeObj(timeStr = '') {
  * @param {String} timeStr 
  * @returns 
  */
- export function getDateObjFromDateAndTimeStr(date = new Date(), timeStr) {
+export function getDateObjFromDateAndTimeStr(date = new Date(), timeStr) {
 
     const timeObj = sqlTimeStrToTimeObj(timeStr);
     const dateObj = {
         year: date.getFullYear(),
-        month: date.getMonth(), 
+        month: date.getMonth(),
         day: date.getDate(),
         hour: timeObj.hour,
         minute: timeObj.minute,

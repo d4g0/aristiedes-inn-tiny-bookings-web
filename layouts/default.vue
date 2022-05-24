@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { ref, provide, watch } from "@vue/composition-api";
+import { ref, provide, watch } from "@nuxtjs/composition-api";
 import { useElementSize } from "@vueuse/core";
 import LangMenuOptions from "~/components/global/LangMenuOptions.vue";
 import useBodOverflow from "~/composables/useBodyOverflow.js";

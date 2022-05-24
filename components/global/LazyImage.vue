@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { ref,  watchEffect } from "@vue/composition-api";
+import { ref,  watchEffect } from "@nuxtjs/composition-api";
 import { useElementVisibility } from "@vueuse/core";
 export default {
   props: {
