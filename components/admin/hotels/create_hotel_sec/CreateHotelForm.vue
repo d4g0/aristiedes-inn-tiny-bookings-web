@@ -94,7 +94,7 @@
         </span>
         <!-- inputs -->
         <div class="flex items-center justify-between gap-8">
-            <!-- check in hour -->
+          <!-- check in hour -->
           <div>
             <label for="check_in_hour" class="sr-only">Hora</label>
             <input
@@ -174,7 +174,7 @@
         </span>
         <!-- inputs -->
         <div class="flex items-center justify-between gap-8">
-            <!-- check in hour -->
+          <!-- check in hour -->
           <div>
             <label for="check_out_hour" class="sr-only">Hora</label>
             <input
@@ -235,6 +235,44 @@
             <span aria-hidden="true">*</span>
             <span class="">
               Por favor introduzca un minuto válido, entre 0 y 59
+            </span>
+          </div>
+        </transition>
+      </div>
+
+      <!-- Hotel Time Zone -->
+      <div class="mt-4">
+        <label
+          for="iana_time_zone"
+          class="label pl-2"
+          :class="{
+            'opacity-60': isSending,
+            'text-red-700': ianaTimeZoneError,
+          }"
+        >
+          Zona horaria del hotel
+        </label>
+        <input
+          type="text"
+          name="iana_time_zone"
+          class="
+            input-field
+            focus-effect
+            border-gray-800/40 border
+            focus:ring-brand
+          "
+          :disabled="isSending"
+          :class="{
+            'opacity-60': isSending,
+            'text-red-700 border-red-700 focus:ring-red-700': ianaTimeZoneError,
+          }"
+          v-model="v.iana_time_zone.$model"
+        />
+        <transition name="fade">
+          <div class="pl-2 mt-1 text-red-700 text-sm" v-if="ianaTimeZoneError">
+            <span aria-hidden="true">*</span>
+            <span class="">
+              Por favor introduzca una zona horaria (iana time zone)
             </span>
           </div>
         </transition>
@@ -313,6 +351,7 @@ import {
 } from "@vuelidate/validators";
 import { EVENTS } from "~/db";
 import { computed, ref } from "@nuxtjs/composition-api";
+import { getCurrentTimeZone } from "~/utils";
 const CREATE_HOTEL = EVENTS.ADMIN.HOTELS.CREATE_HOTEL;
 export default {
   props: {
@@ -330,6 +369,7 @@ export default {
     const check_in_minute = ref(0);
     const check_out_hour = ref(13);
     const check_out_minute = ref(0);
+    const iana_time_zone = ref(getCurrentTimeZone());
     //
 
     // //
@@ -370,6 +410,9 @@ export default {
         minValue: minValue(0),
         maxValue: maxValue(59),
       },
+      iana_time_zone: {
+        required,
+      },
     };
 
     // validator instnace
@@ -380,6 +423,7 @@ export default {
       check_in_minute,
       check_out_hour,
       check_out_minute,
+      iana_time_zone,
     });
 
     // errors
@@ -409,6 +453,11 @@ export default {
       () => utts.value && v.value.check_out_minute.$invalid
     );
 
+    // iana_time_zone
+    const ianaTimeZoneError = computed(
+      () => utts.value && v.value.iana_time_zone.$invalid
+    );
+
     function onFormSubmit() {
       utts.value = true;
 
@@ -416,6 +465,12 @@ export default {
       if (!v.value.$invalid) {
         emit(CREATE_HOTEL, {
           hotel_name: hotel_name.value,
+          calendar_length: calendar_length.value,
+          check_in_hour: check_in_hour.value,
+          check_in_minute: check_in_minute.value,
+          check_out_hour: check_out_hour.value,
+          check_out_minute: check_out_minute.value,
+          iana_time_zone: iana_time_zone.value,
         });
       }
     }
@@ -430,6 +485,7 @@ export default {
       check_in_minute,
       check_out_hour,
       check_out_minute,
+      iana_time_zone,
       // form
       v,
       // errors
@@ -439,6 +495,7 @@ export default {
       checkInMinuteError,
       checkOutHourError,
       checkOutMinuteError,
+      ianaTimeZoneError,
       //
       // actions
       onFormSubmit,

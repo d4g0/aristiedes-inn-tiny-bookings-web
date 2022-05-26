@@ -150,3 +150,17 @@ const timeStr = '13:00:00';
 const r = useTimeStrFormat(timeStr);
 console.log(r)
 ```
+
+```js
+const date = new Date(Date.UTC(2020, 11, 20, 3, 23, 16, 738));
+// Results below assume UTC timezone - your results may vary
+
+// Specify default date formatting for language (locale)
+console.log(new Intl.DateTimeFormat('en-US').format(date));
+
+const tz = Intl.DateTimeFormat().resolvedOptions();
+
+console.log(tz)
+
+
+```

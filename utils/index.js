@@ -4,6 +4,9 @@ import {
 } from 'luxon';
 Settings.defaultZone = 'utc'
 
+/**
+ * Basic gql syntax higligth 
+ */
 export const gql = String.raw;
 
 export async function wait(seconds = 0) {
@@ -205,4 +208,9 @@ function setDateObjToMidNigth(date) {
         "second": 0,
         "millisecond": 0
     }
+}
+
+export function getCurrentTimeZone() {
+    const localTZ = Intl.DateTimeFormat().resolvedOptions().timeZone
+    return localTZ;
 }
