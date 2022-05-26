@@ -24,6 +24,7 @@ import { useToastStore } from "~/stores/toast-storage";
 const CREATE_HOTEL = EVENTS.ADMIN.HOTELS.CREATE_HOTEL;
 const UNAUTHENTICATED = API_ERRORS.UNAUTHENTICATED;
 const DB_UNIQUE_CONSTRAINT_ERROR = API_ERRORS.DB_UNIQUE_CONSTRAINT_ERROR;
+const FORBIDDEN = API_ERRORS.FORBIDDEN;
 export default {
   components: { SubHeading, CreateHotelForm },
   setup() {
@@ -78,6 +79,16 @@ export default {
           showToastWithText(
             TOAST_TYPES.error,
             "Fallo al crear el hotel porque ya existe uno con ese nombre",
+            true
+          );
+        }
+
+        // FORBIDDEN
+        // Duplicated
+        if (error?.extensions?.code == FORBIDDEN) {
+          showToastWithText(
+            TOAST_TYPES.error,
+            "No tiene permiso para realizar esta operación",
             true
           );
         }
