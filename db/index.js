@@ -113,7 +113,8 @@ export const EVENTS = {
 
 // toasts
 export const TOAST_TYPES = {
-    error: 'error-toast'
+    error: 'error-toast',
+    success:'success'
 }
 
 
@@ -122,7 +123,8 @@ export const TOAST_TYPES = {
 // errors
 export const API_ERRORS = {
     USER_NOT_FOUND: 'NOT_FOUND_RECORD_ERROR',
-    VALIATION_ERROR_KEY: 'NON VALID ARGUMENT'
+    VALIATION_ERROR_KEY: 'NON VALID ARGUMENT',
+    UNAUTHENTICATED: "UNAUTHENTICATED"
 }
 
 export const USER_ROLES = {

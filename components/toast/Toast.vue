@@ -14,6 +14,7 @@
         "
         :class="{
           'bg-red-200 border-red-400 text-red-900': isErrorToast,
+          'bg-green-200 border-green-400 text-green-900': isSuccessToast,
         }"
       >
         <p class="p-3">
@@ -24,6 +25,7 @@
           class="p-2 focus-styles focus:ring-brand rounded-full"
           :class="{
             'focus:ring-red-900': isErrorToast,
+            'focus:ring-green-900': isSuccessToast,
           }"
         >
           <span class="sr-only">Close</span>
@@ -58,9 +60,10 @@ export default {
   },
   setup(props) {
     const isErrorToast = computed(() => props.type == TOAST_TYPES.error);
-
+    const isSuccessToast = computed(()=> props.type == TOAST_TYPES.success)
     return {
       isErrorToast,
+      isSuccessToast,
     };
   },
 };
