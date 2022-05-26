@@ -16,7 +16,9 @@
           'bg-red-200 border-red-400 text-red-900': isErrorToast,
         }"
       >
-        <p class="p-3">{{ $t(contentPath) }}</p>
+        <p class="p-3">
+          {{ contentPath.length > 0 ? $t(contentPath) : contentText }}
+        </p>
         <button
           @click="$emit('close')"
           class="p-2 focus-styles focus:ring-brand rounded-full"
@@ -46,6 +48,10 @@ export default {
       default: "",
     },
     contentPath: {
+      type: String,
+      default: "",
+    },
+    contentText: {
       type: String,
       default: "",
     },

@@ -1,10 +1,11 @@
 <template>
-  <div class="fixed w-full h-0 left-0 bottom-0  z-10">
+  <div class="fixed w-full h-0 left-0 bottom-0 z-10">
     <transition name="fade">
       <div v-if="toastNeeded">
         <Toast
           :type="toastType"
           :contentPath="contentPath"
+          :contentText="contentText"
           @close="hideToast"
           class="mb-20"
         />
@@ -23,13 +24,15 @@ export default {
   components: { Toast },
   setup() {
     const toastStore = useToastStore();
-    const { showToast, hideToast } = toastStore;
-    const { toastNeeded, toastType, contentPath } = storeToRefs(toastStore);
+    const { hideToast } = toastStore;
+    const { toastNeeded, toastType, contentPath, contentText } =
+      storeToRefs(toastStore);
 
     return {
       toastNeeded,
       toastType,
       contentPath,
+      contentText,
       hideToast,
     };
   },
