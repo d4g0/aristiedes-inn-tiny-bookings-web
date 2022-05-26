@@ -75,6 +75,14 @@ export const useAuthStore = defineStore(AUTH_STORAGE_KEY, () => {
    * Assumes a user is authenticated
    */
   function handleLoginRedirections(nuxt) {
+
+    // // 
+    // TODO  enable for production (remove next `return` statement)
+    // disable just to use mesh with redirections when 
+    // developing components
+    // return;
+    // 
+
     console.log("hanling reirect login");
     // console.log(nuxt)
     // case is admin
