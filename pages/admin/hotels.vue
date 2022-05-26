@@ -11,6 +11,7 @@ import CreateHotelSection from "~/components/admin/hotels/create_hotel_sec/Creat
 
 export default {
   layout: "admin",
+  middleware: ['isFullAdmin'],
   components: {
     // dev only
     //

@@ -104,7 +104,13 @@ export const EVENTS = {
     },
     ADMIN: {
         HOTELS: {
-            CREATE_HOTEL: 'CREATE_HOTEL'
+            CREATE_HOTEL: 'CREATE_HOTEL',
+            EDIT_HOTELS: {
+                LIST: {
+                    EDIT_HOTEL: 'EDIT_HOTEL',
+                    DELETE_HOTEL: 'DELETE_HOTEL'
+                }
+            }
         }
     }
 }
