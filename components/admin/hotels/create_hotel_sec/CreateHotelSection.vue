@@ -1,8 +1,12 @@
 <template>
   <div>
     <SubHeading text="Crear un hotel" />
-    <div class="w-full max-w-md ">
-    <CreateHotelForm :isSending="isLoading"/>
+    <div class="w-full max-w-md">
+      <!-- create hotel -->
+      <div>
+        <CreateHotelForm :isSending="isLoading" />
+        <div class="border border-b-gray-200 mt-[50px]"></div>
+      </div>
     </div>
   </div>
 </template>
