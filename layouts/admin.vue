@@ -2,16 +2,12 @@
   <div class="w-full min-h-screen bg-white" ref="shell">
     <AdminNavigation />
     <AuthCtrl />
-    <AuthMultiTabSync/>
-    <ToastControler>
-      <main class="pt-nav-h">
-        <Nuxt />
-        <LangMenuOptions
-          @close="onCloseLangOptions"
-          :langMenuNeeded="langOptionsNeeded"
-        />
-      </main>
-    </ToastControler>
+    <AuthMultiTabSync />
+    <ToastControler />
+    <main class="pt-nav-h">
+      <Nuxt />
+      <LangMenuOptions @close="onCloseLangOptions" :langMenuNeeded="langOptionsNeeded" />
+    </main>
   </div>
 </template>
 
@@ -32,7 +28,7 @@ export default {
     AuthMultiTabSync,
     AdminNavigation,
     ToastControler
-},
+  },
   setup() {
     // reactive $width spred
     const shell = ref(null);

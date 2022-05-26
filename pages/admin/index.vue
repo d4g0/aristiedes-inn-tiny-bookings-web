@@ -1,7 +1,7 @@
 <template>
-  <div class="frame">
+  <div class="frame-30 ">
     <h1 class="text-4xl font-bold">Admin Home</h1>
-    <AuthData />
+    <AuthData class="" />
   </div>
 </template>
 

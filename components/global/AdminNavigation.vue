@@ -34,15 +34,11 @@
 <script>
 import { useEventListener, useThrottleFn } from "@vueuse/core";
 import { wait } from "~/utils";
-import { navigationLinks } from "~/db";
+import { navigationLinks, USER_ROLES } from "~/db";
 
-import {
-  computed,
-  watch,
-  onMounted,
-  ref,
-  inject,
-} from "@nuxtjs/composition-api";
+import { onMounted, ref, inject } from "@nuxtjs/composition-api";
+import { useAuthStore } from "~/stores/auth";
+import { storeToRefs } from "pinia";
 
 export default {
   components: {
@@ -125,17 +121,6 @@ export default {
     // ---------------
     useEventListener("scroll", onScrollThrottled);
 
-    // ---------------
-    // Life Cycle
-    // ---------------
-    onMounted(() => {
-      if (process.client) {
-        initScrollValue();
-        inintPathName();
-        document.addEventListener("focusin", onFocus);
-      }
-    });
-
     function inintPathName() {
       pathName.value = window.location.pathname;
     }
@@ -180,7 +165,41 @@ export default {
     // ---------------
     // Navigation links selections handling
     // ---------------
-    const currentLinks = navigationLinks.authenticatedAdmin;
+    const basicAdminLinks = navigationLinks.authenticatedAdmin;
+
+    const fullAdminLinks = [
+      // home
+      basicAdminLinks[0],
+      // hotels
+      navigationLinks.dashHotelLink,
+      // other basics
+      ...basicAdminLinks.slice(1),
+      // admin
+      navigationLinks.dashAdminLink,
+    ];
+    const authStore = useAuthStore();
+    const { user } = storeToRefs(authStore);
+    const currentLinks = ref(basicAdminLinks);
+
+    function handleFullAdminExtraLinks() {
+      if (user.value?.user_role == USER_ROLES.FULL_ADMIN) {
+        currentLinks.value = fullAdminLinks;
+      } else {
+        currentLinks.value = basicAdminLinks;
+      }
+    }
+
+    // ---------------
+    // Life Cycle
+    // ---------------
+    onMounted(() => {
+      if (process.client) {
+        initScrollValue();
+        inintPathName();
+        document.addEventListener("focusin", onFocus);
+        handleFullAdminExtraLinks();
+      }
+    });
 
     return {
       // ref

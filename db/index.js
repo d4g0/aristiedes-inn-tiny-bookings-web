@@ -25,10 +25,28 @@ export const navigationLinks = {
         },
     ],
     authenticatedAdmin: [
+        // dashoard home
         {
             route: "/admin",
             i18nPath: "nav.links.home",
         },
+        
+        // rooms
+        {
+            route: "/admin/rooms",
+            i18nPath: "nav.links.dashboard.rooms",
+        },
+        // bookings
+        {
+            route: "/admin/bookings",
+            i18nPath: "nav.links.dashboard.bookings",
+        },
+        // calendar
+        {
+            route: "/admin/calendar",
+            i18nPath: "nav.links.dashboard.calendar",
+        },
+
     ],
     adminLogin: {
         route: "/admin_login",
@@ -37,6 +55,15 @@ export const navigationLinks = {
     terms: {
         route: "/terms",
         i18nPath: "nav.links.terms",
+    },
+    dashAdminLink:{
+        route: "/admin/admins",
+        i18nPath: "nav.links.dashboard.admins",
+    },
+    // hotels
+    dashHotelLink: {
+        route: "/admin/hotels",
+        i18nPath: "nav.links.dashboard.hotels",
     },
 
 }

@@ -1,165 +1,172 @@
 module.exports = {
-    // ---------------
-    // Global 
-    // ---------------
-    langSwitcher: {
-        label: 'Selector de Lenguaje',
-        optionsLabel: 'Options',
-        menuHeading: 'Seleccione su lenguaje'
+  // ---------------
+  // Global
+  // ---------------
+  langSwitcher: {
+    label: "Selector de Lenguaje",
+    optionsLabel: "Options",
+    menuHeading: "Seleccione su lenguaje",
+  },
+  nav: {
+    links: {
+      home: "Home",
+      terms: "Términos",
+      contact: "Contact",
+      admin_login: "Login as Admin",
+      dashboard: {
+        hotels: "Hoteles",
+        rooms: "Habitaciones",
+        bookings: "Reservaciones",
+        calendar: "Calendario",
+        admins: "Administradores",
+      },
     },
-    nav: {
-        links: {
-            home: 'Home',
-            terms: 'Términos',
-            contact: 'Contact',
-            admin_login: 'Login as Admin',
-        },
-        reserve: 'Reservar'
-    },
-    colorSelector: {
-        label: 'Color Mode Picker',
-        btnLabel: 'Color Mode',
-        colorModes: [
-            {
-                code: 'system',
-                text: 'system'
-            },
-            {
-                code: 'ligth',
-                text: 'ligth'
-            },
-            {
-                code: 'dark',
-                text: 'dark'
-            }
-        ]
-    },
+    reserve: "Reservar",
+  },
+  colorSelector: {
+    label: "Color Mode Picker",
+    btnLabel: "Color Mode",
+    colorModes: [
+      {
+        code: "system",
+        text: "system",
+      },
+      {
+        code: "ligth",
+        text: "ligth",
+      },
+      {
+        code: "dark",
+        text: "dark",
+      },
+    ],
+  },
 
-    // ---------------
-    // Metadata 
-    // ---------------
-    metadata: {
-        home: {
-            title: 'Reserva tu habitación en el hotel hoy',
-            description: `Nuestra infraestructura proporciona una atmósfera de calidez, modernidad y tranquilidad que caracterizan a nuestro hotel. `
-        },
-
-    },
-
-    // ---------------
-    // Home 
-    // ---------------
+  // ---------------
+  // Metadata
+  // ---------------
+  metadata: {
     home: {
-        search: {
-            title: 'Busque su habitación',
-            searchBtn: 'Buscar',
-            errors: {
-                selection_error: 'Por favor seleccione al menos una noche',
-                hotel_load_error: 'Falló al cargar la información del hotel, por favor intente de nuevo',
-                listings_load_error: 'Falló al cargar la información de las habitaciones, por favor intente de nuevo',
+      title: "Reserva tu habitación en el hotel hoy",
+      description: `Nuestra infraestructura proporciona una atmósfera de calidez, modernidad y tranquilidad que caracterizan a nuestro hotel. `,
+    },
+  },
 
-            },
-        },
-
-        listings: {
-            listing_unit: {
-                addToBookingBtn: 'Añadir a mi cesta',
-                night: 'Noche',
-                bed: 'cama',
-                guest: 'invitado',
-                details: {
-                    expanded: 'Ver menos detalles',
-                    not_expanded: 'Ver mas detalles'
-                }
-            }
-        },
-
-        basket: {
-            cartToogleBtn: {
-                expanded: 'Colapse la cesta',
-                not_expanded: 'Expanda la cesta'
-            },
-            bookBtn: 'Reserve Ahora',
-            room: {
-                singular: 'Habitación',
-                plural: 'Habitaciones'
-            }
-        },
-
-        basket_exp: {
-            backBtn: 'Ir atrás',
-            rooms_key: 'Habitaciones',
-            room_item: {
-                removeBtn: 'Remover'
-            },
-            summary: {
-                summary_key: 'Resumen',
-                nights: 'Noches',
-                check_in: 'Fecha de entrada',
-                check_out: 'Fecha de salida',
-                check_in_time: 'Hora de entrada',
-                check_out_time: 'Hora de salida'
-            }
-
-        },
-        check_out: {
-            total_price: 'Total',
-            comming_soon: 'Esto fue una prueba, el sistema real será desplegado en breve.',
-            currency:'Moneda'
-        }
-
+  // ---------------
+  // Home
+  // ---------------
+  home: {
+    search: {
+      title: "Busque su habitación",
+      searchBtn: "Buscar",
+      errors: {
+        selection_error: "Por favor seleccione al menos una noche",
+        hotel_load_error:
+          "Falló al cargar la información del hotel, por favor intente de nuevo",
+        listings_load_error:
+          "Falló al cargar la información de las habitaciones, por favor intente de nuevo",
+      },
     },
 
-    // ---------------
-    // Login 
-    // ---------------
-    login: {
-        errors: {
-            user_not_found: "El correo o la contraseña o ambos no coinciden",
-            fetch_error: "Falló al enviar",
-            validation_error: `El email que ha introducido no parece ser real, por favor  use solo un email real.`
+    listings: {
+      listing_unit: {
+        addToBookingBtn: "Añadir a mi cesta",
+        night: "Noche",
+        bed: "cama",
+        guest: "invitado",
+        details: {
+          expanded: "Ver menos detalles",
+          not_expanded: "Ver mas detalles",
         },
-        form: {
-            email: 'Correo',
-            password: 'Contraseña',
-            submit: 'Enviar',
-            validation_errors_hints: {
-                email: 'Se requiere un correo válido',
-                password: 'Se requiere de una contraseña válida de al menos 8 caracteres y máximo 24'
-            }
-        }
+      },
     },
 
-    singup: {
-        errors: {
-            name_error: 'Un nombre válido es requrido, debe tener  entre 1 y 60 caracteres.',
-            last_name_error: 'Apellido válido es requrido, debe tener  entre 1 y 60 caracteres.',
-            captcha_missing: 'Por favor, démuestrenos que no es un robot',
-            submition_fail: 'Falló al enviar',
-        },
-        form: {
-            names_title: 'Díganos quien es:',
-            client_name: 'Nombre',
-            client_last_name: 'Apellido',
-            next: 'Siguiente',
-            back: 'Atrás',
-            credentials_title: 'Defina sus credenciales:'
-        }
+    basket: {
+      cartToogleBtn: {
+        expanded: "Colapse la cesta",
+        not_expanded: "Expanda la cesta",
+      },
+      bookBtn: "Reserve Ahora",
+      room: {
+        singular: "Habitación",
+        plural: "Habitaciones",
+      },
     },
 
-    contact: {
-        heading: 'Contáctenos',
-        address: 'Av. Alberto Reyes N 0 261 - 2do piso - Huarmey - Ancash - Perú',
+    basket_exp: {
+      backBtn: "Ir atrás",
+      rooms_key: "Habitaciones",
+      room_item: {
+        removeBtn: "Remover",
+      },
+      summary: {
+        summary_key: "Resumen",
+        nights: "Noches",
+        check_in: "Fecha de entrada",
+        check_out: "Fecha de salida",
+        check_in_time: "Hora de entrada",
+        check_out_time: "Hora de salida",
+      },
     },
-
-
-    // ---------------
-    // 404 
-    // ---------------
-    404: {
-        heading: 'It looks like you got lost',
-        description: 'No worrys, you always can go back.',
-        homeLinkText: 'Go Home'
+    check_out: {
+      total_price: "Total",
+      comming_soon:
+        "Esto fue una prueba, el sistema real será desplegado en breve.",
+      currency: "Moneda",
     },
+  },
 
-}
+  // ---------------
+  // Login
+  // ---------------
+  login: {
+    errors: {
+      user_not_found: "El correo o la contraseña o ambos no coinciden",
+      fetch_error: "Falló al enviar",
+      validation_error: `El email que ha introducido no parece ser real, por favor  use solo un email real.`,
+    },
+    form: {
+      email: "Correo",
+      password: "Contraseña",
+      submit: "Enviar",
+      validation_errors_hints: {
+        email: "Se requiere un correo válido",
+        password:
+          "Se requiere de una contraseña válida de al menos 8 caracteres y máximo 24",
+      },
+    },
+  },
+
+  singup: {
+    errors: {
+      name_error:
+        "Un nombre válido es requrido, debe tener  entre 1 y 60 caracteres.",
+      last_name_error:
+        "Apellido válido es requrido, debe tener  entre 1 y 60 caracteres.",
+      captcha_missing: "Por favor, démuestrenos que no es un robot",
+      submition_fail: "Falló al enviar",
+    },
+    form: {
+      names_title: "Díganos quien es:",
+      client_name: "Nombre",
+      client_last_name: "Apellido",
+      next: "Siguiente",
+      back: "Atrás",
+      credentials_title: "Defina sus credenciales:",
+    },
+  },
+
+  contact: {
+    heading: "Contáctenos",
+    address: "Av. Alberto Reyes N 0 261 - 2do piso - Huarmey - Ancash - Perú",
+  },
+
+  // ---------------
+  // 404
+  // ---------------
+  404: {
+    heading: "It looks like you got lost",
+    description: "No worrys, you always can go back.",
+    homeLinkText: "Go Home",
+  },
+};
