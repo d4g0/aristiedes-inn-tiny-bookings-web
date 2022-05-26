@@ -30,7 +30,7 @@ export const navigationLinks = {
             route: "/admin",
             i18nPath: "nav.links.home",
         },
-        
+
         // rooms
         {
             route: "/admin/rooms",
@@ -56,7 +56,7 @@ export const navigationLinks = {
         route: "/terms",
         i18nPath: "nav.links.terms",
     },
-    dashAdminLink:{
+    dashAdminLink: {
         route: "/admin/admins",
         i18nPath: "nav.links.dashboard.admins",
     },
@@ -100,6 +100,11 @@ export const EVENTS = {
                     REMOVAL_REQUEST: 'REMOVAL-REQUEST'
                 }
             }
+        }
+    },
+    ADMIN: {
+        HOTELS: {
+            CREATE_HOTEL: 'CREATE_HOTEL'
         }
     }
 }
