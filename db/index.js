@@ -114,7 +114,7 @@ export const EVENTS = {
 // toasts
 export const TOAST_TYPES = {
     error: 'error-toast',
-    success:'success'
+    success: 'success'
 }
 
 
@@ -125,7 +125,8 @@ export const API_ERRORS = {
     USER_NOT_FOUND: 'NOT_FOUND_RECORD_ERROR',
     VALIATION_ERROR_KEY: 'NON VALID ARGUMENT',
     UNAUTHENTICATED: "UNAUTHENTICATED",
-    DB_UNIQUE_CONSTRAINT_ERROR:'DB_UNIQUE_CONSTRAINT_ERROR'
+    DB_UNIQUE_CONSTRAINT_ERROR: 'DB_UNIQUE_CONSTRAINT_ERROR',
+    FORBIDDEN: "FORBIDDEN",
 }
 
 export const USER_ROLES = {
