@@ -1,6 +1,6 @@
 <template>
   <div
-    class="border-2 border-gray-400 p-[30px] rounded-[16px] overflow-x-scroll"
+    class="border-2 border-gray-400 p-[30px] rounded-[16px] "
   >
     <!-- core -->
     <div class="flex items-center justify-between">

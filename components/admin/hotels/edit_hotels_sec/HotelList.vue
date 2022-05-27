@@ -2,7 +2,7 @@
   <div class="w-full">
     <ul v-if="hotels.length" class="space-y-[20px]">
       <li v-for="hotel in hotels" :key="hotel.id">
-        <hotel-list-item
+        <HotelListItem
           :hotel="hotel"
           @[EDIT_HOTEL]="onEditReq"
           @[DELETE_HOTEL]="onDelReq"
