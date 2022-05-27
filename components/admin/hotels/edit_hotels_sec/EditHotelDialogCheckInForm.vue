@@ -174,7 +174,7 @@ export default {
     },
   },
 
-  setup(props, { emit }) {
+  setup(props) {
     const hotelsStore = useHotelListStore();
     const { getHotelById } = hotelsStore;
     const hotel = ref();

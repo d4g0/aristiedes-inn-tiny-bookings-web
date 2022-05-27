@@ -1,6 +1,6 @@
 <template>
-  <form @submit.prevent="onCheckInSubmit">
-    <SubHeading text="Entrada" />
+  <form @submit.prevent="onCheckOutSubmit">
+    <SubHeading text="Salida" />
     <!-- Check in time  -->
     <div class="mt-[30px]">
       <span
@@ -8,7 +8,7 @@
         class="label pl-2"
         :class="{
           'opacity-60': isSending,
-          'text-red-700': checkInHourError || checkInMinuteError,
+          'text-red-700': checkOutHourError || checkOutMinuteError,
         }"
       >
         Hora - Minuto (24h)
@@ -17,10 +17,10 @@
       <div class="flex items-center justify-between gap-8">
         <!-- check in hour -->
         <div>
-          <label for="check_in_hour" class="sr-only">Hora</label>
+          <label for="check_out_hour" class="sr-only">Hora</label>
           <input
             type="number"
-            name="check_in_hour"
+            name="check_out_hour"
             inputmode="numeric"
             class="
               input-field
@@ -32,17 +32,17 @@
             :class="{
               'opacity-60': isSending,
               'text-red-700 border-red-700 focus:ring-red-700':
-                checkInHourError,
+                checkOutHourError,
             }"
-            v-model="v_check_in.check_in_hour.$model"
+            v-model="v_check_out.check_out_hour.$model"
           />
         </div>
         <!-- check in minute -->
         <div>
-          <label for="check_in_minute" class="sr-only">Minuto</label>
+          <label for="check_out_minute" class="sr-only">Minuto</label>
           <input
             type="number"
-            name="check_in_minute"
+            name="check_out_minute"
             inputmode="numeric"
             class="
               input-field
@@ -54,15 +54,15 @@
             :class="{
               'opacity-60': isSending,
               'text-red-700 border-red-700 focus:ring-red-700':
-                checkInMinuteError,
+                checkOutMinuteError,
             }"
-            v-model="v_check_in.check_in_minute.$model"
+            v-model="v_check_out.check_out_minute.$model"
           />
         </div>
       </div>
 
       <transition name="fade" mode="out-in">
-        <div class="pl-2 mt-1 text-red-700 text-sm" v-if="checkInHourError">
+        <div class="pl-2 mt-1 text-red-700 text-sm" v-if="checkOutHourError">
           <span aria-hidden="true">*</span>
           <span class="">
             Por favor introduzca una hora válida, entre 0 y 23
@@ -71,7 +71,7 @@
 
         <div
           class="pl-2 mt-1 text-red-700 text-sm"
-          v-else-if="checkInMinuteError"
+          v-else-if="checkOutMinuteError"
         >
           <span aria-hidden="true">*</span>
           <span class="">
@@ -142,16 +142,30 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from "@nuxtjs/composition-api";
+import {
+  computed,
+  inject,
+  onMounted,
+  ref,
+  watch,
+} from "@nuxtjs/composition-api";
 import XIcon from "~/components/icons/XIcon.vue";
 import { useHotelListStore } from "~/stores/hotel-list-storage";
 import SubHeading from "../../global/SubHeading.vue";
 import useVuelidate from "@vuelidate/core";
 import { required, maxValue, minValue } from "@vuelidate/validators";
 import MainHeading from "../../global/MainHeading.vue";
-
-import { updateHotelCheckIn } from "~/querys/updateHotelCheckIn.js";
+import { updateHotelCheckOut } from "~/querys/updateHotelCheckOut.js";
 import { useLazyQuery } from "~/composables/useLazyAuthQuery.js";
+import { useToastStore } from "~/stores/toast-storage";
+import { API_ERRORS, TOAST_TYPES } from "~/db";
+import { sqlTimeStrToTimeObj } from "~/utils";
+import { useAuthStore } from "~/stores/auth";
+import { storeToRefs } from "pinia";
+const UNAUTHENTICATED = API_ERRORS.UNAUTHENTICATED;
+const DB_UNIQUE_CONSTRAINT_ERROR = API_ERRORS.DB_UNIQUE_CONSTRAINT_ERROR;
+const FORBIDDEN = API_ERRORS.FORBIDDEN;
+
 export default {
   components: { XIcon, SubHeading, MainHeading },
   props: {
@@ -165,67 +179,163 @@ export default {
     const { getHotelById } = hotelsStore;
     const hotel = ref();
 
-    
-
     // hotel times
-    const check_in_hour = ref(12);
-    const check_in_minute = ref(0);
+    const check_out_hour = ref(12);
+    const check_out_minute = ref(0);
     //
 
-    const utts_check_in = ref(false);
+    const utts_check_out = ref(false);
     //
     // validation rules
-    const ci_rules = {
-      check_in_hour: {
+    const cout_rules = {
+      check_out_hour: {
         required,
         minValue: minValue(0),
         maxValue: maxValue(23),
       },
-      check_in_minute: {
+      check_out_minute: {
         required,
         minValue: minValue(0),
         maxValue: maxValue(59),
       },
     };
 
-    
-    const v_check_in = useVuelidate(ci_rules, {
-      check_in_hour,
-      check_in_minute,
+    const v_check_out = useVuelidate(cout_rules, {
+      check_out_hour,
+      check_out_minute,
     });
-
-    
-
 
     const {
       loading: isSending,
       setVariables,
       setToken,
       load,
-    } = useLazyQuery();
+      result,
+      error,
+    } = useLazyQuery(updateHotelCheckOut);
 
-    
-
-    function init() {
-      hotel.value = getHotelById(props.selectedHotelId);
-    }
-
-    // check_in_hour error
-    const checkInHourError = computed(
-      () => utts_check_in.value && v_check_in.value.check_in_hour.$invalid
+    // check_out_hour error
+    const checkOutHourError = computed(
+      () => utts_check_out.value && v_check_out.value.check_out_hour.$invalid
     );
-    // check_in_minute
-    const checkInMinuteError = computed(
-      () => utts_check_in.value && v_check_in.value.check_in_minute.$invalid
+    // check_out_minute
+    const checkOutMinuteError = computed(
+      () => utts_check_out.value && v_check_out.value.check_out_minute.$invalid
     );
 
-    function onCheckInSubmit() {
-      utts_check_in.value = true;
+    // auth store
+    const authStore = useAuthStore();
+    const { token } = storeToRefs(authStore);
+
+    function onCheckOutSubmit() {
+      utts_check_out.value = true;
 
       // emit
-      if (!v_check_in.value.$invalid) {
+      if (!v_check_out.value.$invalid) {
+        setToken(token.value);
+        const variables = {
+          input: {
+            hotel_id: props.selectedHotelId,
+            check_out_hour_time: {
+              hours: parseInt(check_out_hour.value),
+              minutes: parseInt(check_out_minute.value),
+            },
+          },
+        };
+        console.log("hiting check out edit api with");
+        console.log(variables);
+        setVariables(variables);
         // hit edit api
+        load();
       }
+    }
+
+    // toast
+    const toastStore = useToastStore();
+    const { showToastWithText } = toastStore;
+    //
+
+    // parent fn
+    const loadHotels = inject("loadHotels");
+    const closeDialog = inject("closeDialog");
+
+    // result
+    watch(result, (newR) => {
+      // console.log("(watch/result change)");
+      // console.log(newR)
+      // console.log({ result: result.value });
+      if (newR?.data?.updateHotelCheckOut) {
+        // success
+        console.log("Hotel Check out updated");
+        // console.log(newR?.data?.createHotel);
+        showToastWithText(
+          TOAST_TYPES.success,
+          `El check in del hotel: ${newR?.data?.updateHotelCheckOut.hotel_name} ha sido actualizado`,
+          true
+        );
+
+        closeDialog();
+        loadHotels();
+        return;
+      }
+
+      // const temp_err = '';
+      if (newR?.errors) {
+        console.log("Api error");
+        var error = newR.errors[0];
+        console.log(error);
+        // UNAUTHENTICATED
+        if (error?.extensions?.code == UNAUTHENTICATED) {
+          showToastWithText(
+            TOAST_TYPES.error,
+            "No tiene permiso para realizar esta operación",
+            true
+          );
+        }
+
+        // Duplicated
+        if (error?.extensions?.exception?.code == DB_UNIQUE_CONSTRAINT_ERROR) {
+          showToastWithText(
+            TOAST_TYPES.error,
+            "Fallo al crear el hotel porque ya existe uno con ese nombre",
+            true
+          );
+        }
+
+        // FORBIDDEN
+        // Duplicated
+        if (error?.extensions?.code == FORBIDDEN) {
+          showToastWithText(
+            TOAST_TYPES.error,
+            "No tiene permiso para realizar esta operación",
+            true
+          );
+        }
+
+        // errors
+        return;
+      }
+    });
+    // error
+    watch(error, (newE) => {
+      if (newE) {
+        console.log("fetch error");
+        console.log(newE);
+        showToastWithText(
+          TOAST_TYPES.error,
+          "Fallo al contactar con el API",
+          true
+        );
+      }
+    });
+
+    function init() {
+      // init current hotel values
+      hotel.value = getHotelById(props.selectedHotelId);
+      const timeObj = sqlTimeStrToTimeObj(hotel.value.check_out_hour_time);
+      // console.log(timeObj);
+      check_out_hour.value = timeObj.hour;
+      check_out_minute.value = timeObj.minute;
     }
 
     onMounted(init);
@@ -233,10 +343,10 @@ export default {
     return {
       hotel,
       isSending,
-      onCheckInSubmit,
-      v_check_in,
-      checkInHourError,
-      checkInMinuteError,
+      onCheckOutSubmit,
+      v_check_out,
+      checkOutHourError,
+      checkOutMinuteError,
     };
   },
 };

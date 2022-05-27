@@ -48,6 +48,10 @@
       <div class="mt-[50px]">
         <EditHotelDialogCheckInForm :selectedHotelId="selectedHotelId" />
       </div>
+
+      <div class="mt-[50px]">
+        <EditHotelDialogCheckOutForm :selectedHotelId="selectedHotelId" />
+      </div>
     </div>
   </div>
 </template>
@@ -57,10 +61,17 @@ import XIcon from "~/components/icons/XIcon.vue";
 import SubHeading from "../../global/SubHeading.vue";
 import MainHeading from "../../global/MainHeading.vue";
 import EditHotelDialogCheckInForm from "./EditHotelDialogCheckInForm.vue";
+import EditHotelDialogCheckOutForm from "./EditHotelDialogCheckOutForm.vue";
 import { provide } from "@nuxtjs/composition-api";
 
 export default {
-  components: { XIcon, SubHeading, MainHeading, EditHotelDialogCheckInForm },
+  components: {
+    XIcon,
+    SubHeading,
+    MainHeading,
+    EditHotelDialogCheckInForm,
+    EditHotelDialogCheckOutForm,
+  },
   props: {
     selectedHotelId: {
       type: Number,
