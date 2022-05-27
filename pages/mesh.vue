@@ -12,6 +12,9 @@ import MainHeading from "~/components/admin/global/MainHeading.vue";
 import CreateHotelSection from '~/components/admin/hotels/create_hotel_sec/CreateHotelSection.vue';
 import EditHotelSection from '~/components/admin/hotels/edit_hotels_sec/EditHotelSection.vue';
 
+
+
+
 import AuthData from "~/components/test/AuthData.vue";
 export default {
   layout: "admin",
@@ -24,6 +27,10 @@ export default {
     EditHotelSection,
     
   },
+
+  setup(props, {emit}){
+
+  }
 };
 </script>
 

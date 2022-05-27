@@ -106,9 +106,12 @@ export const EVENTS = {
         HOTELS: {
             CREATE_HOTEL: 'CREATE_HOTEL',
             EDIT_HOTELS: {
+                
                 LIST: {
                     EDIT_HOTEL: 'EDIT_HOTEL',
-                    DELETE_HOTEL: 'DELETE_HOTEL'
+                    DELETE_HOTEL: 'DELETE_HOTEL',
+                    EDIT_HOTEL_SUCCESS:'EDIT_HOTEL_SUCCESS',
+                    EDIT_HOTEL_FAILURE:'EDIT_HOTEL_FAILURE',
                 }
             }
         }

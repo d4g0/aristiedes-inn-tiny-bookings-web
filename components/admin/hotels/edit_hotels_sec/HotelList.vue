@@ -2,11 +2,15 @@
   <div class="w-full">
     <ul v-if="hotels.length" class="space-y-[20px]">
       <li v-for="hotel in hotels" :key="hotel.id">
-        <hotel-list-item :hotel="hotel" />
+        <hotel-list-item
+          :hotel="hotel"
+          @[EDIT_HOTEL]="onEditReq"
+          @[DELETE_HOTEL]="onDelReq"
+        />
       </li>
     </ul>
 
-    <!-- empty msg -->
+    <!-- empty or loading msg -->
     <div
       v-else
       class="
@@ -34,6 +38,10 @@
 
 <script>
 import HotelListItem from "./HotelListItem.vue";
+import { EVENTS } from "~/db";
+const EDIT_HOTEL = EVENTS.ADMIN.HOTELS.EDIT_HOTELS.LIST.EDIT_HOTEL;
+const DELETE_HOTEL = EVENTS.ADMIN.HOTELS.EDIT_HOTELS.LIST.DELETE_HOTEL;
+
 export default {
   components: { HotelListItem },
   props: {
@@ -46,7 +54,21 @@ export default {
       default: false,
     },
   },
-  setup() {},
+  setup(props, { emit }) {
+    function onEditReq({ id }) {
+      emit(EDIT_HOTEL, { id });
+    }
+    function onDelReq({ id }) {
+      emit(DELETE_HOTEL, { id });
+    }
+
+    return {
+      EDIT_HOTEL,
+      DELETE_HOTEL,
+      onEditReq,
+      onDelReq,
+    };
+  },
 };
 </script>
 

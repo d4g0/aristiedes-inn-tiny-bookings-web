@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- heading & btn -->
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between max-w-md">
       <SubHeading text="Editar hoteles" />
       <button
         aria-label="actualizar listado de hoteles"
@@ -20,11 +20,24 @@
     <div class="w-full max-w-md">
       <!-- hotel list -->
       <div class="mt-[30px]">
-        <HotelList :hotels="hotels" :isLoading="loadingHotels" />
+        <HotelList
+          :hotels="hotels"
+          :isLoading="loadingHotels"
+          @[EDIT_HOTEL]="onEditReq"
+          @[DELETE_HOTEL]="onDelReq"
+        />
       </div>
 
       <!-- hotel edit dialog  -->
-      <div></div>
+      <div>
+        <transition name="fade">
+          <EditHotelDialog
+            v-if="editDialogNeeded"
+            @hideEditDialog="onHideEditDialogReq"
+            :selectedHotelId="selectedHotelId"
+          />
+        </transition>
+      </div>
 
       <div class="border border-b-gray-200 mt-[50px]"></div>
     </div>
@@ -37,19 +50,36 @@ import HotelList from "./HotelList.vue";
 import ReloadIcon from "~/components/icons/ReloadIcon.vue";
 import { useLazyQuery } from "~/composables/useLazyQuery";
 import { getHotels } from "~/querys/hotels.js";
-import { computed, onMounted, ref, watch } from "@nuxtjs/composition-api";
+import {
+  computed,
+  onMounted,
+  provide,
+  ref,
+  watch,
+} from "@nuxtjs/composition-api";
 import { useToastStore } from "~/stores/toast-storage";
-import { TOAST_TYPES } from "~/db";
+import { useHotelListStore } from "~/stores/hotel-list-storage";
+import { EVENTS, TOAST_TYPES } from "~/db";
+import { storeToRefs } from "pinia";
+import EditHotelDialog from "./EditHotelDialog.vue";
+import useBobyOverflow from "~/composables/useBodyOverflow";
+
+const EDIT_HOTEL = EVENTS.ADMIN.HOTELS.EDIT_HOTELS.LIST.EDIT_HOTEL;
+const DELETE_HOTEL = EVENTS.ADMIN.HOTELS.EDIT_HOTELS.LIST.DELETE_HOTEL;
+
 export default {
   components: {
     SubHeading,
     HotelList,
     ReloadIcon,
+    EditHotelDialog,
   },
 
   setup() {
     // data
-    const hotels = ref([]);
+    const hotelListSotre = useHotelListStore();
+    const { hotels } = storeToRefs(hotelListSotre);
+    const { populateHotels } = hotelListSotre;
 
     // toast
     const toastStore = useToastStore();
@@ -72,7 +102,8 @@ export default {
         // success
         console.log("Hotels Loaded");
         // console.log(newR?.data?.createHotel);
-        hotels.value = newR.data.hotels;
+        // hotels.value = newR.data.hotels;
+        populateHotels(newR.data.hotels);
         return;
       }
 
@@ -103,18 +134,48 @@ export default {
       load();
     }
 
-    const isSectionLoading = computed(() => loadingHotels.value);
+    provide("loadHotels", loadHotels);
+    //
+    // dom goverflow
+    const { hideOverflow, showOverflow } = useBobyOverflow();
+
+    // edit hotel
+    const editDialogNeeded = ref(false);
+    const selectedHotelId = ref(null);
+    function onHideEditDialogReq() {
+      editDialogNeeded.value = false;
+      showOverflow();
+    }
+
+    // reqs
+    function onEditReq({ id }) {
+      // console.log(EDIT_HOTEL, { id });
+      selectedHotelId.value = id;
+      hideOverflow();
+      editDialogNeeded.value = true;
+    }
+
+    function onDelReq({ id }) {
+      console.log(DELETE_HOTEL, { id });
+    }
+
     // Life Cycle
     onMounted(loadHotels);
 
     return {
       // data
       hotels,
+      EDIT_HOTEL,
+      DELETE_HOTEL,
+      editDialogNeeded,
+      selectedHotelId,
       // state
       loadingHotels,
-      // isSectionLoading,
       //   fn
       loadHotels,
+      onEditReq,
+      onDelReq,
+      onHideEditDialogReq,
     };
   },
 };
