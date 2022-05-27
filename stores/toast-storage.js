@@ -8,6 +8,8 @@ export const useToastStore = defineStore('TOAST_STORE', () => {
     const contentPath = ref("");
     const contentText = ref("");
 
+    var hideTid = null;
+
     function showToast(
         toastTypeStr = "",
         contentPathStr = "",
@@ -27,7 +29,7 @@ export const useToastStore = defineStore('TOAST_STORE', () => {
         toastNeeded.value = true;
 
         if (autohidable) {
-            setTimeout(() => {
+            hideTid = setTimeout(() => {
                 toastNeeded.value = false;
             }, 10 * 1000);
         }
@@ -53,7 +55,7 @@ export const useToastStore = defineStore('TOAST_STORE', () => {
         toastNeeded.value = true;
 
         if (autohidable) {
-            setTimeout(() => {
+            hideTid = setTimeout(() => {
                 toastNeeded.value = false;
             }, 10 * 1000);
         }
@@ -65,6 +67,7 @@ export const useToastStore = defineStore('TOAST_STORE', () => {
     }
 
     function resetToast() {
+        clearTimeout(hideTid)
         toastType.value = "";
         contentPath.value = "";
         contentText.value = ""
