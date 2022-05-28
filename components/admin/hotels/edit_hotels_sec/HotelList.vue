@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
-    <ul v-if="hotels.length" class="space-y-[20px]">
-      <li v-for="hotel in hotels" :key="hotel.id">
+    <ul v-if="hotels.length" class=" grid gap-[20px] md:grid-cols-2" >
+      <li v-for="hotel in hotels" :key="hotel.id" class="">
         <HotelListItem
           :hotel="hotel"
           @[EDIT_HOTEL]="onEditReq"

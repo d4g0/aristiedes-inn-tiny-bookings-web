@@ -1,9 +1,7 @@
 <template>
-  <div
-    class="border-2 border-gray-400 p-[30px] rounded-[16px] "
-  >
+  <div class="h-full border-2 border-gray-400 p-[30px] rounded-[16px]">
     <!-- core -->
-    <div class="flex items-center justify-between">
+    <div class="h-full flex items-center justify-between">
       <!-- name -->
       <div class="max-w-[130px]">
         <h3 class="font-bold">
