@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- heading & btn -->
-    <div class="flex items-center justify-between max-w-md">
+    <div class="flex items-center justify-between ">
       <SubHeading text="Editar hoteles" />
       <button
         aria-label="actualizar listado de hoteles"
@@ -17,9 +17,9 @@
         <ReloadIcon />
       </button>
     </div>
-    <div class="w-full max-w-md">
+    <div class="w-full">
       <!-- hotel list -->
-      <div class="mt-[30px]">
+      <div class="mt-[50px]">
         <HotelList
           :hotels="hotels"
           :isLoading="loadingHotels"
@@ -29,11 +29,22 @@
       </div>
 
       <!-- hotel edit dialog  -->
-      <div>
+      <div class="max-w-md">
         <transition name="fade">
           <EditHotelDialog
             v-if="editDialogNeeded"
             @hideEditDialog="onHideEditDialogReq"
+            :selectedHotelId="selectedHotelId"
+          />
+        </transition>
+      </div>
+
+      <!-- dell hotel dialog  -->
+      <div class="max-w-md">
+        <transition name="fade">
+          <DellHotelDialog
+            v-if="dellDialogNeeded"
+            @dellDialog="onHideDellDialogReq"
             :selectedHotelId="selectedHotelId"
           />
         </transition>
@@ -63,6 +74,7 @@ import { EVENTS, TOAST_TYPES } from "~/db";
 import { storeToRefs } from "pinia";
 import EditHotelDialog from "./EditHotelDialog.vue";
 import useBobyOverflow from "~/composables/useBodyOverflow";
+import DellHotelDialog from "./DellHotelDialog.vue";
 
 const EDIT_HOTEL = EVENTS.ADMIN.HOTELS.EDIT_HOTELS.LIST.EDIT_HOTEL;
 const DELETE_HOTEL = EVENTS.ADMIN.HOTELS.EDIT_HOTELS.LIST.DELETE_HOTEL;
@@ -73,6 +85,7 @@ export default {
     HotelList,
     ReloadIcon,
     EditHotelDialog,
+    DellHotelDialog,
   },
 
   setup() {
@@ -139,11 +152,19 @@ export default {
     // dom goverflow
     const { hideOverflow, showOverflow } = useBobyOverflow();
 
+    //
     // edit hotel
-    const editDialogNeeded = ref(false);
     const selectedHotelId = ref(null);
+    const editDialogNeeded = ref(false);
     function onHideEditDialogReq() {
       editDialogNeeded.value = false;
+      showOverflow();
+    }
+
+    // dell hotel
+    const dellDialogNeeded = ref(false);
+    function onHideDellDialogReq() {
+      dellDialogNeeded.value = false;
       showOverflow();
     }
 
@@ -156,7 +177,10 @@ export default {
     }
 
     function onDelReq({ id }) {
-      console.log(DELETE_HOTEL, { id });
+      // console.log(DELETE_HOTEL, { id });
+      selectedHotelId.value = id;
+      hideOverflow();
+      dellDialogNeeded.value = true;
     }
 
     // Life Cycle
@@ -169,6 +193,7 @@ export default {
       DELETE_HOTEL,
       editDialogNeeded,
       selectedHotelId,
+      dellDialogNeeded,
       // state
       loadingHotels,
       //   fn
@@ -176,6 +201,7 @@ export default {
       onEditReq,
       onDelReq,
       onHideEditDialogReq,
+      onHideDellDialogReq,
     };
   },
 };
