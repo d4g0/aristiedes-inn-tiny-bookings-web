@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- selection form -->
-    <div v-if="hotels.length > 0" class="mt-[30px]">
+    <div v-if="hotels.length > 0" class="mt-[50px]">
       <form @submit.prevent="selectHotelAsCurrent">
         <div class="w-full">
           <label for="hotels_current_selector" class="sr-only">
@@ -13,7 +13,8 @@
             id="hotels_current_selector"
             class="
               w-full
-              bg-gray-200-400
+              bg-surface-light
+              border-2 border-gray-400
               p-3
               rounded-[16px]
               focus-styles focus:ring-offset-2
