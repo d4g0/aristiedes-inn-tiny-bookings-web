@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full border-2 border-gray-400 p-[30px] rounded-[16px]">
+  <div class="h-full border-2 border-gray-400 p-[20px] sm:p-[30px] rounded-[16px]">
     <!-- core -->
     <div class="h-full flex items-center justify-between">
       <!-- name -->
