@@ -62,7 +62,6 @@ import ReloadIcon from "~/components/icons/ReloadIcon.vue";
 import { useLazyQuery } from "~/composables/useLazyQuery";
 import { getHotels } from "~/querys/hotels.js";
 import {
-  computed,
   onMounted,
   provide,
   ref,
