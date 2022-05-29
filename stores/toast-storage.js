@@ -40,13 +40,13 @@ export const useToastStore = defineStore('TOAST_STORE', () => {
         contentTextStr = "",
         autohidable = false
     ) {
-        console.log(
-            "showing Toast",
-            "text:",
-            contentTextStr,
-            "type",
-            toastTypeStr
-        );
+        // console.log(
+        //     "showing Toast",
+        //     "text:",
+        //     contentTextStr,
+        //     "type",
+        //     toastTypeStr
+        // );
 
         resetToast();
         toastNeeded.value = false;

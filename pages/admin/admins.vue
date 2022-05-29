@@ -1,14 +1,18 @@
 <template>
   <div class="frame-30 ">
-    <h1 class="text-4xl font-bold">Admins</h1>
+    <MainHeading text="Administradores" class="mt-10" />
+    <AdminSec class="mt-[50px]"/>
+
   </div>
 </template>
 
 <script>
+import AdminSec from '~/components/admin/admin/AdminSec.vue';
+import MainHeading from '~/components/admin/global/MainHeading.vue';
 export default {
   layout: "admin",
   middleware: ['isFullAdmin'],
-  components: {},
+  components: {MainHeading, AdminSec},
 };
 </script>
 

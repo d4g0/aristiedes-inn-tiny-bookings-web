@@ -1,8 +1,27 @@
 <template>
   <div>
-    <ul v-if="admins.length">
+    <div class="flex items-center justify-between">
+      <SubHeading text="Editar administradores" />
+      <button
+        aria-label="actualizar listado de hoteles"
+        class="
+          p-2
+          rounded-lg
+          hover:bg-gray-200
+          focus-styles
+          focus-visible:ring-brand
+        "
+        @click="loadAdmins"
+      >
+        <ReloadIcon />
+      </button>
+    </div>
+    <ul
+      v-if="admins.length"
+      class="mt-[30px] space-y-4 md:grid md:grid-cols-2 md:space-y-0 md:gap-4"
+    >
       <li v-for="admin in admins" :key="admin.id">
-        <AdminListItem :admin="admin" />
+        <AdminListItem :admin="admin" @delete_request="onDellReq" />
       </li>
     </ul>
 
@@ -29,14 +48,41 @@
         <p>Cree uno para empezar.</p>
       </div>
     </div>
+
+    <!-- dell hotel dialog  -->
+    <div class="max-w-md">
+      <transition name="fade">
+        <DellAdminDialog
+          v-if="dellDialogNeeded"
+          @closeDialog="onHideDellDialogReq"
+          :selectedAdminId="selectedAdminId"
+        />
+      </transition>
+    </div>
+
+    <div class="border-b border-gray-200 mt-[50px]"></div>
   </div>
 </template>
 
 <script>
+import { inject, ref } from "@nuxtjs/composition-api";
+import ReloadIcon from "~/components/icons/ReloadIcon.vue";
+import SubHeading from "../global/SubHeading.vue";
 import AdminListItem from "./AdminListItem.vue";
+import DellAdminDialog from "~/components/admin/admin/DellAdminDialog.vue";
 export default {
-  components: { AdminListItem },
+  components: {
+    AdminListItem,
+    SubHeading,
+    ReloadIcon,
+    DellAdminDialog,
+    SubHeading,
+  },
   props: {
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
     admins: {
       type: Array,
       default: () => [
@@ -50,6 +96,27 @@ export default {
         },
       ],
     },
+  },
+
+  setup() {
+    const loadAdmins = inject("loadAdmins");
+    const dellDialogNeeded = ref();
+    const selectedAdminId = ref();
+    function onHideDellDialogReq() {
+      dellDialogNeeded.value = false;
+    }
+
+    function onDellReq(id) {
+      selectedAdminId.value = id;
+      dellDialogNeeded.value = true;
+    }
+    return {
+      loadAdmins,
+      dellDialogNeeded,
+      onHideDellDialogReq,
+      selectedAdminId,
+      onDellReq,
+    };
   },
 };
 </script>

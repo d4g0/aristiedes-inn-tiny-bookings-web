@@ -144,7 +144,7 @@
         <transition name="fade">
           <div class="pl-2 mt-1 text-red-700 text-sm" v-if="passwordError">
             <span aria-hidden="true">*</span>
-            <span class=""> Por favor introduzca un nombre válido </span>
+            <span class=""> Por favor introduzca un password válido, de 8 a 24 caracteres </span>
           </div>
         </transition>
       </div>
@@ -335,7 +335,7 @@ export default {
     });
 
     const emailError = computed(() => utts.value && v.value.email.$invalid);
-    const adminNameError = computed(() => utts.value && v.value.email.$invalid);
+    const adminNameError = computed(() => utts.value && v.value.admin_name.$invalid);
     const adminDescriptionError = computed(
       () => utts.value && v.value.admin_description.$invalid
     );

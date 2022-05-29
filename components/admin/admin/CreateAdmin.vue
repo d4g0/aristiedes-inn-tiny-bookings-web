@@ -1,13 +1,13 @@
 <template>
   <div>
-    <SubHeading text="Create admin" />
+    <SubHeading text="Crear un administrador" />
     <div class="w-full max-w-md">
       <CreateAdminForm
         @[CREATE_ADMIN]="onCreateReq"
         class="mt-[30px]"
         :roles="roles"
       />
-      <div class="border border-b-gray-200 mt-[50px]"></div>
+      <div class="border-b border-gray-200 mt-[50px]"></div>
     </div>
   </div>
 </template>
@@ -82,7 +82,7 @@ export default {
         if (error?.extensions?.exception?.code == DB_UNIQUE_CONSTRAINT_ERROR) {
           showToastWithText(
             TOAST_TYPES.error,
-            "Fallo al crear el hotel porque ya existe uno con ese nombre",
+            "Fallo al crear el admin porque ya existe uno con ese nombre o email",
             true
           );
         }
@@ -161,7 +161,7 @@ export default {
         if (error?.extensions?.exception?.code == DB_UNIQUE_CONSTRAINT_ERROR) {
           showToastWithText(
             TOAST_TYPES.error,
-            "Fallo al crear el hotel porque ya existe uno con ese nombre",
+            "Fallo al crear el admin porque ya existe uno con ese nombre o correo",
             true
           );
         }
@@ -195,7 +195,7 @@ export default {
 
     function onCreateReq(data) {
       console.log("attempting to create admin");
-      console.log(data)
+      console.log(data);
 
       var variables = {
         input: data,

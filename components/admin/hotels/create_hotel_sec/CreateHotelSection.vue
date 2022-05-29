@@ -5,7 +5,7 @@
       <!-- create hotel -->
       <div>
         <CreateHotelForm :isSending="loading" @[CREATE_HOTEL]="onCreateReq" class="mt-[30px]" />
-        <div class="border border-b-gray-200 mt-[50px]"></div>
+        <div class="border-b border-gray-200 mt-[50px]"></div>
       </div>
     </div>
   </div>

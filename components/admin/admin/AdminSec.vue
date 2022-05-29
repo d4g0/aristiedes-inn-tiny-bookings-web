@@ -1,16 +1,14 @@
 <template>
   <div>
-    <!-- create aadmin form -->
+    <!-- create  -->
     <CreateAdmin class="mt-[50px]" />
     <!-- admin list -->
-    <!-- <AdminList :admins="admins"  class="mt-[50px]" /> -->
-
-    
+    <AdminList :admins="admins" :isLoading="isLoading" class="mt-[50px]" />
   </div>
 </template>
 
 <script>
-import { onMounted, ref, watch } from "@nuxtjs/composition-api";
+import { onMounted, provide, ref, watch } from "@nuxtjs/composition-api";
 import { useLazyQuery } from "~/composables/useLazyAuthQuery";
 import { getAdmins } from "~/querys/getAdmins";
 import { useToastStore } from "~/stores/toast-storage";
@@ -109,6 +107,8 @@ export default {
     function mountedSec() {
       loadAdmins();
     }
+
+    provide("loadAdmins", loadAdmins);
 
     onMounted(mountedSec);
 
