@@ -33,7 +33,10 @@ export function useLazyQuery(query, variables = {}) {
 
 
             if (!res.ok) {
-                // console.log(res)
+                console.log(res)
+                if (res.status == 400) {
+                    throw new BadInputError('Bad Input')
+                }
                 throw new Error('Fetch Error');
             }
             var data = await res.json();
@@ -68,4 +71,14 @@ export function useLazyQuery(query, variables = {}) {
         setToken,
     }
 
+}
+
+
+const BAD_INPUT_CODE = 'BAD_INPUT';
+
+class BadInputError extends Error {
+    constructor(message) {
+        super(message);
+        this.code = BAD_INPUT_CODE;
+    }
 }

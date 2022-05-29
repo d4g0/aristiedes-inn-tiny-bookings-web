@@ -114,6 +114,9 @@ export const EVENTS = {
                     EDIT_HOTEL_FAILURE:'EDIT_HOTEL_FAILURE',
                 }
             }
+        },
+        ADMINS:{
+            CREATE_ADMIN:'CREATE_ADMIN'
         }
     }
 }

@@ -10,7 +10,7 @@
       </div>
 
       <!-- actions -->
-      <div class="flex gap-x-5">
+      <div class="space-x-5">
         <button
           class="opacity-70 focus:opacity-100 focus-styles"
           @click="editReq"
