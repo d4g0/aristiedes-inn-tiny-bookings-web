@@ -78,7 +78,7 @@ export default {
         if (error?.extensions?.exception?.code == DB_UNIQUE_CONSTRAINT_ERROR) {
           showToastWithText(
             TOAST_TYPES.error,
-            "Fallo al crear el hotel porque ya existe uno con ese nombre",
+            "Falló al crear el hotel porque ya existe uno con ese nombre",
             true
           );
         }
@@ -104,7 +104,7 @@ export default {
         console.log(newE);
         showToastWithText(
             TOAST_TYPES.error,
-            "Fallo al contactar con el API",
+            "Falló al contactar con el API",
             true
           );
       }

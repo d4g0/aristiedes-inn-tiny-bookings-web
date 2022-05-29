@@ -137,3 +137,32 @@ Remove home middleware from public home
 
 [done]
 Fix focus styles non show up in non chrome browsers (autoprefixer) was tailwind 3.0.23, downgrade it to .10
+
+
+### New Tasks
+
+Resources
+    Rooms
+    Rooms Types
+    Amenities
+Operations
+Rooms
+    Create a room
+    Delete a Room
+    Edit a Room
+Rooms Types
+    Create RoomType
+    Delete RoomType
+    Edit RoomType
+Amenities
+    CreateRoomAmenity
+    Edit RoomAMenity
+    Delete RoomAmenity
+
+
+#### Priority map Order
+- Rooms Types
+  - [x] Create  [29 april 4 - 6pm]
+  - [] List Room Types
+  - [] Delete RoomType
+  - [] Edit RoomType

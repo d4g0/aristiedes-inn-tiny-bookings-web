@@ -1,14 +1,15 @@
 <template>
-  <div class="frame-30 ">
-    <h1 class="text-4xl font-bold">Rooms</h1>
+  <div class="frame-30">
+    <RoomsSec />
   </div>
 </template>
 
 <script>
+import RoomsSec from "~/components/admin/rooms/RoomsSec.vue";
 export default {
   layout: "admin",
   middleware: "admin",
-  components: {},
+  components: { RoomsSec },
 };
 </script>
 

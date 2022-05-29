@@ -1,22 +1,21 @@
 <template>
   <div class="frame-30">
-    <MainHeading text="Administradores" class="mt-10" />
-    <AdminSec class="mt-[50px]"/>
+    <RoomsSec />
     <AuthData class="mt-[750px]" />
   </div>
 </template>
 
 <script>
-import AdminSec from '~/components/admin/admin/AdminSec.vue';
-import MainHeading from '~/components/admin/global/MainHeading.vue';
+import MainHeading from "~/components/admin/global/MainHeading.vue";
+import RoomsSec from "~/components/admin/rooms/RoomsSec.vue";
 import AuthData from "~/components/test/AuthData.vue";
 export default {
   layout: "admin",
   components: {
     // dev only
     AuthData,
-    AdminSec,
     MainHeading,
+    RoomsSec,
     //
   },
 
