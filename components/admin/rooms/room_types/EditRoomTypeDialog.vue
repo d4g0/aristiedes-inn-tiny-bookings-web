@@ -57,7 +57,6 @@
 </template>
 
 <script>
-import MainHeading from "../global/MainHeading.vue";
 import XIcon from "~/components/icons/XIcon.vue";
 import { computed, inject, watch } from "@nuxtjs/composition-api";
 import EditRoomTypeDialogForm from "./EditRoomTypeDialogForm.vue";
@@ -67,6 +66,7 @@ import { useAuthStore } from "~/stores/auth";
 import { useToastStore } from "~/stores/toast-storage";
 import { storeToRefs } from "pinia";
 import { API_ERRORS, TOAST_TYPES } from "~/db";
+import MainHeading from '../../global/MainHeading.vue';
 const UNAUTHENTICATED = API_ERRORS.UNAUTHENTICATED;
 const FORBIDDEN = API_ERRORS.FORBIDDEN;
 
@@ -75,6 +75,7 @@ export default {
     XIcon,
     MainHeading,
     EditRoomTypeDialogForm,
+    MainHeading,
   },
   props: {
     selectedRoomType: {

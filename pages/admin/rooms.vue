@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import RoomsSec from "~/components/admin/rooms/RoomsSec.vue";
+import RoomsSec from "~/components/admin/rooms/room_types/RoomsSec.vue";
+
 export default {
   layout: "admin",
   middleware: "admin",

@@ -84,14 +84,14 @@ import RoomTypeListItem from "./RoomTypeListItem.vue";
 import { useLazyQuery } from "~/composables/useLazyQuery";
 import { getRoomTypes } from "~/querys/getRoomTypes.js";
 import { API_ERRORS, TOAST_TYPES } from "~/db";
-import SubSubHeading from "../global/SubSubHeading.vue";
-import EndSecLine from "../global/EndSecLine.vue";
 import ReloadIcon from "~/components/icons/ReloadIcon.vue";
 import { useToastStore } from "~/stores/toast-storage";
 import { useRoomTypesStore } from "~/stores/room-types-storage";
 import { storeToRefs } from "pinia";
 import EditRoomTypeDialog from "./EditRoomTypeDialog.vue";
 import useBobyOverflow from "~/composables/useBodyOverflow";
+import SubSubHeading from '../../global/SubSubHeading.vue';
+import EndSecLine from '../../global/EndSecLine.vue';
 const UNAUTHENTICATED = API_ERRORS.UNAUTHENTICATED;
 const DB_UNIQUE_CONSTRAINT_ERROR = API_ERRORS.DB_UNIQUE_CONSTRAINT_ERROR;
 const FORBIDDEN = API_ERRORS.FORBIDDEN;
@@ -103,6 +103,8 @@ export default {
     EndSecLine,
     ReloadIcon,
     EditRoomTypeDialog,
+    EndSecLine,
+    SubSubHeading,
   },
 
   setup() {

@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import SubSubHeading from "../global/SubSubHeading.vue";
 import RoomTypeCreateForm from "./RoomTypeCreateForm.vue";
 import { createRoomType } from "~/querys/createRoomType";
 import { useLazyQuery } from "~/composables/useLazyAuthQuery";
@@ -21,6 +20,7 @@ import { useAuthStore } from "~/stores/auth";
 import { storeToRefs } from "pinia";
 import { watch } from "@nuxtjs/composition-api";
 import { API_ERRORS, TOAST_TYPES } from "~/db";
+import SubSubHeading from '../../global/SubSubHeading.vue';
 const UNAUTHENTICATED = API_ERRORS.UNAUTHENTICATED;
 const DB_UNIQUE_CONSTRAINT_ERROR = API_ERRORS.DB_UNIQUE_CONSTRAINT_ERROR;
 const FORBIDDEN = API_ERRORS.FORBIDDEN;
@@ -29,6 +29,7 @@ export default {
   components: {
     SubSubHeading,
     RoomTypeCreateForm,
+    SubSubHeading,
   },
 
   setup() {

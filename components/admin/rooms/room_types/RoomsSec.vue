@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import MainHeading from "../global/MainHeading.vue";
-import RoomTypesSec from "./RoomTypesSec.vue";
+import MainHeading from "~/components/admin/global/MainHeading.vue";
+import RoomTypesSec from "~/components/admin/rooms/room_types/RoomTypesSec.vue";
 
 var figmaTable = `
 Resources
