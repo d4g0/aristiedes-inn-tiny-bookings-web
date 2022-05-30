@@ -2,7 +2,7 @@
   <div>
     <SubSubHeading text="Crear un nuevo tipo de habitación" />
     <RoomTypeCreateForm
-      class="mt-[30px]"
+      class="mt-[30px] max-w-md"
       @createReq="onCreateReq"
       :isSending="loading"
     />
