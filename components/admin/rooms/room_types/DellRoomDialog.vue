@@ -25,7 +25,7 @@
     >
       <!-- h1 & close btn -->
       <div class="flex items-center justify-between">
-        <MainHeading text="Elimine el hotel" />
+        <MainHeading text="Elimine el tipo" />
         <button
           class="
             rounded-full
@@ -37,7 +37,7 @@
             text-type-on-light
             dark:text-type-on-dark
           "
-          @click="$emit('dellDialog')"
+          @click="closeDialog"
         >
           <XIcon />
           <span class="sr-only"> Cerrar </span>
@@ -46,7 +46,10 @@
 
       <!-- hotel edit dell -->
       <div class="mt-[50px]">
-        <p>
+        <span class="block font-bold">
+          {{ room_type_str }}
+        </span>
+        <p class="mt-4">
           Esta acción es irrecuperable, está completamente seguro que quiere
           eliminarlo ?
         </p>
@@ -55,7 +58,7 @@
       <div class="mt-[30px] flex items-center justify-between space-x-4">
         <!-- cancel -->
         <button
-          @click="$emit('dellDialog')"
+          @click="closeDialog"
           class="
             rounded-[16px]
             w-full
@@ -98,67 +101,70 @@
 
 <script>
 import XIcon from "~/components/icons/XIcon.vue";
-import SubHeading from "../../global/SubHeading.vue";
-import MainHeading from "../../global/MainHeading.vue";
-import { inject, provide, watch } from "@nuxtjs/composition-api";
-import Dialog from "../../global/Dialog.vue";
+import { computed, inject, watch } from "@nuxtjs/composition-api";
+import EditRoomTypeDialogForm from "./EditRoomTypeDialogForm.vue";
 import { useLazyQuery } from "~/composables/useLazyAuthQuery";
-import { genDellHotelQuery } from "~/querys/deleteHotel";
-import { TOAST_TYPES } from "~/db";
-import { useToastStore } from "~/stores/toast-storage";
+import { deleteRoomType } from "~/querys/delRoomType";
 import { useAuthStore } from "~/stores/auth";
+import { useToastStore } from "~/stores/toast-storage";
 import { storeToRefs } from "pinia";
+import { API_ERRORS, TOAST_TYPES } from "~/db";
+import MainHeading from "../../global/MainHeading.vue";
+const UNAUTHENTICATED = API_ERRORS.UNAUTHENTICATED;
+const FORBIDDEN = API_ERRORS.FORBIDDEN;
 
 export default {
   components: {
     XIcon,
-    SubHeading,
     MainHeading,
-    Dialog,
+    EditRoomTypeDialogForm,
+    MainHeading,
   },
   props: {
-    selectedHotelId: {
-      type: Number,
+    selectedRoomType: {
+      type: Object,
+      default: () => ({
+        id: 0,
+        room_type: "foo-type",
+      }),
     },
   },
 
-  setup(props, { emit }) {
+  setup(props) {
+    const room_type_str = computed(() => props.selectedRoomType.room_type);
+    //
+    const hideDelDialog = inject("hideDelDialog");
     function closeDialog() {
-      emit("dellDialog");
+      hideDelDialog();
     }
-    provide("closeDialog", closeDialog);
-    const loadHotels = inject("loadHotels");
 
-    const delHotelQuery = genDellHotelQuery(+props.selectedHotelId);
+    // api
     const {
       loading: isLoading,
-      setToken,
-      load,
       result,
       error,
-    } = useLazyQuery(delHotelQuery);
+      load,
+      setVariables,
+      setToken,
+    } = useLazyQuery(deleteRoomType);
 
     // toast
     const toastStore = useToastStore();
     const { showToastWithText } = toastStore;
-    //
 
+    // auth store
+    const authStore = useAuthStore();
+    const { token } = storeToRefs(authStore);
+
+    const loadRoomTypes = inject("loadRoomTypes");
     // result
     watch(result, (newR) => {
-      // console.log("(watch/result change)");
-      // console.log({ result: result.value });
-      if (newR?.data?.delHotel) {
+      if (newR?.data?.deleteRoomType) {
         // success
-        // console.log("Hotel has been deleted");
-        // console.log(newR?.data?.createHotel);
-        showToastWithText(
-          TOAST_TYPES.success,
-          `El hotel: ${newR?.data?.delHotel.hotel_name} ha sido eliminado`,
-          true
-        );
+        showToastWithText(TOAST_TYPES.success, "El tipo fue eliminado", true);
 
+        loadRoomTypes();
         closeDialog();
-        loadHotels();
         return;
       }
 
@@ -166,21 +172,13 @@ export default {
       if (newR?.errors) {
         console.log("Api error");
         var error = newR.errors[0];
-        console.log(error);
+        
+        // console.log(error);
         // UNAUTHENTICATED
         if (error?.extensions?.code == UNAUTHENTICATED) {
           showToastWithText(
             TOAST_TYPES.error,
-            "No tiene permiso para realizar esta operación",
-            true
-          );
-        }
-
-        // Duplicated
-        if (error?.extensions?.exception?.code == DB_UNIQUE_CONSTRAINT_ERROR) {
-          showToastWithText(
-            TOAST_TYPES.error,
-            "Fallo al crear el hotel porque ya existe uno con ese nombre",
+            "Su sessión ha expirado, vaya a login",
             true
           );
         }
@@ -191,6 +189,19 @@ export default {
           showToastWithText(
             TOAST_TYPES.error,
             "No tiene permiso para realizar esta operación",
+            true
+          );
+        }
+
+        // forgein key error
+        if (
+          error?.extensions?.exception?.code ==
+          API_ERRORS.PRISMA_FORGEIN_KEY_ERROR_CODE
+        ) {
+          showToastWithText(
+            TOAST_TYPES.error,
+            `Falló al intertar eliminar: Existen habitaciones que possen este tipo, 
+             asígneles otro o elimínelas para poder eliminar este tipo`,
             true
           );
         }
@@ -206,23 +217,32 @@ export default {
         console.log(newE);
         showToastWithText(
           TOAST_TYPES.error,
-          "Falló al contactar con el API",
+          "Fallo al contactar con el API",
           true
         );
       }
     });
 
-    // auth store
-    const authStore = useAuthStore();
-    const { token } = storeToRefs(authStore);
-
-    function onDellReq() {
+    function fetchDellRoomType() {
+      const variables = {
+        input: {
+          room_type: room_type_str.value,
+        },
+      };
+      setVariables(variables);
       setToken(token.value);
       load();
     }
 
+    function onDellReq() {
+      fetchDellRoomType();
+    }
+
     return {
+      closeDialog,
       onDellReq,
+      room_type_str,
+      //
       isLoading,
     };
   },

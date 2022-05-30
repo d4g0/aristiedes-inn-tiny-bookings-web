@@ -163,7 +163,7 @@ Amenities
 #### Priority map Order
 - Rooms Types
   - [x] Create  [29 april 4 - 6pm]
-  - [] List Room Types [29 april 21:32 - ]
-      - [] List Item
-      - [] Delete RoomType
-      - [] Edit RoomType
+  - [x] List Room Types [29 april 21:32 - 30 april 00:27]
+      - [x] List Item
+      - [x] Delete RoomType
+      - [x] Edit RoomType

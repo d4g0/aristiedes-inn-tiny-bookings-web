@@ -68,6 +68,16 @@
       </transition>
     </div>
     <!-- dell -->
+
+    <div class="max-w-md">
+      <transition name="fade">
+        <DellRoomDialog
+          v-if="dellDialogNeeded"
+          :selectedRoomType="selectedRoomType"
+        />
+      </transition>
+    </div>
+
     <EndSecLine />
   </div>
 </template>
@@ -92,6 +102,7 @@ import EditRoomTypeDialog from "./EditRoomTypeDialog.vue";
 import useBobyOverflow from "~/composables/useBodyOverflow";
 import SubSubHeading from '../../global/SubSubHeading.vue';
 import EndSecLine from '../../global/EndSecLine.vue';
+import DellRoomDialog from './DellRoomDialog.vue';
 const UNAUTHENTICATED = API_ERRORS.UNAUTHENTICATED;
 const DB_UNIQUE_CONSTRAINT_ERROR = API_ERRORS.DB_UNIQUE_CONSTRAINT_ERROR;
 const FORBIDDEN = API_ERRORS.FORBIDDEN;
@@ -103,6 +114,7 @@ export default {
     EndSecLine,
     ReloadIcon,
     EditRoomTypeDialog,
+    DellRoomDialog,
     EndSecLine,
     SubSubHeading,
   },
