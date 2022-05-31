@@ -2,7 +2,10 @@
   <div>
     <SubSubHeading text="Cree una amenidad" />
     <!-- form -->
-    <AmenitiesSecCreateForm class="mt-[30px]" @createReq="fetchCreate" />
+    <AmenitiesSecCreateForm
+      class="mt-[30px] max-w-md"
+      @createReq="fetchCreate"
+    />
     <EndSecLine />
   </div>
 </template>
