@@ -67,7 +67,16 @@
         />
       </transition>
     </div>
+
     <!-- dell -->
+    <div class="max-w-md">
+      <transition name="fade">
+        <AmenitiesSecListDellDialog
+          v-if="dellDialogNeeded"
+          :selectedAmenity="selectedAmenity"
+        />
+      </transition>
+    </div>
 
     <EndSecLine />
   </div>
@@ -92,6 +101,7 @@ import { useRoomAmenitiesStore } from "~/stores/room-amenyties-storage";
 import { storeToRefs } from "pinia";
 import { useToastStore } from "~/stores/toast-storage";
 import AmenitiesSecListEditDialog from "./AmenitiesSecListEditDialog.vue";
+import AmenitiesSecListDellDialog from "./AmenitiesSecListDellDialog.vue";
 export default {
   components: {
     SubSubHeading,
@@ -99,6 +109,7 @@ export default {
     EndSecLine,
     AmenitiesSecListItem,
     AmenitiesSecListEditDialog,
+    AmenitiesSecListDellDialog,
   },
   setup() {
     const editDialogNeeded = ref(false);
