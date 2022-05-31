@@ -25,7 +25,7 @@
     >
       <!-- h1 & close btn -->
       <div class="flex items-center justify-between">
-        <MainHeading text="Elimine el tipo" />
+        <MainHeading text="Elimine la amenidad" />
         <button
           class="
             rounded-full
