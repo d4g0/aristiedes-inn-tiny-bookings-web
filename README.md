@@ -167,3 +167,12 @@ Amenities
       - [x] List Item
       - [x] Delete RoomType
       - [x] Edit RoomType
+
+- Amenities
+    - [x] CreateRoomAmenity [30 april 21:19 - 22:31 ]
+    - [] Edit RoomAMenity
+    - [] Delete RoomAmenity
+
+
+#### Questions to answer
+- how to reset vuelidate forms to initial state

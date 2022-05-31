@@ -1,6 +1,6 @@
 <template>
   <div>
-    <sub-heading text="Tipos de habitación" />
+    <SubHeading text="Tipos de habitación" class="mt-[100px]" />
     <!-- [create] -->
     <RoomTypeCreateSec class="mt-[50px]" />
 
