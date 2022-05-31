@@ -211,7 +211,11 @@ export default {
       if (!process.client) {
         return;
       }
-
+      // if amenities present
+      // use those in initial load
+      if (amenities.value.length) {
+        return;
+      }
       loadAmenities();
     }
     onMounted(mountSec);

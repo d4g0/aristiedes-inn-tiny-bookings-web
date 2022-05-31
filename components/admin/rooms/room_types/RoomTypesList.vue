@@ -100,9 +100,9 @@ import { useRoomTypesStore } from "~/stores/room-types-storage";
 import { storeToRefs } from "pinia";
 import EditRoomTypeDialog from "./EditRoomTypeDialog.vue";
 import useBobyOverflow from "~/composables/useBodyOverflow";
-import SubSubHeading from '../../global/SubSubHeading.vue';
-import EndSecLine from '../../global/EndSecLine.vue';
-import DellRoomDialog from './DellRoomDialog.vue';
+import SubSubHeading from "../../global/SubSubHeading.vue";
+import EndSecLine from "../../global/EndSecLine.vue";
+import DellRoomDialog from "./DellRoomDialog.vue";
 const UNAUTHENTICATED = API_ERRORS.UNAUTHENTICATED;
 const DB_UNIQUE_CONSTRAINT_ERROR = API_ERRORS.DB_UNIQUE_CONSTRAINT_ERROR;
 const FORBIDDEN = API_ERRORS.FORBIDDEN;
@@ -218,7 +218,11 @@ export default {
       if (!process.client) {
         return;
       }
-
+      // if room types present
+      // use those in initial load
+      if (roomTypes.value.length) {
+        return;
+      }
       loadRoomTypes();
     }
     onMounted(mountSec);

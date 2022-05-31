@@ -7,7 +7,7 @@
 
 <script>
 // import MainHeading from "~/components/admin/global/MainHeading.vue";
-import RoomsSec from "~/components/admin/rooms/room_types/RoomsSec.vue";
+import RoomsSec from "~/components/admin/rooms/RoomsSec.vue";
 import AuthData from "~/components/test/AuthData.vue";
 import { onMounted } from '@nuxtjs/composition-api';
 export default {
