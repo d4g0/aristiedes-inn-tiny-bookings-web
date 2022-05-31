@@ -169,9 +169,10 @@ Amenities
       - [x] Edit RoomType
 
 - Amenities
-    - [x] CreateRoomAmenity [30 april 21:19 - 22:31 ]
-    - [] Edit RoomAMenity
-    - [] Delete RoomAmenity
+    - [x] CreateRoomAmenity [30 april 21:19 - 22:31]
+    - [] List RoomAmenities [30 april 23:00 - ]
+          - [x] Edit RoomAmenity [- 00:00]
+          - [] Delete RoomAmenity
 
 
 #### Questions to answer

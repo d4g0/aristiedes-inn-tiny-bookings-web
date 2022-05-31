@@ -26,7 +26,7 @@ export default {
       var rawSessionData = localStorage.getItem(AUTH_STORAGE_KEY);
       var authSessionData = rawSessionData ? JSON.parse(rawSessionData) : null;
       console.log("(multitab-sync) syncStorage");
-      console.log({ authSessionData });
+      // console.log({ authSessionData });
       // case logout
       if (!authSessionData) {
         console.log("(multitab-sync) logout assumed");

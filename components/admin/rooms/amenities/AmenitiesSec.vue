@@ -5,15 +5,17 @@
     <!-- [create amenity] -->
     <AmenitiesSecCreate class="mt-[50px]" />
 
-    <!-- [ amenity list edit @ remove] -->
+    <!-- [ amenity list (edit & remove)] -->
+    <AmenitiesSecList class="mt-[50px]" />
   </div>
 </template>
 
 <script>
 import SubHeading from "../../global/SubHeading.vue";
 import AmenitiesSecCreate from "./AmenitiesSecCreate.vue";
+import AmenitiesSecList from "./AmenitiesSecList.vue";
 export default {
-  components: { SubHeading, AmenitiesSecCreate },
+  components: { SubHeading, AmenitiesSecCreate, AmenitiesSecList },
 };
 </script>
 
