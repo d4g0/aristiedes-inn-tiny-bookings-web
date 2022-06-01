@@ -36,7 +36,7 @@ export default {
     const selectedHotel = computed(() => getHotelById(selectedHotelId));
 
     function onHotelSelected({ id }) {
-      console.log("onHotelSelected: " + { id });
+      selectedHotelId.value = +id;
     }
 
     async function selectFirst() {

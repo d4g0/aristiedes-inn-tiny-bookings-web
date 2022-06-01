@@ -49,7 +49,7 @@ export default {
   },
   setup(props, { emit }) {
     function onChange(evt) {
-      console.log({ id: +evt.target.value });
+      emit("hotel_seleted", { id: +evt.target.value });
     }
 
     // // select first as default
