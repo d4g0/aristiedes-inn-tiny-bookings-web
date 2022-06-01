@@ -8,6 +8,26 @@
         <h3 class="font-bold">
           {{ room.room_name }}
         </h3>
+
+        <div class="text-xs mt-2">
+          <span class="block border-b border-gray-200 py-2">
+            <span class="opacity-50"> Id: </span>
+            <span>
+              {{ room.id }}
+            </span>
+          </span>
+
+          <p
+            v-if="room.room_type_key"
+            class="block border-b border-gray-200 py-2"
+          >
+            <span class="opacity-50"> Tipo: </span>
+
+            <span>
+              {{ room.room_type_key }}
+            </span>
+          </p>
+        </div>
       </div>
 
       <!-- actions -->
