@@ -180,9 +180,12 @@ Amenities
         - [x] Room deps loader [ 19:24 - 19:46 ] / refactor to composable [ - 21:14 ]
     - [x] Hotel Selector [ - 22:30 ]
     - [x] Create a room [ 23:30 - 24 april 00:24]
-    - [] Delete a Room
-    - [] Edit a Room
+    - [ ] Room List (edit menu) [24 april 10:58 - ]
+      - [x] `Smart Query Controler` and `Room Sec Edit Menu` rooms data reload on selectedHotel change [ - 12:20 ]
+      - [] Delete a Room
+      - [] Edit a Room
 
 
 #### Questions to answer
 - how to reset vuelidate forms to initial state
+- when a watch props get's change all the watcher fns have been runned before the prop change againg it's runing  (probably not)

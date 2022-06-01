@@ -2,8 +2,9 @@
   <div>
     <MainHeading text="Habitaciones" class="mt-10" />
     <RoomSec class="mt-[50px]" />
-    <RoomTypesSec />
-    <AmenitiesSec class="mt-[50px]" />
+    <!-- Todo uncomment for production -->
+    <!-- <RoomTypesSec class="mt-[100px]" /> -->
+    <!-- <AmenitiesSec class="mt-[50px]" /> -->
   </div>
 </template>
 

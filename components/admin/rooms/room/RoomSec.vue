@@ -7,6 +7,7 @@
       class="max-w-md"
     />
     <RoomSecCreateRoom :hotelId="selectedHotelId" class="mt-[50px]" />
+    <RoomSecEditMenu class="mt-[50px]" :hotelId="selectedHotelId"/>
     <!-- refresh eps -->
     <!-- <button @click="loadRoomDependencies">reload</button> -->
   </div>
@@ -18,8 +19,9 @@ import { useLoadRoomDeps } from "~/composables/useLoadRoomDeps";
 import RoomSecCreateRoom from "./RoomSecCreateRoom.vue";
 import RoomSecHotelSelector from "./RoomSecHotelSelector.vue";
 import { wait } from "~/utils";
+import RoomSecEditMenu from "./RoomSecEditMenu.vue";
 export default {
-  components: { RoomSecCreateRoom, RoomSecHotelSelector },
+  components: { RoomSecCreateRoom, RoomSecHotelSelector, RoomSecEditMenu },
   setup() {
     const {
       roomTypes,
@@ -28,7 +30,6 @@ export default {
       loadRoomDependencies,
       isLoadingDeps,
     } = useLoadRoomDeps();
-
 
     const selectedHotelId = ref(null);
 
