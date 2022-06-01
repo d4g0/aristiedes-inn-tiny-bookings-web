@@ -177,9 +177,9 @@ Amenities
     - [] Rooms Sec 
       - [] Room Sec Entities Loader  [31 april 18:17 - ]
         - [x] how to use pinia in composables [ - 18:59]
-        - [x] Room deps loader [ 19:24 - 19:46 ]
+        - [x] Room deps loader [ 19:24 - 19:46 ] / refactor to composable [ - 21:14 ]
     - [] Create a room [31 april  19:48 - ]
-      - * wrap create room comp inside  Room_deps_loader and pass `isLoadingdeps` prop
+      - [x] Hotel Selector [ - 22:18 ]
     - [] Delete a Room
     - [] Edit a Room
 
