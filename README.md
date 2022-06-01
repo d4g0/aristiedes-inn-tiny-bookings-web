@@ -179,7 +179,7 @@ Amenities
         - [x] how to use pinia in composables [ - 18:59]
         - [x] Room deps loader [ 19:24 - 19:46 ] / refactor to composable [ - 21:14 ]
     - [x] Hotel Selector [ - 22:30 ]
-    - [] Create a room [ - ]
+    - [x] Create a room [ 23:30 - 24 april 00:24]
     - [] Delete a Room
     - [] Edit a Room
 

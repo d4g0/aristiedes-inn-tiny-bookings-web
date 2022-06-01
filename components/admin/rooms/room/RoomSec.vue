@@ -6,13 +6,14 @@
       :hotels="hotels"
       class="max-w-md"
     />
-    <RoomSecCreateRoom :hotel="selectedHotel" />
-    <button @click="loadRoomDependencies">reload</button>
+    <RoomSecCreateRoom :hotelId="selectedHotelId" class="mt-[50px]" />
+    <!-- refresh eps -->
+    <!-- <button @click="loadRoomDependencies">reload</button> -->
   </div>
 </template>
 
 <script>
-import { computed, onMounted, ref } from "@nuxtjs/composition-api";
+import { onMounted, ref } from "@nuxtjs/composition-api";
 import { useLoadRoomDeps } from "~/composables/useLoadRoomDeps";
 import RoomSecCreateRoom from "./RoomSecCreateRoom.vue";
 import RoomSecHotelSelector from "./RoomSecHotelSelector.vue";
@@ -33,7 +34,6 @@ export default {
     const { getHotelById } = hotelStore;
 
     const selectedHotelId = ref(null);
-    const selectedHotel = computed(() => getHotelById(selectedHotelId));
 
     function onHotelSelected({ id }) {
       selectedHotelId.value = +id;
@@ -70,7 +70,6 @@ export default {
       hotels,
       roomTypes,
       amenities,
-      selectedHotel,
       selectedHotelId,
     };
   },
