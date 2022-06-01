@@ -40,7 +40,7 @@
       <transition name="fade">
         <RoomSecEditMenuEditDialog
           v-if="editDialogNeeded"
-          :selectedRoomId="selectedRoomId"
+          :room="selectedRoom"
         />
       </transition>
     </div>
@@ -52,8 +52,7 @@
       <transition name="fade">
         <RoomSecEditMenuDellDialog
           v-if="dellDialogNeeded"
-          :selectedRoomId="selectedRoomId"
-          :roomName="selectedRoomName"
+          :room="selectedRoom"
         />
       </transition>
     </div>
@@ -66,6 +65,7 @@ import RoomSecEditMenuListItem from "./RoomSecEditMenuListItem.vue";
 import useBobyOverflow from "~/composables/useBodyOverflow";
 import RoomSecEditMenuEditDialog from "./RoomSecEditMenuEditDialog.vue";
 import RoomSecEditMenuDellDialog from "./RoomSecEditMenuDellDialog.vue";
+import { search } from "~/utils";
 export default {
   components: {
     RoomSecEditMenuListItem,
@@ -108,9 +108,7 @@ export default {
   },
   setup(props) {
     const selectedRoomId = ref();
-    const selectedRoomName = computed(
-      () => props.rooms[selectedRoomId.value]?.room_name || ""
-    );
+    const selectedRoom = computed(() => getRoomById(selectedRoomId.value));
     const editDialogNeeded = ref(false);
     const dellDialogNeeded = ref(false);
 
@@ -141,13 +139,22 @@ export default {
     provide("hideEditDialog", hideEditDialog);
     provide("hideDelDialog", hideDelDialog);
 
+    function getRoomById(id) {
+      const pos = search(props.rooms, id);
+      if (pos == -1) {
+        return null;
+      }
+
+      return props.rooms[pos];
+    }
+
     return {
       onEditReq,
       onDelReq,
       selectedRoomId,
       editDialogNeeded,
       dellDialogNeeded,
-      selectedRoomName,
+      selectedRoom,
     };
   },
 };

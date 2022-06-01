@@ -47,7 +47,7 @@
       <!-- hotel edit dell -->
       <div class="mt-[50px]">
         <span class="block font-bold">
-          {{ roomName }}
+          {{ room.room_name }}
         </span>
         <p class="mt-4">
           Esta acción es irrecuperable, está completamente seguro que quiere
@@ -101,23 +101,57 @@
 
 <script>
 import { inject, ref } from "@nuxtjs/composition-api";
-import XIcon from '~/components/icons/XIcon.vue';
-import MainHeading from '../../global/MainHeading.vue';
+import XIcon from "~/components/icons/XIcon.vue";
+import MainHeading from "../../global/MainHeading.vue";
+import { deleteARoom } from "~/querys/deleteARoom";
+import { smartQueryLoader } from "~/composables/useSmartQueryControler";
+import { useToastStore } from "~/stores/toast-storage";
+import { TOAST_TYPES } from "~/db";
 export default {
   components: { XIcon, MainHeading },
   props: {
-    roomName: {
-      type: String,
-      default: "Room Name",
+    room: {
+      type: Object,
+      default: () => ({
+        id: 0,
+        room_name: "",
+      }),
     },
   },
-  setup() {
+  setup(props) {
     const hideDelDialog = inject("hideDelDialog");
     const loadRooms = inject("loadRooms");
 
-    const isLoading = ref(false);
+    const toastStore = useToastStore();
+    const { showToastWithText } = toastStore;
+
+    const {
+      load: fetchDeleteRoom,
+      loading: isLoading,
+      setVariables,
+    } = smartQueryLoader(
+      deleteARoom,
+      (result) => {
+        // graphql api result
+        if (result.completed) {
+          // success toast
+          hideDelDialog();
+          loadRooms();
+          showToastWithText(TOAST_TYPES.success, "Habitación eliminada", true);
+        }
+      },
+      "deleteRoom"
+    );
+
     function onDellReq() {
       //   fetchDellRoomType();
+      const variables = {
+        input: {
+          room_id: props.room.id,
+        },
+      };
+      setVariables(variables);
+      fetchDeleteRoom();
     }
 
     return {
