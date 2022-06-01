@@ -1,4 +1,4 @@
-import { computed, onMounted, provide, watch } from "@nuxtjs/composition-api";
+import { computed, onMounted, watch } from "@nuxtjs/composition-api";
 import { useLazyQuery } from "~/composables/useLazyAuthQuerySmart";
 import { useContext } from "@nuxtjs/composition-api";
 import { useToastStore } from "~/stores/toast-storage";
@@ -239,7 +239,6 @@ export function useLoadRoomDeps() {
         loadAmenities();
     }
 
-    // provide("loadRoomDependencies", loadRoomDependencies);
 
     const isLoadingDeps = computed(
         () =>

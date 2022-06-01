@@ -14,14 +14,7 @@
 import { inject } from "@nuxtjs/composition-api";
 import { useLoadRoomDeps } from "~/composables/useLoadRoomDeps";
 export default {
-  // props: {
-  //   isLoadingDeps: {
-  //     type: Boolean,
-  //     default: false,
-  //   },
-  // },
-
-  setup(props) {
+  setup() {
     const {
       roomTypes,
       amenities,
