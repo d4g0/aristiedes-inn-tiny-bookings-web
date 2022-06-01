@@ -184,6 +184,9 @@ Amenities
       - [x] `Smart Query Controler` and `Room Sec Edit Menu` rooms data reload on selectedHotel change [ - 12:20 ]
       - [x] Delete a Room [- 17:23]
       - [] Edit a Room
+        - [] Room Type
+        - [] Room Amenities
+        - [] Room Pictures
 
 - Home
   - [x] Client Experience Room Image bugs fix  [ 17:23 - 17: 41 ]

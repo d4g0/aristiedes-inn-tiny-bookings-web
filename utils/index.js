@@ -214,3 +214,20 @@ export function getCurrentTimeZone() {
     const localTZ = Intl.DateTimeFormat().resolvedOptions().timeZone
     return localTZ;
 }
+
+export function isInCollection(
+    collection = [{ searchKey: "" }],
+    searchKey,
+    element
+) {
+
+    var isIn = false;
+    for (let i = 0; i < collection.length; i++) {
+        // cohercion intentionally allowed
+        if (collection[i][searchKey] == element) {
+            isIn = true;
+            break;
+        }
+    }
+    return isIn;
+}

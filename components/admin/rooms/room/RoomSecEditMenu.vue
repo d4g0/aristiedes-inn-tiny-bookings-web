@@ -20,8 +20,6 @@
     <!-- list -->
     <RoomSecEditMenuList :rooms="rooms" :isLoading="loadingRooms" />
     
-
-
     <EndSecLine />
   </div>
 </template>
@@ -34,7 +32,7 @@ import { smartQueryLoader } from "~/composables/useSmartQueryControler";
 import { genRoomsQuery } from "~/querys/rooms";
 import { wait } from "~/utils";
 import RoomSecEditMenuList from "./RoomSecEditMenuList.vue";
-import ReloadIcon from '~/components/icons/ReloadIcon.vue';
+import ReloadIcon from "~/components/icons/ReloadIcon.vue";
 export default {
   components: { SubHeading, EndSecLine, RoomSecEditMenuList, ReloadIcon },
   props: {
@@ -61,7 +59,7 @@ export default {
       // graphql response result key
       "rooms"
     );
-    provide('loadRooms', loadRooms);
+    provide("loadRooms", loadRooms);
     const hasLoadedFirstTime = ref(false);
     watch(props, (newProps) => {
       const newHotelId = newProps.hotelId;
@@ -93,7 +91,7 @@ export default {
       loadRooms();
     }
     onMounted(mountSec);
-    
+
     return {
       rooms,
       loadingRooms,

@@ -46,26 +46,32 @@
 
       <!-- edit  form -->
       <div class="mt-[50px]">
-        <!-- <AmenitiesSecListEditDialogForm
-          :actualRoomAmenityStr="room_amenity_str"
-          :isSending="loading"
-          @editReq="onEditReq"
-        /> -->
+        <RoomSecEditMenuRoomTypeSelector :room="room"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { inject } from '@nuxtjs/composition-api';
-import MainHeading from '../../global/MainHeading.vue';
-import XIcon from '~/components/icons/XIcon.vue';
+import { inject } from "@nuxtjs/composition-api";
+import MainHeading from "../../global/MainHeading.vue";
+import XIcon from "~/components/icons/XIcon.vue";
+import RoomSecEditMenuRoomTypeSelector from "./RoomSecEditMenuRoomTypeSelector.vue";
 export default {
-  components: { MainHeading, XIcon },
+  components: {
+    MainHeading,
+    XIcon,
+    RoomSecEditMenuRoomTypeSelector,
+  },
   props: {
-    selectedRoomId: {
-      type: Number,
-      default: 0,
+    room: {
+      type: Object,
+      default: () => ({
+        id: 0,
+        room_name: "Supper Nice Room",
+        room_type_id: 0,
+        room_type_key: "Room Type",
+      }),
     },
   },
 
