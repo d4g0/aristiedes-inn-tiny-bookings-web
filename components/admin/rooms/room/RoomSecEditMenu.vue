@@ -1,24 +1,42 @@
 <template>
   <div>
-    <SubHeading text="Edite las habitaciones" />
+    <div class="flex items-center justify-between">
+      <SubHeading text="Edite las habitaciones" />
+      <button
+        aria-label="actualizar informacion"
+        class="
+          p-2
+          rounded-lg
+          hover:bg-gray-200
+          focus-styles
+          focus-visible:ring-brand
+        "
+        @click="loadRooms"
+      >
+        <ReloadIcon />
+      </button>
+    </div>
 
     <!-- list -->
+    <RoomSecEditMenuList :rooms="rooms" :isLoading="loadingRooms" />
+    
 
-    <!-- dell dialog -->
 
     <EndSecLine />
   </div>
 </template>
 
 <script>
-import { onMounted, ref, watch } from "@nuxtjs/composition-api";
+import { onMounted, provide, ref, watch } from "@nuxtjs/composition-api";
 import EndSecLine from "../../global/EndSecLine.vue";
 import SubHeading from "../../global/SubHeading.vue";
 import { smartQueryLoader } from "~/composables/useSmartQueryControler";
 import { genRoomsQuery } from "~/querys/rooms";
 import { wait } from "~/utils";
+import RoomSecEditMenuList from "./RoomSecEditMenuList.vue";
+import ReloadIcon from '~/components/icons/ReloadIcon.vue';
 export default {
-  components: { SubHeading, EndSecLine },
+  components: { SubHeading, EndSecLine, RoomSecEditMenuList, ReloadIcon },
   props: {
     hotelId: {
       type: Number,
@@ -43,10 +61,9 @@ export default {
       // graphql response result key
       "rooms"
     );
-
+    provide('loadRooms', loadRooms);
     const hasLoadedFirstTime = ref(false);
     watch(props, (newProps) => {
-      
       const newHotelId = newProps.hotelId;
       // let first load to mountSec fn
       if (!hasLoadedFirstTime.value) {
@@ -76,7 +93,7 @@ export default {
       loadRooms();
     }
     onMounted(mountSec);
-
+    
     return {
       rooms,
       loadingRooms,
