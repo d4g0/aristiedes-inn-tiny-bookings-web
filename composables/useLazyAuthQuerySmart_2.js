@@ -8,7 +8,7 @@ import { storeToRefs } from 'pinia'
  * @param {Object} pinia 
  * @returns  The auth session aware query configurator function 
  */
-export const useLazyQuery = (query, variables = {}) => {
+export const useLazyQuery = (init_query, variables = {}) => {
 
     const ctx = useContext();
     const pinia = ctx.$pinia;
@@ -22,6 +22,7 @@ export const useLazyQuery = (query, variables = {}) => {
     var result = ref(null);
     var error = ref(null)
     var queryVariables = variables;
+    var query = init_query;
 
     async function load() {
         loading.value = true;
@@ -69,6 +70,10 @@ export const useLazyQuery = (query, variables = {}) => {
         queryVariables = variables;
     }
 
+    function setQuery(new_query) {
+        query = new_query;
+    }
+
     return {
         // state
         loading,
@@ -78,6 +83,7 @@ export const useLazyQuery = (query, variables = {}) => {
         // fn
         load,
         setVariables,
+        setQuery,
     }
 
 }
