@@ -17,7 +17,6 @@ import { onMounted, ref } from "@nuxtjs/composition-api";
 import { useLoadRoomDeps } from "~/composables/useLoadRoomDeps";
 import RoomSecCreateRoom from "./RoomSecCreateRoom.vue";
 import RoomSecHotelSelector from "./RoomSecHotelSelector.vue";
-import { useHotelListStore } from "~/stores/hotel-list-storage";
 import { wait } from "~/utils";
 export default {
   components: { RoomSecCreateRoom, RoomSecHotelSelector },
@@ -30,8 +29,6 @@ export default {
       isLoadingDeps,
     } = useLoadRoomDeps();
 
-    const hotelStore = useHotelListStore();
-    const { getHotelById } = hotelStore;
 
     const selectedHotelId = ref(null);
 
