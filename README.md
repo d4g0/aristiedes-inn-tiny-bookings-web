@@ -178,7 +178,8 @@ Amenities
       - [] Room Sec Entities Loader  [31 april 18:17 - ]
         - [x] how to use pinia in composables [ - 18:59]
         - [x] Room deps loader [ 19:24 - 19:46 ]
-    - [] Create a room [31 april  - ]
+    - [] Create a room [31 april  19:48 - ]
+      - * wrap create room comp inside  Room_deps_loader and pass `isLoadingdeps` prop
     - [] Delete a Room
     - [] Edit a Room
 

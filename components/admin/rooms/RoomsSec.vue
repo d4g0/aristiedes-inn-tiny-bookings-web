@@ -1,10 +1,12 @@
 <template>
   <div>
     <MainHeading text="Habitaciones" class="mt-10" />
+    <!-- <RoomDepsLoader v-slot="{ isLoadingDeps }">
+      <RoomSec class="mt-[50px]" :isLoadingDeps="isLoadingDeps" />
+    </RoomDepsLoader> -->
     <RoomSec class="mt-[50px]" />
     <RoomTypesSec />
     <AmenitiesSec class="mt-[50px]" />
-    <RoomDepsLoader />
   </div>
 </template>
 

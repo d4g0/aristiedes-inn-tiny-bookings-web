@@ -1,7 +1,11 @@
-<template></template>
+<template>
+  <div>
+    <slot :isLoadingDeps="isLoadingDeps"></slot>
+  </div>
+</template>
 
 <script>
-import { onMounted, watch } from "@vue/composition-api";
+import { computed, onMounted, provide, watch } from "@nuxtjs/composition-api";
 import { useLazyQuery } from "~/composables/useLazyAuthQuerySmart";
 import { useContext } from "@nuxtjs/composition-api";
 import { useToastStore } from "~/stores/toast-storage";
@@ -11,6 +15,9 @@ import { storeToRefs } from "pinia";
 import { getRoomTypes } from "~/querys/getRoomTypes";
 import { useRoomAmenitiesStore } from "~/stores/room-amenyties-storage";
 import { getRoomAmenities } from "~/querys/getRoomAmenities";
+import { getHotels } from "~/querys/hotels.js";
+import { useHotelListStore } from "~/stores/hotel-list-storage";
+
 export default {
   components: {},
 
@@ -37,10 +44,10 @@ export default {
 
     // query
     const {
-      loading: isLoadingRoomTypes,
       result: resultRoomTypes,
       error: errorRoomTypes,
       load: loadRoomTypes,
+      loading: loadingRoomTypes,
     } = useLazyQuery(ctx.$pinia)(getRoomTypes);
 
     // watchers
@@ -114,9 +121,9 @@ export default {
     // query
     const {
       result: amenitiesResult,
-      loading: isLoadingAmenities,
       error: amenitiesError,
       load: loadAmenities,
+      loading: loadingAmenities,
     } = useLazyQuery(ctx.$pinia)(getRoomAmenities);
     // watchers
     // result
@@ -181,21 +188,80 @@ export default {
       }
     });
 
+    // -----
+    // hotels
+    // -----
+    // store
+    const hotelListSotre = useHotelListStore();
+    const { hotels } = storeToRefs(hotelListSotre);
+    const { populateHotels } = hotelListSotre;
+
+    //
+    const {
+      result: resultHotels,
+      error: errorHotels,
+      load: loadHotels,
+      loading: loadingHotels,
+    } = useLazyQuery(ctx.$pinia)(getHotels);
+
+    // result
+    watch(resultHotels, (newR) => {
+      if (newR?.data?.hotels) {
+        // success
+        populateHotels(newR.data.hotels);
+        return;
+      }
+
+      if (newR?.errors) {
+        console.log("Api error");
+        var error = newR.errors[0];
+        console.log(error);
+        return;
+      }
+    });
+    // error
+    watch(errorHotels, (newE) => {
+      if (newE) {
+        console.log("fetch error");
+        console.log(newE);
+        showToastWithText(
+          TOAST_TYPES.error,
+          "Fallo al contactar con el API",
+          true
+        );
+      }
+    });
+
+    //
     function mountSec() {
       if (!process.client) {
         return;
       }
 
       // load stuff
+      loadRoomDependencies();
+    }
+
+    function loadRoomDependencies() {
+      loadHotels();
       loadRoomTypes();
       loadAmenities();
     }
+
+    provide("loadRoomDependencies", loadRoomDependencies);
+
+    const isLoadingDeps = computed(
+      () =>
+        loadingHotels.value || loadingAmenities.value || loadingRoomTypes.value
+    );
 
     onMounted(mountSec);
 
     return {
       roomTypes,
       amenities,
+      hotels,
+      isLoadingDeps,
     };
   },
 };
