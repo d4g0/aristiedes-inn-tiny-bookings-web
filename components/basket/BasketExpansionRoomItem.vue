@@ -14,11 +14,24 @@
           relative
         "
       >
-        <img
+        <LazyImage
+          v-if="firstPicSrc.length"
           :src="mapedPictureSrc(firstPicSrc)"
           alt=""
-          class="absolute top-0 left-0 w-full h-full object-cover"
+          class="
+            absolute
+            top-0
+            left-0
+            w-full
+            h-full
+            object-cover
+            rounded-[16px]
+          "
+          aria-hidden="true"
         />
+        <div v-else class="w-full h-full flex items-center justify-center text-center">
+          <p class="text-xs ">Imagen no disponible</p>
+        </div>
       </div>
       <!-- info -->
       <div class="pl-[12px] sm:pl-[32px]">
@@ -48,8 +61,9 @@
 <script>
 import { computed, useContext } from "@nuxtjs/composition-api";
 import { EVENTS } from "~/db/index";
+import LazyImage from "../global/LazyImage.vue";
 export default {
-  components: {},
+  components: { LazyImage },
   props: {
     room_item: {
       type: Object,
@@ -93,7 +107,7 @@ export default {
       return `/${API_CONTENT_PATH}/img/${filename}`;
     }
     const firstPicSrc = computed(
-      () => props?.room_item?.room_pictures[0].filename
+      () => props?.room_item?.room_pictures[0]?.filename || ""
     );
     //
 

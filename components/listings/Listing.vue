@@ -15,11 +15,15 @@
       "
     >
       <LazyImage
+        v-if="firstPicSrc.length"
         :src="mapedPictureSrc(firstPicSrc)"
         alt=""
         class="absolute top-0 left-0 w-full h-full object-cover rounded-[16px]"
         aria-hidden="true"
       />
+      <div v-else class="w-full h-full flex items-center justify-center">
+        <p>Imagen no disponible</p>
+      </div>
     </div>
 
     <!-- listing details -->
@@ -183,7 +187,7 @@ export default {
       return `/${API_CONTENT_PATH}/img/${filename}`;
     }
     const firstPicSrc = computed(
-      () => props?.listing?.room_pictures[0].filename
+      () => props?.listing?.room_pictures[0]?.filename || ""
     );
     //
 

@@ -182,8 +182,11 @@ Amenities
     - [x] Create a room [ 23:30 - 24 april 00:24]
     - [ ] Room List (edit menu) [24 april 10:58 - ]
       - [x] `Smart Query Controler` and `Room Sec Edit Menu` rooms data reload on selectedHotel change [ - 12:20 ]
-      - [] Delete a Room
+      - [x] Delete a Room [- 17:23]
       - [] Edit a Room
+
+- Home
+  - [x] Client Experience Room Image bugs fix  [ 17:23 - 17: 41 ]
 
 
 #### Questions to answer
