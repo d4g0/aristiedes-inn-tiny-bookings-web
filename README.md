@@ -190,6 +190,7 @@ Amenities
         - [] Room Data
           - [x] Name [- 14:53]
           - [x] Price [14:53 - 15:04]
+          - [x] Beds [15:08 - 15:15 ]
         - [] Room Pictures
 
 - Home
