@@ -1,6 +1,7 @@
 <template>
   <div>
-    <form @submit.prevent="onFormSubmit">
+    <SubHeading text="Tipo"/>
+    <form class="mt-[30px]" @submit.prevent="onFormSubmit">
       <!-- user role -->
       <div class="mt-4">
         <label
@@ -122,8 +123,12 @@ import { smartQueryLoader } from "~/composables/useSmartQueryControler";
 import { useToastStore } from "~/stores/toast-storage";
 import { TOAST_TYPES } from "~/db";
 import { updateARoomIsType } from "~/querys/updateARoomIsType";
+import SubHeading from "~/components/admin/global/SubHeading.vue";
 
 export default {
+  components: {
+    SubHeading,
+  },
   props: {
     room: {
       type: Object,
