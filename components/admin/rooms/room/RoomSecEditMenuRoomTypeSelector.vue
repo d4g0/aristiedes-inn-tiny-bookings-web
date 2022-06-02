@@ -71,7 +71,7 @@
             'opacity-70': isLoading,
           }"
         >
-          Crear
+          Actualizar
         </button>
 
         <!-- spinner -->
@@ -113,7 +113,7 @@
 
 <script>
 import { required } from "@vuelidate/validators";
-import { computed, ref } from "@nuxtjs/composition-api";
+import { computed, inject, ref } from "@nuxtjs/composition-api";
 import { isInCollection } from "~/utils";
 import useVuelidate from "@vuelidate/core";
 import { useRoomTypesStore } from "~/stores/room-types-storage";
@@ -166,6 +166,7 @@ export default {
     const toastStore = useToastStore();
     const { showToastWithText } = toastStore;
 
+    const loadRooms = inject("loadRooms");
     // query
     const {
       load: updateTheRoomIsType,
@@ -173,11 +174,12 @@ export default {
       setVariables,
     } = smartQueryLoader(
       updateARoomIsType,
-      (_result) =>
-        showToastWithText(TOAST_TYPES.success, "Tipo Actualizado", true),
+      (_result) => {
+        loadRooms();
+        showToastWithText(TOAST_TYPES.success, "Tipo Actualizado", true);
+      },
       "updateARoomIsType"
     );
-
     function onFormSubmit() {
       utts.value = true;
 
