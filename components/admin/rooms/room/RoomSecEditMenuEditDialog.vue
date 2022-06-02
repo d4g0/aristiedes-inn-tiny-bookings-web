@@ -18,6 +18,7 @@
         mx-auto
         p-[30px]
         mt-20
+        mb-20
         bg-white
         border border-gray-500
         rounded-[16px]
