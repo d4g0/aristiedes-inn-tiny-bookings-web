@@ -189,6 +189,7 @@ Amenities
           - [x] new updateARoomIsAmenities backend api [ 11:30 - 00:40]
         - [] Room Data
           - [x] Name [- 14:53]
+          - [x] Price [14:53 - 15:04]
         - [] Room Pictures
 
 - Home

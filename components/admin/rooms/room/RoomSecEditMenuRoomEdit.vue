@@ -2,10 +2,11 @@
   <div>
     <SubHeading text="Información de la habitación" />
 
-    <div class="mt-[30px]">
+    <div class="mt-[50px]">
       <!-- room name -->
       <UpdateName :room="room" />
       <!-- price -->
+      <UpdatePrice :room="room" class="mt-[50px]" />
 
       <!-- capacity -->
 
@@ -17,8 +18,9 @@
 <script>
 import SubHeading from "../../global/SubHeading.vue";
 import UpdateName from "./update_room/UpdateName.vue";
+import UpdatePrice from "./update_room/UpdatePrice.vue";
 export default {
-  components: { UpdateName, SubHeading },
+  components: { UpdateName, SubHeading, UpdatePrice },
   props: {
     room: {
       type: Object,
@@ -28,14 +30,9 @@ export default {
     },
   },
 
-  setup(props){
-
-
-
-      return{
-
-      }
-  }
+  setup(props) {
+    return {};
+  },
 };
 </script>
 
