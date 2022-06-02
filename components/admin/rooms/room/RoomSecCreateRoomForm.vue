@@ -219,8 +219,8 @@ import {
   minLength,
   maxLength,
 } from "@vuelidate/validators";
-import { computed, ref } from "@nuxtjs/composition-api";
 import useVuelidate from "@vuelidate/core";
+import { computed, ref } from "@nuxtjs/composition-api";
 
 export default {
   props: {

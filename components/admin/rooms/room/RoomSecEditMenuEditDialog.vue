@@ -46,8 +46,11 @@
 
       <!-- edit  form -->
       <div class="mt-[50px]">
-        <RoomSecEditMenuRoomTypeSelector :room="room"/>
-        <RoomSecEditMenuListAmenitiesSelector class="mt-[50px]" :room="room"/>
+        <RoomSecEditMenuRoomEdit :room="room" />
+        <EndSecLine />
+        <RoomSecEditMenuRoomTypeSelector :room="room" class="mt-[50px]" />
+        <EndSecLine />
+        <RoomSecEditMenuListAmenitiesSelector :room="room" class="mt-[50px]" />
       </div>
     </div>
   </div>
@@ -58,13 +61,17 @@ import { inject } from "@nuxtjs/composition-api";
 import MainHeading from "../../global/MainHeading.vue";
 import XIcon from "~/components/icons/XIcon.vue";
 import RoomSecEditMenuRoomTypeSelector from "./RoomSecEditMenuRoomTypeSelector.vue";
-import RoomSecEditMenuListAmenitiesSelector from './RoomSecEditMenuListAmenitiesSelector.vue';
+import RoomSecEditMenuListAmenitiesSelector from "./RoomSecEditMenuListAmenitiesSelector.vue";
+import RoomSecEditMenuRoomEdit from "./RoomSecEditMenuRoomEdit.vue";
+import EndSecLine from "../../global/EndSecLine.vue";
 export default {
   components: {
     MainHeading,
     XIcon,
     RoomSecEditMenuRoomTypeSelector,
     RoomSecEditMenuListAmenitiesSelector,
+    RoomSecEditMenuRoomEdit,
+    EndSecLine,
   },
   props: {
     room: {
