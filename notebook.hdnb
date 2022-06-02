@@ -200,3 +200,45 @@ const collection = [
 const r = isInCollection(collection, 'id', '1');
 console.log(r)
 ```
+
+```js
+// {...a}
+
+
+const a = {
+    p1: 'p1',
+    p2: 'p1'
+}
+
+const b = {
+    ...a,
+    p3:'p3'
+}
+
+console.log(b)
+```
+
+```js
+// isInCollectionDeep
+
+function isInCollectionDeep(
+    collection = [{ searchKey: "" }],
+    searchKey = 'lv1.lv2',
+    element
+) {
+
+    var isIn = false;
+
+    // const 
+    // 
+    for (let i = 0; i < collection.length; i++) {
+        // console.log(collection[i][searchKey]);
+        if (collection[i][searchKey] === element) {
+            isIn = true;
+            break;
+        }
+    }
+    return isIn;
+}
+
+```

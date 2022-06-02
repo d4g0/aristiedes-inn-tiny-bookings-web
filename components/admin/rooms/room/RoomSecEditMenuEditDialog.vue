@@ -47,6 +47,7 @@
       <!-- edit  form -->
       <div class="mt-[50px]">
         <RoomSecEditMenuRoomTypeSelector :room="room"/>
+        <RoomSecEditMenuListAmenitiesSelector class="mt-[50px]" :room="room"/>
       </div>
     </div>
   </div>
@@ -57,11 +58,13 @@ import { inject } from "@nuxtjs/composition-api";
 import MainHeading from "../../global/MainHeading.vue";
 import XIcon from "~/components/icons/XIcon.vue";
 import RoomSecEditMenuRoomTypeSelector from "./RoomSecEditMenuRoomTypeSelector.vue";
+import RoomSecEditMenuListAmenitiesSelector from './RoomSecEditMenuListAmenitiesSelector.vue';
 export default {
   components: {
     MainHeading,
     XIcon,
     RoomSecEditMenuRoomTypeSelector,
+    RoomSecEditMenuListAmenitiesSelector,
   },
   props: {
     room: {
