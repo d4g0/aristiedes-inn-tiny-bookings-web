@@ -12,18 +12,25 @@
       <UpdateBeds :room="room" class="mt-[50px]" />
 
       <!-- capacity -->
-
+      <UpdateCapacity :room="room" class="mt-[50px]" />
     </div>
   </div>
 </template>
 
 <script>
 import SubHeading from "../../global/SubHeading.vue";
-import UpdateBeds from './update_room/UpdateBeds.vue';
+import UpdateBeds from "./update_room/UpdateBeds.vue";
+import UpdateCapacity from "./update_room/UpdateCapacity.vue";
 import UpdateName from "./update_room/UpdateName.vue";
 import UpdatePrice from "./update_room/UpdatePrice.vue";
 export default {
-  components: { UpdateName, SubHeading, UpdatePrice, UpdateBeds },
+  components: {
+    UpdateName,
+    SubHeading,
+    UpdatePrice,
+    UpdateBeds,
+    UpdateCapacity,
+  },
   props: {
     room: {
       type: Object,

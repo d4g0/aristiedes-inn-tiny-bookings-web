@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SubHeading text="Aemnidades" />
+    <SubHeading text="Amnidades" />
     <form @submit.prevent="onFormSubmit" class="mt-[30px]">
       <ul>
         <li v-for="amenity in reactiveAmenities" :key="amenity.id">

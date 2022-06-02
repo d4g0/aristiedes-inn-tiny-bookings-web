@@ -187,10 +187,11 @@ Amenities
         - [x] Room Type [ - 19:~30 ]
         - [x] Room Amenities [ - 25 april 14:00]
           - [x] new updateARoomIsAmenities backend api [ 11:30 - 00:40]
-        - [] Room Data
+        - [x] Room Data [- 15:35]
           - [x] Name [- 14:53]
           - [x] Price [14:53 - 15:04]
           - [x] Beds [15:08 - 15:15 ]
+          - [x] Capacity [ - 15:35 ]
         - [] Room Pictures
 
 - Home

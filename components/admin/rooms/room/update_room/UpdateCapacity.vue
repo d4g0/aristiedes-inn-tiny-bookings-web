@@ -1,22 +1,22 @@
 <template>
   <div>
     <form @submit.prevent="onSubmit">
-      <!-- number_of_beds -->
+      <!-- capacity -->
       <div class="mt-4">
         <label
-          for="number_of_beds"
+          for="capacity"
           class="label pl-2"
           :class="{
             'opacity-60': isSending,
-            'text-red-700': bedsError,
+            'text-red-700': capacityError,
           }"
         >
-          Número de camas
+          Capacidad
         </label>
         <input
           type="number"
           inputmode="numeric"
-          name="number_of_beds"
+          name="capacity"
           class="
             input-field
             focus-effect
@@ -26,15 +26,15 @@
           :disabled="isSending"
           :class="{
             'opacity-60': isSending,
-            'text-red-700 border-red-700 focus:ring-red-700': bedsError,
+            'text-red-700 border-red-700 focus:ring-red-700': capacityError,
           }"
-          v-model="v.number_of_beds.$model"
+          v-model="v.capacity.$model"
         />
         <transition name="fade">
-          <div class="pl-2 mt-1 text-red-700 text-sm" v-if="bedsError">
+          <div class="pl-2 mt-1 text-red-700 text-sm" v-if="capacityError">
             <span aria-hidden="true">*</span>
             <span class="">
-              Por favor introduzca una número válido (al menos 1)
+              Por favor introduzca una capacidad válida (al menos 1)
             </span>
           </div>
         </transition>
@@ -55,7 +55,7 @@ import { computed, inject, ref } from "@nuxtjs/composition-api";
 import SubmitBtn from "~/components/admin/global/SubmitBtn.vue";
 import { required, minValue } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
-import { updateNumberOfBeds } from "~/querys/updateRoomNumberOfBes";
+import { updateRoomCapacity } from "~/querys/updateRoomCapacity";
 import { smartQueryLoader } from "~/composables/useSmartQueryControler";
 import { useToastStore } from "~/stores/toast-storage";
 import { TOAST_TYPES } from "~/db";
@@ -77,20 +77,20 @@ export default {
     // form
     // ----
     const utts = ref(false);
-    const number_of_beds = ref(props.room.number_of_beds);
+    const capacity = ref(props.room.capacity);
 
     const rules = {
-      number_of_beds: {
+      capacity: {
         required,
         minValue: minValue(1),
       },
     };
     const v = useVuelidate(rules, {
-      number_of_beds,
+      capacity,
     });
 
-    const bedsError = computed(
-      () => utts.value && v.value.number_of_beds.$invalid
+    const capacityError = computed(
+      () => utts.value && v.value.capacity.$invalid
     );
 
     // toast
@@ -107,16 +107,16 @@ export default {
       loading: isSending,
       setVariables,
     } = smartQueryLoader(
-      updateNumberOfBeds,
+      updateRoomCapacity,
       (_result) => {
         loadRooms();
         showToastWithText(
           TOAST_TYPES.success,
-          `Camas actualizadas: ${_result.number_of_beds}`,
+          `Capacidad actualizada: ${_result.capacity}`,
           true
         );
       },
-      "updateRoomNumberOfBeds"
+      "updateRoomCapacity"
     );
 
     // form trigger
@@ -132,7 +132,7 @@ export default {
       const variables = {
         input: {
           room_id: props.room.id,
-          new_number_of_beds: +number_of_beds.value,
+          new_capacity: +capacity.value,
         },
       };
 
@@ -143,7 +143,7 @@ export default {
       isSending,
       onSubmit,
       v,
-      bedsError,
+      capacityError,
     };
   },
 };
