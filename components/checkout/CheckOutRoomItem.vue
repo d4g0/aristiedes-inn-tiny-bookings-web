@@ -47,8 +47,8 @@
           {{ nightPrice }}
         </p>
 
-        <div class="">
-          <ul class="text-sm list-disc pl-[12px]">
+        <div class="pl-[18px]">
+          <ul class="text-sm list-disc">
             <li>
               {{ beds }}
             </li>
