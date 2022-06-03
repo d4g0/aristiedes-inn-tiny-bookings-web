@@ -15,8 +15,8 @@
       "
     >
       <LazyImage
-        v-if="firstPicSrc.length"
-        :src="mapedPictureSrc(firstPicSrc)"
+        v-if="hasPicture"
+        :src="pictureSrc"
         alt=""
         class="absolute top-0 left-0 w-full h-full object-cover rounded-[16px]"
         aria-hidden="true"
@@ -182,13 +182,22 @@ export default {
     const guestStr = computed(() =>
       root.$i18n.t("home.listings.listing_unit.guest")
     );
+
     // pictures
+    const firstPicSrc = computed(
+      () => props.listing?.room_pictures[0]?.filename || ""
+    );
+
     function mapedPictureSrc(filename) {
       return `/${API_CONTENT_PATH}/img/${filename}`;
     }
-    const firstPicSrc = computed(
-      () => props?.listing?.room_pictures[0]?.filename || ""
+
+    const pictureSrc = computed(() => mapedPictureSrc(firstPicSrc.value));
+
+    const hasPicture = computed(() =>
+      firstPicSrc.value.length ? true : false
     );
+
     //
 
     // night price
@@ -257,8 +266,9 @@ export default {
       // state
       detailsNeeded,
       // computed
+      hasPicture,
       firstPicSrc,
-      mapedPictureSrc,
+      pictureSrc,
       nightPrice,
       beds,
       capacity,

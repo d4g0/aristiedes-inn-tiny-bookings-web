@@ -25,13 +25,15 @@
         py-[50px]
       "
     >
-      <div v-if="isLoading">
-        <p class="animate-pulse">Cargando</p>
-      </div>
+      <div>
+        <div v-if="isLoading">
+          <p class="animate-pulse">Cargando</p>
+        </div>
 
-      <div v-else>
-        <p>Todavía no hay habitaciones .</p>
-        <p>Cree una para empezar.</p>
+        <div v-else>
+          <p>Todavía no hay habitaciones .</p>
+          <p>Cree una para empezar.</p>
+        </div>
       </div>
     </div>
 

@@ -22,6 +22,8 @@
       :class="{
         'opacity-70': isSending,
       }"
+
+      @click="$emit('btn_hit')"
     >
       {{ submitText }}
     </button>

@@ -6,17 +6,13 @@
       <p class="font-bold">Actual:</p>
       <div class="mt-[20px] h-[300px] w-full relative">
         <div
-          class="
-            absolute
-            w-full
-            h-full
-            inset-0
-            bg-gray-200
-            animate-pulse
-            rounded-[16px]
-          "
+          class="absolute w-full h-full inset-0 bg-gray-200 rounded-[16px]"
+          :class="{
+            hasPicture: 'animate-pulse',
+          }"
         ></div>
         <img
+          v-if="hasPicture"
           class="
             absolute
             top-0
@@ -27,11 +23,18 @@
             rounded-[16px]
             z-10
           "
-          :src="pictureSr"
+          :src="pictureSrc"
         />
+        <div
+          v-else
+          class="relative z-10 w-full h-full flex items-center justify-center"
+        >
+          <p>Esta habitación no tiene foto</p>
+        </div>
       </div>
     </div>
 
+    <!-- update pic -->
     <form class="mt-[30px]" @submit.prevent="onSubmit">
       <div>
         <div class="">
@@ -73,24 +76,45 @@
         />
       </div>
     </form>
+
+    <!-- eliminate pic -->
+    <div v-if="hasPicture" class="mt-[50px]">
+      <SubmitBtnSecondary
+        @btn_hit="onDelReq"
+        :isSending="deleteRoomPictureLoading"
+        submitText="Eliminar foto"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import SubHeading from "../../global/SubHeading.vue";
-import { computed, inject, ref, useContext, watch } from "@nuxtjs/composition-api";
+import {
+  computed,
+  inject,
+  ref,
+  useContext,
+  watch,
+} from "@nuxtjs/composition-api";
 import SubmitBtn from "../../global/SubmitBtn.vue";
+import SubmitBtnSecondary from "../../global/SubmitBtnSecondary.vue";
 import { usePostFormDataQuery } from "~/composables/usePostFormDataQuery";
 import { useAuthStore } from "~/stores/auth";
 import { storeToRefs } from "pinia";
 import { useToastStore } from "~/stores/toast-storage";
 import { TOAST_TYPES } from "~/db";
-
+import LazyImage from "~/components/global/LazyImage.vue";
+import EndSecLine from "../../global/EndSecLine.vue";
+import { smartQueryLoader } from "~/composables/useSmartQueryControler";
+import { deleteRoomPicture } from "~/querys/deleteRoomPicture";
 export default {
   components: {
     SubHeading,
     SubmitBtn,
-    // LazyImage,
+    SubmitBtnSecondary,
+    LazyImage,
+    EndSecLine,
   },
 
   props: {
@@ -106,12 +130,16 @@ export default {
     const API_REST_URL = ctx.env.API_REST_URL;
     // console.log({ env: ctx.env });
     const firstPicSrc = computed(
-      () => props.room.room_pictures[0].filename || ""
+      () => props.room?.room_pictures[0]?.filename || ""
     );
     function mapedPictureSrc(filename) {
       return `/${API_CONTENT_PATH}/img/${filename}`;
     }
-    const pictureSr = computed(() => mapedPictureSrc(firstPicSrc.value));
+    const pictureSrc = computed(() => mapedPictureSrc(firstPicSrc.value));
+
+    const hasPicture = computed(() =>
+      firstPicSrc.value.length ? true : false
+    );
 
     // form
     const picture_input = ref();
@@ -126,7 +154,7 @@ export default {
 
     const uploadRoute = `room_pictures?room_id=${props.room.id}&token=${token.value}`;
     const uploadUrl = API_REST_URL + uploadRoute;
-    console.log({ API_REST_URL, uploadUrl });
+    // console.log({ API_REST_URL, uploadUrl });
     const {
       loading: isSending,
       load: updatePicture,
@@ -138,10 +166,10 @@ export default {
     const loadRooms = inject("loadRooms");
 
     watch(updateResult, (newR) => {
-      console.log({ newR });
+      // console.log({ newR });
       if (newR.result == "OK") {
         showToastWithText(TOAST_TYPES.success, "Foto actualizada", true);
-        loadRooms()
+        loadRooms();
       }
     });
     watch(updateError, (newE) => {
@@ -169,13 +197,52 @@ export default {
       updatePicture();
     }
 
+    // dell picture
+
+    const {
+      load: fetchDeleteRoomPicture,
+      loading: deleteRoomPictureLoading,
+      setVariables,
+    } = smartQueryLoader(
+      deleteRoomPicture,
+      (_result) => {
+        showToastWithText(TOAST_TYPES.success, "Foto eliminada", true);
+        loadRooms();
+      },
+      "deleteRoomPicture"
+    );
+
+    function onDelReq() {
+      console.log("onDelReq");
+
+      try {
+        // v
+        const variables = {
+          input: {
+            room_picture_id: parseInt(
+              props.room.room_pictures[0].room_picture_id
+            ),
+          },
+        };
+
+        setVariables(variables);
+        fetchDeleteRoomPicture();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
     return {
+      hasPicture,
       firstPicSrc,
-      pictureSr,
+      pictureSrc,
       picture_input,
       isSending,
       fileError,
       onSubmit,
+      // dell
+      onDelReq,
+      deleteRoomPictureLoading,
     };
   },
 };
