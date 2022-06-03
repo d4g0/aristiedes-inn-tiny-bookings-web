@@ -8,15 +8,15 @@
         bg-white
         dark:bg-type-on-dark
         text-type-on-light
+        
         dark:text-type-on-dark
         border
         border-gray-400
         w-full
         font-medium
         focus-styles focus:ring-offset-2
-        hover:bg-brand
-        dark:hover:bg-brand dark:hover:text-white
-        disabled:bg-brand/60 disabled:cursor-not-allowed
+        hover:bg-gray-200
+        disabled:bg-gray-200/60 disabled:cursor-not-allowed
       "
       :disabled="isSending"
       :class="{
