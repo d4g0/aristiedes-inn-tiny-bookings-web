@@ -52,6 +52,8 @@
         <RoomSecEditMenuRoomTypeSelector :room="room" class="mt-[50px]" />
         <EndSecLine />
         <RoomSecEditMenuListAmenitiesSelector :room="room" class="mt-[50px]" />
+        <EndSecLine />
+        <RoomSecEditMenuListPictureSelector :room="room" class="mt-[50px]" />
       </div>
     </div>
   </div>
@@ -65,6 +67,7 @@ import RoomSecEditMenuRoomTypeSelector from "./RoomSecEditMenuRoomTypeSelector.v
 import RoomSecEditMenuListAmenitiesSelector from "./RoomSecEditMenuListAmenitiesSelector.vue";
 import RoomSecEditMenuRoomEdit from "./RoomSecEditMenuRoomEdit.vue";
 import EndSecLine from "../../global/EndSecLine.vue";
+import RoomSecEditMenuListPictureSelector from './RoomSecEditMenuListPictureSelector.vue';
 export default {
   components: {
     MainHeading,
@@ -73,6 +76,7 @@ export default {
     RoomSecEditMenuListAmenitiesSelector,
     RoomSecEditMenuRoomEdit,
     EndSecLine,
+    RoomSecEditMenuListPictureSelector,
   },
   props: {
     room: {

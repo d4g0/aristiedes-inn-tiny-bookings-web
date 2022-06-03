@@ -7,7 +7,8 @@ export default {
     SITE_NAME: process.env.SITE_NAME || 'tiny-bookings',
     CAPTCHA_SITE_KEY: process.env.CAPTCHA_SITE_KEY,
     HOTEL_ID: process.env.HOTEL_ID,
-    API_CONTENT_PATH: process.env.API_CONTENT_PATH
+    API_CONTENT_PATH: process.env.API_CONTENT_PATH,
+    API_REST_URL: process.env.API_REST_URL
   },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
