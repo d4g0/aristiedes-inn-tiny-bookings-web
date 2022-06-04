@@ -13,7 +13,11 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
   generate: {
-    fallback: "404.html"
+    fallback: "404.html",
+    exclude: [
+      // todo, figure out how this shiet gets done
+      '/^\/mesh/'
+    ]
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head

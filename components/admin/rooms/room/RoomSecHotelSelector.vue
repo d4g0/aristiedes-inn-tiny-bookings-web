@@ -25,7 +25,7 @@
           :id="`hotel_selector_option_${hotel.id}`"
           :selected="selectedHotelId === +hotel.id"
         >
-          {{ hotel.hotel_name }}
+          {{ hotel.hotel_name }} ( Id: {{hotel.id}})
         </option>
       </select>
     </div>
