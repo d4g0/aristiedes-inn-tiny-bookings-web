@@ -35,7 +35,11 @@
     </div>
 
     <!-- update pic -->
-    <form class="mt-[30px]" @submit.prevent="onSubmit">
+    <form
+      class="mt-[30px]"
+      @submit.prevent="onSubmit"
+      ref="room_picture_upload_form"
+    >
       <div>
         <div class="">
           <label
@@ -108,6 +112,8 @@ import LazyImage from "~/components/global/LazyImage.vue";
 import EndSecLine from "../../global/EndSecLine.vue";
 import { smartQueryLoader } from "~/composables/useSmartQueryControler";
 import { deleteRoomPicture } from "~/querys/deleteRoomPicture";
+import {} from "@vuelidate/validators";
+
 export default {
   components: {
     SubHeading,
@@ -143,6 +149,7 @@ export default {
 
     // form
     const picture_input = ref();
+    const room_picture_upload_form = ref();
 
     const toastStore = useToastStore();
     const { showToastWithText } = toastStore;
@@ -167,9 +174,11 @@ export default {
 
     watch(updateResult, (newR) => {
       // console.log({ newR });
-      if (newR.result == "OK") {
+      if (newR?.result == "OK") {
         showToastWithText(TOAST_TYPES.success, "Foto actualizada", true);
         loadRooms();
+        // reset form
+        room_picture_upload_form.value.reset();
       }
     });
     watch(updateError, (newE) => {
@@ -179,18 +188,20 @@ export default {
       }
     });
 
-    const utts = ref(false);
     const fileError = ref(false);
-    // const fileError = computed(
-    //   utts.value &&
-    //     !picture_input.value?.files &&
-    //     !picture_input.value?.files[0]
-    // );
+
     // submit
     function onSubmit() {
-      utts.value = true;
       // check vality
-      console.log(picture_input.value);
+      const filesPresent = picture_input.value?.files[0];
+      if (!filesPresent) {
+        fileError.value = true;
+        return;
+      }
+
+      fileError.value = false;
+
+      // upload pic
       const formData = new FormData();
       formData.append("new_room_picture", picture_input.value?.files[0]);
       setFormData(formData);
@@ -198,7 +209,6 @@ export default {
     }
 
     // dell picture
-
     const {
       load: fetchDeleteRoomPicture,
       loading: deleteRoomPictureLoading,
@@ -214,7 +224,8 @@ export default {
 
     function onDelReq() {
       console.log("onDelReq");
-
+      // reset form
+      room_picture_upload_form.value.reset();
       try {
         // v
         const variables = {
@@ -233,6 +244,7 @@ export default {
     }
 
     return {
+      room_picture_upload_form,
       hasPicture,
       firstPicSrc,
       pictureSrc,
