@@ -1,10 +1,17 @@
 # API
+
+# graphql endpoint
 API_URL=http://localhost/graphql
+#rest enpoint
 API_REST_URL=http://localhost/api/
+
+# Hotel bind for querys
 HOTEL_ID=1
+
+# hotel static assets
 API_CONTENT_PATH=content
 
-# SITE DATA
+# SITE DATA (metadata)
 SITE_NAME=Aristides-Inn
 SITE_URL=http://localhost
 DOMAIN=tiny-bookings.com
