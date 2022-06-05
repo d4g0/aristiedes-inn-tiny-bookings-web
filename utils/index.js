@@ -231,3 +231,22 @@ export function isInCollection(
     }
     return isIn;
 }
+
+
+export function isValidPicture(file, max_mb_size = 5) {
+    var isValid = false;
+
+    if (!file || !file.type || !file.size) {
+        return isValid;
+    }
+    if (!["image/jpeg", "image/png"].includes(file.type)) {
+        return isValid;
+    }
+
+    // check file size (< max_mb_size)
+    if (file.size > max_mb_size * 1024 * 1024) {
+        return isValid;
+    }
+
+    return true;
+}

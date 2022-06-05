@@ -69,7 +69,10 @@
           <transition name="fade">
             <div class="pl-2 mt-1 text-red-700 text-sm" v-if="fileError">
               <span aria-hidden="true">*</span>
-              <span class=""> Por favor seleccione una foto </span>
+              <span class="">
+                Por favor seleccione una foto, a lo máximo de 5 mb (~ 1 mb
+                recomendado)
+              </span>
             </div>
           </transition>
         </div>
@@ -112,7 +115,7 @@ import LazyImage from "~/components/global/LazyImage.vue";
 import EndSecLine from "../../global/EndSecLine.vue";
 import { smartQueryLoader } from "~/composables/useSmartQueryControler";
 import { deleteRoomPicture } from "~/querys/deleteRoomPicture";
-import {} from "@vuelidate/validators";
+import { isValidPicture } from "~/utils";
 
 export default {
   components: {
@@ -192,12 +195,16 @@ export default {
 
     // submit
     function onSubmit() {
+      const file = picture_input.value?.files[0];
+
       // check vality
-      const filesPresent = picture_input.value?.files[0];
-      if (!filesPresent) {
+
+      if (!isValidPicture(file)) {
         fileError.value = true;
         return;
       }
+
+      // if(isValidPicture())
 
       fileError.value = false;
 
