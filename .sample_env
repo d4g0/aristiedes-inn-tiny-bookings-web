@@ -1,0 +1,14 @@
+# API
+API_URL=http://localhost/graphql
+API_REST_URL=http://localhost/api/
+HOTEL_ID=1
+API_CONTENT_PATH=content
+
+# SITE DATA
+SITE_NAME=Aristides-Inn
+SITE_URL=http://localhost
+DOMAIN=tiny-bookings.com
+BRAND=Aristides-Inn
+
+# Captcha
+CAPTCHA_SITE_KEY=
