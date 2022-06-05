@@ -69,19 +69,22 @@
       <transition name="fade">
         <div class="mt-[30px]" v-if="detailsNeeded">
           <h2 class="font-bold">Amenities</h2>
+          <!-- list-disc -->
           <ul
             class="
               mt-[18px]
-              list-disc
-              pl-[20px]
               grid grid-cols-2
               sm:grid-cols-3
               lg:grid-cols-2
-              gap-x-2
+              gap-y-4
+              gap-x-6
             "
           >
-            <li v-for="amenity in amenities" :key="amenity.id">
-              {{ amenity.amenity }}
+            <li v-for="amenity in amenities" :key="amenity.id" class="flex  items-start text-sm">
+              <span aria-hidden="true"> • </span>
+              <span class="ml-2 flex-shrink-0 w-full">
+                {{ amenity.amenity }}
+              </span>
             </li>
           </ul>
         </div>
