@@ -1,7 +1,7 @@
 <template>
   <div class="mt-5">
     <SearchForm
-      :searching="tempLoading"
+      :searching="listingsLoading"
       :calendarLength="calendarLength"
       @[SEARCH_REQUEST]="onSearchRequest"
     />
@@ -215,14 +215,12 @@ export default {
       loadListings();
     }
 
-    const tempLoading = ref(false);
     return {
       hotel,
       calendarLength,
       SEARCH_REQUEST,
       onSearchRequest,
       listingsLoading,
-      tempLoading,
       searchInterval,
     };
   },
