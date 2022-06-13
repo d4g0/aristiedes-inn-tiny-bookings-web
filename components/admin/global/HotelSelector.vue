@@ -23,7 +23,6 @@
             v-for="hotel in hotels"
             :key="hotel.id"
             :value="hotel.id"
-            :id="`hotel_selector_option_${hotel.id}`"
             :selected="selectedHotelId === +hotel.id"
           >
             {{ hotel.hotel_name }} ( Id: {{ hotel.id }})
@@ -60,15 +59,20 @@ import { storeToRefs } from "pinia";
 import { useHotelListStore } from "~/stores/hotel-list-storage";
 import { smartQueryLoader } from "~/composables/useSmartQueryControler";
 import { getHotels } from "~/querys/hotels";
-import { onMounted } from "@nuxtjs/composition-api";
+import { computed, onMounted } from "@nuxtjs/composition-api";
 import { wait } from "~/utils";
 export default {
+  props: {},
   setup(props, { emit }) {
     //   store
 
     const hotelStore = useHotelListStore();
-    const { hotels, selectedHotelId } = storeToRefs(hotelStore);
+    const { hotels, selectedHotel } = storeToRefs(hotelStore);
     const { populateHotels, selectHotel } = hotelStore;
+
+    const selectedHotelId = computed(() =>
+      selectedHotel.value ? selectedHotel.value.id : null
+    );
 
     // query
     // smartQueryLoader
@@ -99,9 +103,7 @@ export default {
       if (!firstHotel) {
         return;
       }
-      const optionId = `hotel_selector_option_${firstHotel.id}`;
-      const option = document.getElementById(optionId);
-      option.selected = true;
+      selectHotel(+firstHotel.id);
     }
 
     function mountSec() {
