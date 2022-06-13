@@ -80,6 +80,8 @@ export default {
       getHotels,
       (_hotels) => {
         populateHotels(_hotels);
+        // do not auto select because prop might no propagate
+        // soon enought in create query preparation
         selectFirst();
       },
       "hotels"

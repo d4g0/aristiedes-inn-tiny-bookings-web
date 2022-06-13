@@ -1,6 +1,6 @@
 <template>
   <!-- submit -->
-  <div class=" relative">
+  <div class="relative">
     <button
       class="
         rounded-[16px]
@@ -20,6 +20,7 @@
       :class="{
         'opacity-70': isSending,
       }"
+      @click="$emit('btn_click')"
     >
       {{ submitText }}
     </button>
@@ -74,6 +75,16 @@ export default {
       type: String,
       default: "Submit",
     },
+  },
+
+  setup(props, { emit }) {
+    function onClick() {
+      emit('btn_click')
+    }
+
+    return{
+      onClick
+    }
   },
 };
 </script>

@@ -2,11 +2,13 @@
   <div>
     <MainHeading text="Reservaciones" class="mt-10" />
 
-    <!-- hotel selector -->
-    <HotelSelector class="mt-[50px] max-w-md" />
-    <!-- create -->
-    <CreateBooking class="mt-[50px] max-w-md" :selectedHotel="selectedHotel" />
-    <!-- list -->
+    <div v-if="hotels">
+      <!-- hotel selector -->
+      <HotelSelector class="mt-[50px] max-w-md" />
+      <!-- create -->
+      <CreateBooking class="mt-[150px]" :selectedHotel="selectedHotel" />
+      <!-- list -->
+    </div>
   </div>
 </template>
 
@@ -34,6 +36,7 @@ export default {
     return {
       selectedHotelId,
       selectedHotel,
+      hotels
     };
   },
 };
