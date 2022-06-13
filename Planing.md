@@ -125,6 +125,10 @@ Amenities
           - [x] Beds [15:08 - 15:15 ]
           - [x] Capacity [ - 15:35 ]
         - [x] Room Pictures
+- [ ] Bookings [13 Jun 01:24 - ]
+  - [ ] Create
+  - [ ] List
+  - [ ] Cancel
 
 
 #### Bugs
