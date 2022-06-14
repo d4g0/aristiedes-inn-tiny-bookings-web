@@ -1,9 +1,9 @@
 <template>
   <div>
-    <form @submit.prevent="onSubmit">
+    <form @change="onSubmit">
       <fieldset>
         <legend>Selecione las habitaciones a incluir:</legend>
-        <div class="mt-[20px] grid gap-[20px] md:grid-cols-2 lg:grid-cols-3">
+        <div class="mt-[20px] grid gap-[20px] grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <label
             v-for="room in reactiveRooms"
             :key="room.id"
@@ -15,7 +15,12 @@
               flex
               items-baseline
               justify-start
+              hover:cursor-pointer
+              transition-all duration-200
             "
+            :class="{
+              'border-gray-600 border-2': room.checked
+            }"
           >
             <input
               type="checkbox"
@@ -25,7 +30,7 @@
             />
 
             <div class="ml-4">
-              <span>
+              <span class="font-medium">
                 {{ room.room_name }}
               </span>
               <div class="mt-[10px] text-sm">
@@ -35,28 +40,26 @@
                 <p class="block border-b border-gray-200 py-2">
                   Capacidad: {{ room.capacity }}
                 </p>
-                <p class="block border-b border-gray-200 py-2">
-                  Precio: {{ room.night_price }}
-                </p>
+                <p class="block py-2">Precio: {{ room.night_price }}</p>
               </div>
             </div>
           </label>
         </div>
       </fieldset>
-      <div class="max-w-md">
+      <!-- <div class="max-w-md">
         <submit-btn
           submitText="Seleccionar"
           v-if="reactiveRooms.length"
           class="mt-[30px]"
         />
-      </div>
+      </div> -->
     </form>
   </div>
 </template>
 
 <script>
 import { computed, onMounted, ref } from "@nuxtjs/composition-api";
-import SubmitBtn from "../global/SubmitBtn.vue";
+import SubmitBtn from "../global/SubmitBtnSecondary.vue";
 import { useToastStore } from "~/stores/toast-storage";
 import { TOAST_TYPES } from "~/db";
 export default {

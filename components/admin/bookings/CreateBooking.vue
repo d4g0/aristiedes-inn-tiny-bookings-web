@@ -14,7 +14,7 @@
         @DATES_RANGE_SELECTED="onDateRangeSelection"
         :selectedHotel="selectedHotel"
       />
-      <SubmitBtn
+      <SubmitBtnSecondary
         :isSending="loadingRooms"
         submitText="Ver disponibles"
         class="mt-[30px] max-w-md"
@@ -50,9 +50,10 @@
       <SubmitBtn
         v-if="!fieldMissing"
         @btn_click="onCreateReq"
-        class="mt-[50px]"
+        class="mt-[50px] max-w-md"
         submitText="Crear Reservación"
-        @
+        :isSending="creatingBooking"
+
       />
     </div>
   </div>
@@ -71,12 +72,14 @@ import { useListingsStore } from "~/stores/listings-storage";
 import { smartQueryLoader } from "~/composables/useSmartQueryControler";
 import { roomsAvailable } from "~/querys/roomsAvailable";
 import SubmitBtn from "../global/SubmitBtn.vue";
+import SubmitBtnSecondary from "../global/SubmitBtnSecondary.vue";
 import { useToastStore } from "~/stores/toast-storage";
 import { TOAST_TYPES } from "~/db";
 import { storeToRefs } from "pinia";
 import RoomListings from "./RoomListings.vue";
 import ClientNameForm from "./ClientNameForm.vue";
 import PriceForm from "./PriceForm.vue";
+import { createABookingAsAdmin } from "~/querys/createBookingAsAdmin";
 
 export default {
   components: {
@@ -84,6 +87,7 @@ export default {
     DateTimePicker,
     RoomsPicker,
     SubmitBtn,
+    SubmitBtnSecondary,
     RoomListings,
     ClientNameForm,
     PriceForm,
@@ -147,7 +151,13 @@ export default {
         : []
     );
 
-    // const basePrice = ref(2)
+    const totalCapacity = computed(() =>
+      selectedRooms.value.length
+        ? selectedRooms.value.reduce((ac, r) => ac + r.capacity, 0)
+        : 0
+    );
+
+    //
 
     // query
     const {
@@ -199,28 +209,13 @@ export default {
         },
       };
 
-      var iSample = {
-        input: {
-          start_date: "2022-06-14T00:00:00.000Z", //
-          end_date: "2022-06-15T00:00:00.000Z", //
-          hotel_id: 1, //
-          rooms_ids: [2, 11], //
-          client_name: "Lolo ", //
-          client_last_name: "Zanchez de la Concepcion", //
-          currency_id: 1,
-          payment_type_id: 1,
-          number_of_guests: 2,
-          total_price: 200,
-        },
-      };
-
       setVariables(variables);
       loadRooms();
     }
 
     // rooms selection
     function onSelectedRooms(rooms) {
-      console.log({ rooms });
+      // console.log({ rooms });
       rooms_ids.value = rooms.map((room) => +room.id);
     }
 
@@ -246,6 +241,20 @@ export default {
         )
     );
 
+    // booking query
+    const {
+      load: createBooking,
+      loading: creatingBooking,
+      setVariables: setBookingVars,
+    } = smartQueryLoader(
+      createABookingAsAdmin,
+      (_result) => {
+        showToastWithText(TOAST_TYPES.success, "Reservación creada", true);
+        console.log("Api result", _result);
+      },
+      "createBookingAsAdmin"
+    );
+
     function onCreateReq() {
       if (fieldMissing.value) {
         return showToastWithText(
@@ -254,6 +263,25 @@ export default {
           true
         );
       }
+
+      // hit api
+      const variables = {
+        input: {
+          hotel_id: +props.selectedHotel.id,
+          start_date: start_date.value,
+          end_date: end_date.value,
+          rooms_ids: rooms_ids.value,
+          client_name: clientName.value,
+          client_last_name: clientLastName.value,
+          currency_id: 1,
+          payment_type_id: 1,
+          number_of_guests: totalCapacity.value,
+          total_price: totalPrice.value, //
+        },
+      };
+      setBookingVars(variables);
+
+      createBooking();
     }
 
     return {
@@ -274,7 +302,10 @@ export default {
       clientNamesDefined,
       clientName,
       clientLastName,
-      totalPrice
+      totalPrice,
+      creatingBooking,
+      start_date,
+      end_date
     };
   },
 };

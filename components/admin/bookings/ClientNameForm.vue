@@ -86,7 +86,7 @@ import { required, minLength, maxLength } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 import { computed, ref } from "@nuxtjs/composition-api";
 import SubHeading from "../global/SubHeading.vue";
-import SubmitBtn from "../global/SubmitBtn.vue";
+import SubmitBtn from "../global/SubmitBtnSecondary.vue";
 export default {
   components: { SubHeading, SubmitBtn },
   props: {

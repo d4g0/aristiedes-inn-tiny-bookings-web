@@ -23,8 +23,9 @@
         'opacity-70': isSending,
       }"
 
-      @click="$emit('btn_hit')"
+      @click="$emit('btn_click')"
     >
+      <!-- @click="$emit('btn_hit')" -->
       {{ submitText }}
     </button>
 
