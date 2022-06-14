@@ -18,7 +18,7 @@
         :isSending="loadingRooms"
         submitText="Ver disponibles"
         class="mt-[30px] max-w-md"
-        @btn_click="hitApi"
+        @btn_click="onRoomsLoadReq"
       />
 
       <!-- rooms -->
@@ -31,14 +31,14 @@
 
       <!-- client -->
       <ClientNameForm
-        v-if="rooms_ids.length"
+        v-if="rooms.length && rooms_ids.length"
         @submit="onClientNameSubmit"
         class="mt-[50px] max-w-md"
       />
 
       <!-- price -->
       <PriceForm
-        v-if="clientNamesDefined"
+        v-if="rooms.length && clientNamesDefined"
         @submit="onPriceSubmit"
         class="mt-[50px] max-w-md"
         :basePrice="basePrice"
@@ -53,7 +53,6 @@
         class="mt-[50px] max-w-md"
         submitText="Crear Reservación"
         :isSending="creatingBooking"
-
       />
     </div>
   </div>
@@ -128,6 +127,13 @@ export default {
     const { populateListings, getListingById } = listingsStorage;
     const { listings: rooms } = storeToRefs(listingsStorage);
 
+    function resetBookingForm() {
+      rooms_ids.value = [];
+      populateListings([]);
+      clientName.value = "";
+      clientLastName.value = "";
+      totalPrice.value = 0;
+    }
     const nights = computed(
       () =>
         calculateNightsInBetweenDateStr(start_date.value, end_date.value) || 1
@@ -193,7 +199,8 @@ export default {
     const toastStore = useToastStore();
     const { showToastWithText } = toastStore;
 
-    function hitApi() {
+    function onRoomsLoadReq() {
+      resetBookingForm();
       if (!props.selectedHotel.hotel_name) {
         return showToastWithText(
           TOAST_TYPES.error,
@@ -251,6 +258,7 @@ export default {
       (_result) => {
         showToastWithText(TOAST_TYPES.success, "Reservación creada", true);
         console.log("Api result", _result);
+        resetBookingForm();
       },
       "createBookingAsAdmin"
     );
@@ -288,7 +296,7 @@ export default {
       calendarLength,
       onDateRangeSelection,
       loadingRooms,
-      hitApi,
+      onRoomsLoadReq,
       rooms,
       onSelectedRooms,
       onClientNameSubmit,
@@ -305,7 +313,7 @@ export default {
       totalPrice,
       creatingBooking,
       start_date,
-      end_date
+      end_date,
     };
   },
 };
