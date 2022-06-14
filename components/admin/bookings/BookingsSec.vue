@@ -8,6 +8,11 @@
       <!-- create -->
       <CreateBooking class="mt-[150px]" :selectedHotel="selectedHotel" />
       <!-- list -->
+      <BookingsList
+        :selectedHotel="selectedHotel"
+        class="mt-[150px]"
+        v-if="selectedHotel.hotel_name"
+      />
     </div>
   </div>
 </template>
@@ -19,11 +24,13 @@ import CreateBooking from "./CreateBooking.vue";
 import HotelSelector from "../global/HotelSelector.vue";
 import { useHotelListStore } from "~/stores/hotel-list-storage";
 import { storeToRefs } from "pinia";
+import BookingsList from "./BookingsList.vue";
 export default {
   components: {
     MainHeading,
     CreateBooking,
     HotelSelector,
+    BookingsList,
   },
 
   setup() {
@@ -36,7 +43,7 @@ export default {
     return {
       selectedHotelId,
       selectedHotel,
-      hotels
+      hotels,
     };
   },
 };

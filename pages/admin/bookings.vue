@@ -1,14 +1,17 @@
 <template>
-  <div class="frame-30 ">
-    <h1 class="text-4xl font-bold">Bookings</h1>
+  <div class="frame-30 mb-20">
+    <BookingsSec />
   </div>
 </template>
 
 <script>
+import BookingsSec from "~/components/admin/bookings/BookingsSec.vue";
 export default {
   layout: "admin",
   middleware: "admin",
-  components: {},
+  components: {
+    BookingsSec,
+  },
 };
 </script>
 

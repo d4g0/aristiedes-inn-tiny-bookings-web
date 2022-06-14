@@ -34,6 +34,27 @@ export function getDatesRange(daysOffset = 0) {
   };
 }
 
+export function getDatesRange_2(start = 0, end = 10) {
+  const now = new Date();
+  const today = {
+    year: null,
+    month: null,
+    day: null,
+  };
+
+  today.year = now.getFullYear();
+  today.month = now.getMonth();
+  today.day = now.getDate();
+
+  const startDate = new Date(today.year, today.month, today.day + start);
+  const endDate = new Date(today.year, today.month, today.day + end);
+
+  return {
+    startDate,
+    endDate,
+  };
+}
+
 export function getToDayDate() {
   var now = new Date();
   var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -262,4 +283,10 @@ export function toTimeZone(date = "" || new Date(), timeZone) {
 
 export function getNigthsBeteewn(start, end) {
   return 3;
+}
+
+export function getLocale() {
+  return navigator.languages && navigator.languages.length
+    ? navigator.languages[0]
+    : navigator.language;
 }
