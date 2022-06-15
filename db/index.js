@@ -37,10 +37,11 @@ export const navigationLinks = {
             i18nPath: "nav.links.dashboard.rooms",
         },
         // bookings
-        {
-            route: "/admin/bookings",
-            i18nPath: "nav.links.dashboard.bookings",
-        },
+        // admin/ contains it
+        // {
+        //     route: "/admin/bookings",
+        //     i18nPath: "nav.links.dashboard.bookings",
+        // },
         // calendar
         {
             route: "/admin/calendar",
