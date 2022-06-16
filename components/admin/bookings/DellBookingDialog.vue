@@ -71,7 +71,7 @@
         </button>
 
         <!-- eliminate -->
-        <div class="relative w-full border">
+        <div class="relative w-full">
           <button
             @click="onDellReq"
             class="

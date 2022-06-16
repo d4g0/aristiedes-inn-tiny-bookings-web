@@ -1,14 +1,15 @@
 <template>
   <div class="frame-30 ">
-    <h1 class="text-4xl font-bold">Calendar</h1>
+    <CalendarSec />
   </div>
 </template>
 
 <script>
+import CalendarSec from '~/components/admin/calendar/CalendarSec.vue';
 export default {
   layout: "admin",
   middleware: "admin",
-  components: {},
+  components: {CalendarSec},
 };
 </script>
 

@@ -281,6 +281,10 @@ export function toTimeZone(date = "" || new Date(), timeZone) {
   return _date;
 }
 
+export function sqlDateUTCToTimeZone(date, timeZone) {
+  return DateTime.fromSQL(date, {zone: timeZone}).toISO()
+}
+
 export function getNigthsBeteewn(start, end) {
   return 3;
 }
