@@ -134,6 +134,25 @@ function toTimeZoneKeepenLocal(dateObj, timeZone) {
   return date;
 }
 
+export function localToZonedTimeAsLocalToUtc(
+  date = new Date(),
+  timeZone = "utc"
+) {
+  const zoned = toTimeZoneKeepenLocal_2(date, timeZone);
+  const utc_zoned = DateTime.fromJSDate(zoned.toJSDate(), { zone: "UTC" });
+
+  return {
+    zoned,
+    utc_zoned,
+  };
+}
+
+/**
+ * returns DateTime keeping local time but mapped to the time zone
+ * @param {*} date 
+ * @param {*} timeZone 
+ * @returns {DateTime}
+ */
 export function toTimeZoneKeepenLocal_2(date, timeZone) {
   var _date = date instanceof Date ? date : new Date(date);
   if (Number.isNaN(_date.valueOf())) {
@@ -282,7 +301,7 @@ export function toTimeZone(date = "" || new Date(), timeZone) {
 }
 
 export function sqlDateUTCToTimeZone(date, timeZone) {
-  return DateTime.fromSQL(date, {zone: timeZone}).toISO()
+  return DateTime.fromSQL(date, { zone: timeZone }).toISO();
 }
 
 export function getNigthsBeteewn(start, end) {
@@ -293,4 +312,9 @@ export function getLocale() {
   return navigator.languages && navigator.languages.length
     ? navigator.languages[0]
     : navigator.language;
+}
+
+export function utc_zoned_keeping_local(date = new Date()) {
+  const _date = toTimeZoneKeepenLocal_2(date, 'UTC').toISO();
+  return _date;
 }

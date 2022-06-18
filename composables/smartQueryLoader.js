@@ -11,7 +11,8 @@ export const smartQueryLoader = (
     /* do what you want with result*/
   },
   // graphql response result key
-  graphqlResponseResultKey = ""
+  graphqlResponseResultKey = "",
+  errorProcessingFn = null // (error) => {}
 ) => {
   // pinia
   const ctx = useContext();
@@ -32,6 +33,11 @@ export const smartQueryLoader = (
       if (newR?.errors) {
         console.log("Api error");
         var error = newR.errors[0];
+
+        if (errorProcessingFn) {
+          return errorProcessingFn(error);
+        }
+
         console.log(error);
         // UNAUTHENTICATED
         if (error?.extensions?.code == API_ERRORS.UNAUTHENTICATED) {
@@ -76,8 +82,6 @@ export const smartQueryLoader = (
         resultProcessingFn(payload);
         return;
       }
-
-      
     } catch (error) {
       console.log(error);
       showToastWithText(TOAST_TYPES.error, error.message, true);
@@ -86,6 +90,9 @@ export const smartQueryLoader = (
   // error
   watch(error, (newE) => {
     if (newE) {
+      if (errorProcessingFn) {
+        return errorProcessingFn(newE);
+      }
       console.log("fetch error");
       console.log(newE);
       showToastWithText(

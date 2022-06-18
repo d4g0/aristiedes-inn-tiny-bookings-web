@@ -273,3 +273,16 @@ printNow()
 
 
 ```
+
+```js
+const a = new Date();
+
+function trimTimeZone(date = new Date()) {
+    const _date = date.toISOString();
+
+
+    return _date;
+}
+
+console.log(trimTimeZone(a))
+```

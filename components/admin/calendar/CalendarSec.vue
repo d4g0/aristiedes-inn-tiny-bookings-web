@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pb-20">
     <MainHeading text="Calendario" class="mt-10" />
     <!-- hotel selector -->
     <HotelSelector class="mt-[50px] max-w-md" />
@@ -23,13 +23,15 @@
       </div>
 
 
-      <!-- calendar -->
-      <div v-if="rooms.length">
+      <!-- calendar & room locks -->
+      <div v-if="rooms.length ">
         <Calendar
           class="mt-[150px]"
           :selectedHotel="selectedHotel"
           :rooms="rooms"
         />
+
+        <LockARoom class="mt-[150px]" :rooms="rooms"/>
       
       </div>
       <div v-else class="py-[40px] flex items-center justify-center">
@@ -59,12 +61,14 @@ import Calendar from "./Calendar.vue";
 import { smartQueryLoader } from "~/composables/smartQueryLoader";
 import { genRoomsQuery } from "~/querys/rooms";
 import SubmitBtnSecondary from "../global/SubmitBtnSecondary.vue";
+import LockARoom from './LockARoom.vue';
 export default {
   components: {
     MainHeading,
     HotelSelector,
     Calendar,
     SubmitBtnSecondary,
+    LockARoom,
   },
   setup() {
     const hotelStore = useHotelListStore();

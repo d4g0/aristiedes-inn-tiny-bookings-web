@@ -27,9 +27,20 @@
     </div>
 
     <!-- room selector -->
-    <div class="flex items-center gap-4 mt-[50px]">
-      <label for="room_selector">Viendo habitación: </label>
-      <select name="" id="room_selector" class="" v-model="selectedRoomId">
+    <div class="mt-[50px]">
+      <label for="room_selector" class="label pl-2">Viendo habitación: </label>
+      <select
+        name=""
+        id="room_selector"
+        v-model="selectedRoomId"
+        class="
+          w-full
+          input-field
+          focus-effect
+          border-gray-800/40 border
+          focus:ring-brand
+        "
+      >
         <option disabled>Por favor seleccione</option>
         <option v-for="room in rooms" :key="room.id" :value="room.id">
           <span> {{ room.room_name }} </span>
