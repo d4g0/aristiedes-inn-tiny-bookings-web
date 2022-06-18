@@ -5,9 +5,8 @@
     <HotelSelector class="mt-[50px] max-w-md" />
 
     <div v-if="hotels.length">
-      
       <!-- rooms load btn -->
-      <div class="mt-[30px]">
+      <div class="mt-[30px] max-w-md">
         <SubmitBtnSecondary
           @btn_click="triggerRoomsLoad"
           submitText="Cargar habitaciones"
@@ -22,17 +21,16 @@
         </div>
       </div>
 
-
       <!-- calendar & room locks -->
-      <div v-if="rooms.length ">
+      <div v-if="rooms.length">
         <Calendar
           class="mt-[150px]"
           :selectedHotel="selectedHotel"
           :rooms="rooms"
+          @time_line_element_click="onTimeLineElClick"
         />
 
-        <LockARoom class="mt-[150px]" :rooms="rooms"/>
-      
+        <LockARoom class="mt-[150px]" :rooms="rooms" />
       </div>
       <div v-else class="py-[40px] flex items-center justify-center">
         <p class="font-bold text-lg opacity-60 text-center">
@@ -47,6 +45,16 @@
         calendario
       </p>
     </div>
+
+    <!-- booking Dialog -->
+    <div class="max-w-md">
+      <transition name="fade">
+        <booking-dialog
+          v-if="showBookingDialog"
+          :bookingId="selectedBookingId"
+        />
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -55,13 +63,15 @@
 import { storeToRefs } from "pinia";
 import { useHotelListStore } from "~/stores/hotel-list-storage";
 import MainHeading from "../global/MainHeading.vue";
-import { computed, onMounted, ref, watch } from "@nuxtjs/composition-api";
+import { computed, provide, ref, watch } from "@nuxtjs/composition-api";
 import HotelSelector from "../global/HotelSelector.vue";
 import Calendar from "./Calendar.vue";
 import { smartQueryLoader } from "~/composables/smartQueryLoader";
 import { genRoomsQuery } from "~/querys/rooms";
 import SubmitBtnSecondary from "../global/SubmitBtnSecondary.vue";
-import LockARoom from './LockARoom.vue';
+import LockARoom from "./LockARoom.vue";
+import BookingDialog from "./BookingDialog.vue";
+import useBobyOverflow from "~/composables/useBodyOverflow";
 export default {
   components: {
     MainHeading,
@@ -69,10 +79,12 @@ export default {
     Calendar,
     SubmitBtnSecondary,
     LockARoom,
+    BookingDialog,
   },
   setup() {
     const hotelStore = useHotelListStore();
     const { hotels, selectedHotel } = storeToRefs(hotelStore);
+    const { hideOverflow, showOverflow } = useBobyOverflow();
 
     const getRoomsQueryDynamic = computed(() =>
       genRoomsQuery(selectedHotel.value?.id)
@@ -99,6 +111,8 @@ export default {
       fetchRooms();
     }
 
+    provide("triggerRoomsLoad", triggerRoomsLoad);
+
     watch(selectedHotel, (newH) => {
       // console.log({ newH });
       if (typeof newH?.id == "number" && newH?.id >= 0) {
@@ -106,12 +120,36 @@ export default {
       }
     });
 
+    // BookingDialog
+    const selectedBookingId = ref();
+    const showBookingDialog = ref(false);
+    const closeBookingDialog = () => {
+      showBookingDialog.value = false;
+      showOverflow();
+    };
+    const onShowBookingReq = (booking) => (showBookingDialog.value = true);
+    provide("closeBookingDialog", closeBookingDialog);
+
+    function onTimeLineElClick({ item }) {
+      console.log({ item });
+      // case booking
+      if (item.booking_id || item.booking_id === 0) {
+        selectedBookingId.value = item.booking_id;
+        onShowBookingReq();
+        hideOverflow();
+      }
+    }
+
     return {
       selectedHotel,
       hotels,
       rooms,
       triggerRoomsLoad,
       loadingRooms,
+      // booking og
+      selectedBookingId,
+      showBookingDialog,
+      onTimeLineElClick,
     };
   },
 };

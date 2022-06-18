@@ -107,7 +107,7 @@
                 hover:opacity-100
                 focus-styles
               "
-              v-if="!booking.is_cancel"
+              v-if="!booking.is_cancel && cancelOption"
               @click="$emit('cancel_req', { id: booking.id })"
             >
               Cancelar
@@ -149,6 +149,11 @@ export default {
         ],
       }),
     },
+
+    cancelOption: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   setup(props) {
@@ -158,12 +163,11 @@ export default {
         : "es"
       : "es";
 
-
     // const isIntlSafe = Intl && Intl.DateTimeFormat ;
     const safeFormat = (date) => {
       if (!isValidDate(date)) {
         console.log("Non valid date foud: ", date);
-        return (date.toString());
+        return date.toString();
       }
       return new Intl.DateTimeFormat(userLocale, {
         year: "numeric",
@@ -172,7 +176,7 @@ export default {
         weekday: "short",
         hour: "numeric",
         minute: "numeric",
-      }).format(date)
+      }).format(date);
     };
 
     const localCheckInDate = computed(() =>

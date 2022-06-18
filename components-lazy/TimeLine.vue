@@ -70,7 +70,7 @@ export default {
       }),
     },
   },
-  setup(props, {emit}) {
+  setup(props, { emit }) {
     const showDate = ref(new Date());
 
     function setShowDate(d) {
@@ -84,7 +84,7 @@ export default {
     );
 
     function onPeriodChange(payload) {
-      emit('period_change', payload);
+      emit("period_change", payload);
       // console.log({
       //   PeriodChangePayload: payload,
       // });
@@ -92,6 +92,7 @@ export default {
 
     function onCalItemClick(payload) {
       console.log({ calItemPayload: payload });
+      emit("time_line_element_click", { item: payload.originalItem });
     }
 
     return {

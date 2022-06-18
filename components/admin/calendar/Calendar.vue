@@ -27,7 +27,7 @@
     </div>
 
     <!-- room selector -->
-    <div class="mt-[50px]">
+    <div class="mt-[50px] max-w-md">
       <label for="room_selector" class="label pl-2">Viendo habitación: </label>
       <select
         name=""
@@ -66,6 +66,7 @@
         :selectedHotel="selectedHotel"
         v-if="isClient"
         @period_change="onPeriodChange"
+        @time_line_element_click="onTimeLineElClick"
       />
     </div>
   </div>
@@ -106,7 +107,7 @@ export default {
     },
   },
 
-  setup(props) {
+  setup(props, { emit }) {
     // const rlBR = arrangeByRoom(rls);
 
     const roomLocks = ref([]);
@@ -175,6 +176,10 @@ export default {
       onLoadReq();
     }
 
+    function onTimeLineElClick({ item }) {
+      emit("time_line_element_click", { item });
+    }
+
     return {
       roomLocks,
       isClient,
@@ -185,6 +190,7 @@ export default {
       currentRoomLocks,
       isLoadingRoomLocks,
       selectedRoomId,
+      onTimeLineElClick,
     };
   },
 };
