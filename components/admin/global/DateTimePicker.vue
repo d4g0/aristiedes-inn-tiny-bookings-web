@@ -145,8 +145,8 @@ export default {
 
     function onDateSelection(range) {
       emit("DATES_RANGE_SELECTED", {
-        start: new Date(range.start),
-        end: new Date(range.end),
+        start: range.start,
+        end: range.end,
       });
     }
 

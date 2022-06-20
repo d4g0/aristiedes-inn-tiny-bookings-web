@@ -49,7 +49,7 @@
     <!-- booking Dialog -->
     <div class="max-w-md">
       <transition name="fade">
-        <booking-dialog
+        <BookingDialog
           v-if="showBookingDialog"
           :bookingId="selectedBookingId"
         />

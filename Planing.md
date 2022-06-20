@@ -134,6 +134,24 @@ Amenities
 #### Bugs
 - Home
   - [x] Client Experience Room Image bugs fix  [ 17:23 - 17: 41 ]
+- [ ] Search Ctr fix 1 room between validator error
+
+#### Checks
+Use toUTC times in
+- [ ] Rooms Available
+  - [ ] Search Ctrl (home)
+    - [ ] map api call dates as hotel_zoned to utc
+  - [x] Bookings (admin/home)
+    - [x] api call
+    - [x] item rendering
+- [ ] Room Locks
+  - [x] Calendar
+    - [x] api call
+    - [ ] item rendering
+      - [x] locks 
+      - [x] bookings
+  - [x] Block a room
+    - [x] api call
 
 
 #### Questions to answer

@@ -25,6 +25,7 @@
     ],
     "include": [
         "composables/**/*",
-        "querys/**/*"
+        "querys/**/*",
+        "./notebook.hdnb"
     ],
 }

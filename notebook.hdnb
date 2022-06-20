@@ -244,45 +244,184 @@ function isInCollectionDeep(
 ```
 
 ```js
-const { DateTime, Settings } = require("luxon");
-Settings.defaultZone = "utc";
+// const { DateTime, Settings } = require("luxon");
+// Settings.defaultZone = "utc";
 
 
 
-function toTimeZoneKeepenLocal(date, timeZone) {
-  var _date = date instanceof Date ? date : new Date(date);
-  if (Number.isNaN(_date.valueOf())) {
-    throw new Error("Non valid date param: ", date);
-  }
-  const mappedDate = DateTime.fromJSDate(_date).setZone(timeZone, {
-    keepLocalTime: true,
-  });
-  return mappedDate;
-}
+// function toTimeZoneKeepenLocal(date, timeZone) {
+//   var _date = date instanceof Date ? date : new Date(date);
+//   if (Number.isNaN(_date.valueOf())) {
+//     throw new Error("Non valid date param: ", date);
+//   }
+//   const mappedDate = DateTime.fromJSDate(_date).setZone(timeZone, {
+//     keepLocalTime: true,
+//   });
+//   return mappedDate;
+// }
 
-function printNow(params) {
-  const now = new Date();
-  const nowInUtc = toTimeZoneKeepenLocal(now, "utc");
-  console.clear()
-  console.log(nowInUtc.toISO());
+// function printNow(params) {
+//   const now = new Date();
+//   const nowInUtc = toTimeZoneKeepenLocal(now, "utc");
+//   console.clear()
+//   console.log(nowInUtc.toISO());
 
-  setTimeout(printNow, 1e3);
-}
+//   setTimeout(printNow, 1e3);
+// }
 
-printNow()
+// printNow()
 
 
 ```
 
 ```js
-const a = new Date();
+// Local Date to other TZ Date to UTC
 
-function trimTimeZone(date = new Date()) {
-    const _date = date.toISOString();
+const { DateTime, Settings } = require("luxon");
+Settings.defaultZone = "utc";
+
+const toZoneTimeFromJsDate = (jsDate, timeZone) =>
+  DateTime.fromJSDate(jsDate, { setZone: timeZone }).toISO({
+    suppressMilliseconds: true,
+    suppressSeconds: true,
+  });
+const toZonedTimeKeepLocalFromJsDate = (jsDate, timeZone) =>
+  DateTime.fromJSDate(jsDate)
+    .setZone(timeZone, { keepLocalTime: true })
+    .toString();
+
+const toZonedDateFromJsDate = (jsDate, timeZone) =>
+  DateTime.fromJSDate(jsDate)
+    .setZone(timeZone, { keepLocalTime: false })
+    .toString();
+
+const toZonedDateTimeFromJsDate = (jsDate, timeZone) =>
+  DateTime.fromJSDate(jsDate).setZone(timeZone, { keepLocalTime: false });
+
+const toZonedDateFromDateStr = (date, timeZone) => {
+  // console.log({ date });
+  return date.setZone(timeZone, { keepLocalTime: false }).toString();
+};
+
+const js_date_to_zoned_date_time_to_utc = (jsDate, timeZone) =>
+  toZonedDateFromDateStr(toZonedDateTimeFromJsDate(jsDate, timeZone), "UTC");
+
+// .toISO({
+//   suppressMilliseconds: true,
+//   suppressSeconds: true,
+// });
+
+const JSDate = new Date();
+const cubanNowR = toZonedDateFromJsDate(JSDate, "America/Havana");
+
+const utcNow = toZoneTimeFromJsDate(JSDate, "UTC");
+const limaNow = toZonedDateTimeFromJsDate(JSDate, "America/Lima");
+const limaNowToUTC = js_date_to_zoned_date_time_to_utc(
+  limaNow.toJSDate(),
+  "America/Lima"
+);
+
+const cubaNowAsLima = toZonedTimeKeepLocalFromJsDate(JSDate, "America/Lima");
+const cubaNowAsLimaToUTC = js_date_to_zoned_date_time_to_utc(
+  JSDate,
+  "America/Lima"
+);
 
 
-    return _date;
+
+// console.table([
+//   // { k: "JSDate", v: JSDate },
+//   { k: "utcNow", v: utcNow },
+//   { k: "cubanNowR", v: cubanNowR },
+//   { k: "limaNow", v: limaNow.toString() },
+//   // { k: "limaNowToUTC", v: limaNowToUTC },
+//   { k: "cubaNowAsLima", v: cubaNowAsLima },
+//   { k: "cubaNowAsLimaToUTC", v: cubaNowAsLimaToUTC },
+// ]);
+
+
+
+// map to lima
+
+// map to utc
+
+const cubaNowTs = DateTime.fromJSDate(JSDate).setZone("America/Havana");
+const limaNowTs = DateTime.fromJSDate(JSDate).setZone("America/Lima");
+const limaNowTs_keep = DateTime.fromJSDate(JSDate).setZone("America/Lima", {
+  keepLocalTime: true,
+});
+
+console.log(JSON.stringify({
+  cubaNowTs: { ts: cubaNowTs.ts, c: cubaNowTs.c },
+  limaNowTs: { ts: limaNowTs.ts, c: limaNowTs.c },
+  limaNowTs_keep: { ts: limaNowTs_keep.ts, c: limaNowTs_keep.c },
+  limaNowTs_keep
+}));
+
+```
+
+```js
+const { DateTime, Settings } = require("luxon");
+Settings.defaultZone = "utc";
+
+const utc_sql_date_str_to_zoned_str = (utc_sql_date_str, timeZone) =>
+  DateTime.fromSQL(utc_sql_date_str)
+    .setZone(timeZone, { keepLocalTime: false })
+    .toFormat('yyyy-MM-dd hh:mm');
+
+
+const utcStr = '2022-07-01 04:00:00';
+
+console.log(
+   { limaZn: utc_sql_date_str_to_zoned_str(utcStr, 'America/Lima')}
+)
+```
+
+```js
+const { DateTime, Settings } = require("luxon");
+Settings.defaultZone = "utc";
+
+
+
+function sqlTimeToHourMin(sqlTime = "hh:mm") {
+  var parts = sqlTime.split(":");
+  var time = {
+    hour: parseInt(parts[0]),
+    minute: parseInt(parts[1]),
+    second: 0,
+  };
+
+  return time;
 }
 
-console.log(trimTimeZone(a))
+/**
+ * 
+ * @param jsDate 
+ * @param timeSql 
+ * @returns 
+ */
+const setTime = (
+  jsDate = new Date(),
+  timeSql = 'hh:mm'
+) => {
+  const timeObj = sqlTimeToHourMin(timeSql);
+  return  DateTime.fromJSDate(jsDate).set(timeObj).toString();
+};
+
+
+
+
+const ciTime = "13:30";
+const now = new Date();
+
+const normalizedNow = setTime(now, ciTime);
+
+console.log({
+  now,
+  normalizedNow,
+});
+
+// const jsDate = new Date();
+// console.log({tObj});
+
 ```

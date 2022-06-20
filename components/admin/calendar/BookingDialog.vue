@@ -44,7 +44,7 @@
         </button>
       </div>
       <div v-if="bookingLoaded" class="mt-[30px]">
-        <BookingsListItem :booking="booking" :cancelOption="false"/>
+        <BookingsListItem :booking="booking" :cancelOption="false" :showRooms="false"/>
       </div>
     </div>
   </div>

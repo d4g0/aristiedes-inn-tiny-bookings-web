@@ -70,7 +70,7 @@
             </span>
           </div>
           <!-- rooms -->
-          <div class="">
+          <div class="" v-if="showRooms">
             <span class="block opacity-60"> Habitaciones: </span>
             <ul>
               <li v-for="room in booking.rooms" :key="room.id">
@@ -156,6 +156,11 @@ export default {
     },
 
     cancelOption: {
+      type: Boolean,
+      default: true,
+    },
+
+    showRooms: {
       type: Boolean,
       default: true,
     },

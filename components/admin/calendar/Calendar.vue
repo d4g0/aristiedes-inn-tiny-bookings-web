@@ -118,6 +118,7 @@ export default {
 
     const selectedRoomId = ref(null);
 
+    
     const currentRoomLocks = computed(
       () => roomLocks.value[selectedRoomId.value] || []
     );

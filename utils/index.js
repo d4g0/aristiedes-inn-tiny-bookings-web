@@ -83,6 +83,16 @@ export function sqlTimeStrToTimeObj(timeStr = "") {
   return time;
 }
 
+export function sqlTimeToHourMin(sqlTime = "hh:mm") {
+  var parts = sqlTime.split(":");
+  var time = {
+    hour: parseInt(parts[0]),
+    minute: parseInt(parts[1]),
+    second: 0,
+  };
+
+  return time;
+}
 /**
  * Returns a Date object for use with native js date api
  * @param {Date} date
@@ -149,8 +159,8 @@ export function localToZonedTimeAsLocalToUtc(
 
 /**
  * returns DateTime keeping local time but mapped to the time zone
- * @param {*} date 
- * @param {*} timeZone 
+ * @param {*} date
+ * @param {*} timeZone
  * @returns {DateTime}
  */
 export function toTimeZoneKeepenLocal_2(date, timeZone) {
@@ -315,6 +325,15 @@ export function getLocale() {
 }
 
 export function utc_zoned_keeping_local(date = new Date()) {
-  const _date = toTimeZoneKeepenLocal_2(date, 'UTC').toISO();
+  const _date = toTimeZoneKeepenLocal_2(date, "UTC").toISO();
   return _date;
+}
+
+export function sqlUtcDateToZonedStr(date = "sql valid date", timeZone) {
+  const _date = DateTime.fromSQL(date, { setZone: timeZone });
+  return _date.toISO({
+    includeOffset: false,
+    suppressMilliseconds: true,
+    suppressSeconds: true,
+  });
 }
