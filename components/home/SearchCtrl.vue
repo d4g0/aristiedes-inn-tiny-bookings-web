@@ -23,13 +23,14 @@ import { EVENTS, TOAST_TYPES } from "~/db";
 import { useToastStore } from "~/stores/toast-storage";
 import { roomsAvailable } from "~/querys/roomsAvailable";
 import {
-  date_obj_and_time_zone_to_iso,
   date_obj_and_time_zone_to_localized_date_to_utc_str,
   get_luxon_ready_date_obj_from_js_date_and_sql_time_str,
+  sqlTimeToHourMin,
 } from "~/utils";
 import { useLazyQuery } from "~/composables/useLazyQuery";
 import { useListingsStore } from "~/stores/listings-storage";
 import { useBasketStore } from "~/stores/basket-storage";
+import { js_date_to_zoned_date_time_to_utc } from "~/utils/dateUtils.js";
 
 export default {
   components: { SearchForm },
@@ -44,7 +45,7 @@ export default {
     });
     // toast
     const toastStore = useToastStore();
-    const { showToast } = toastStore;
+    const { showToast , showToastWithText} = toastStore;
     const { loading, result, error, refetch } = useQuery(hotelQuery);
     // hotel query
     watch(result, (nV) => {
@@ -59,7 +60,8 @@ export default {
       }
     });
     // *****
-    // todo watch hotel query error too
+    // todo use presicie dates to hit the search api
+    // map input -> hotel_zoned -> utc to use in query params
     // ****
 
     const calendarLength = computed(() =>
@@ -92,6 +94,13 @@ export default {
         const listings = nLRes.data?.getRoomsAvailable;
         // return console.log({ listings });
         populateListings(listings);
+        if (!listings.length) {
+          showToastWithText(
+            TOAST_TYPES.error,
+            "No hay disponibilidad en esas fechas",
+            true
+          );
+        }
       }
 
       if (nLRes?.errors) {
@@ -119,7 +128,12 @@ export default {
       console.log("loadlistings");
 
       // create input
-
+      console.log({
+        hotel_id: hotel.value.id,
+        hotel: hotel.value,
+        start_date: searchInterval.check_in_date,
+        end_date: searchInterval.check_out_date,
+      });
       //
       // check_out_hour_time
       var input = {
@@ -127,8 +141,6 @@ export default {
         start_date: searchInterval.check_in_date,
         end_date: searchInterval.check_out_date,
       };
-
-      console.log({ input });
 
       setVariables({ input });
       load();
@@ -143,10 +155,31 @@ export default {
     //
 
     // search hanling
-    function onSearchRequest({ check_in_date, check_out_date }) {
-      // console.log("onSearchRequest");
-      // console.log("params");
-      // console.log({ search_fomr_interval: { check_in_date, check_out_date } });
+    function onSearchRequest({
+      check_in_date = new Date(),
+      check_out_date = new Date(),
+    }) {
+      const hotelCheckInTimeObj = sqlTimeToHourMin(
+        hotel.value.check_in_hour_time
+      );
+      const hotelBounCheckInDate = check_in_date.setHours(
+        hotelCheckInTimeObj.hour,
+        hotelCheckInTimeObj.minute,
+        0,
+        0
+      );
+
+      const hotelZonedDate = js_date_to_zoned_date_time_to_utc(
+        hotelBounCheckInDate,
+        hotel.value.iana_time_zone
+      );
+
+      console.log({
+        hotelBounCheckInDate,
+        check_in_date,
+        check_out_date,
+        hotelZonedDate,
+      });
 
       // case hotel query has fail
       if (!hotel.value?.hotel_name) {
@@ -197,6 +230,10 @@ export default {
       // prepare listings load dates params
       searchInterval.check_in_date = utc_check_in_date_str;
       searchInterval.check_out_date = utc_check_out_date_str;
+
+      // iteration
+
+      //
 
       // reset basket
       // **TODO**

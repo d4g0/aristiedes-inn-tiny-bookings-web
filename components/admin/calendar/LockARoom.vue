@@ -150,11 +150,11 @@ export default {
     const end_date = ref(new Date());
 
     const utc_start_date_str = computed(() =>
-      utc_zoned_keeping_local(start_date.value)
+      start_date.value.toISOString()
     );
 
     const utc_end_date_str = computed(() =>
-      utc_zoned_keeping_local(end_date.value)
+      end_date.value.toISOString()
     );
 
     function onStartDateSelection({ date }) {
