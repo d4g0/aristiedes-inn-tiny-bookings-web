@@ -122,6 +122,11 @@
 <script>
 import { computed, ref } from "@vue/composition-api";
 import { isValidDate } from "~/utils";
+import {
+  from_utc_sql_fromat_to_local,
+  getLocalTimeZone,
+} from "~/utils/dateUtils";
+
 export default {
   props: {
     booking: {
@@ -157,34 +162,14 @@ export default {
   },
 
   setup(props) {
-    const userLocale = navigator
-      ? navigator.language
-        ? navigator.language
-        : "es"
-      : "es";
-
-    // const isIntlSafe = Intl && Intl.DateTimeFormat ;
-    const safeFormat = (date) => {
-      if (!isValidDate(date)) {
-        console.log("Non valid date foud: ", date);
-        return date.toString();
-      }
-      return new Intl.DateTimeFormat(userLocale, {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        weekday: "short",
-        hour: "numeric",
-        minute: "numeric",
-      }).format(date);
-    };
+    const localTimeZone = getLocalTimeZone();
 
     const localCheckInDate = computed(() =>
-      safeFormat(new Date(props.booking.start_date))
+      from_utc_sql_fromat_to_local(props.booking.start_date, localTimeZone)
     );
 
     const localCheckOutDate = computed(() =>
-      safeFormat(new Date(props.booking.end_date))
+      from_utc_sql_fromat_to_local(props.booking.end_date, localTimeZone)
     );
 
     const detailsNeeded = ref(false);
@@ -192,6 +177,7 @@ export default {
       detailsNeeded.value = !detailsNeeded.value;
     }
     return {
+      //
       localCheckInDate,
       localCheckOutDate,
       detailsNeeded,
