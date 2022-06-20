@@ -21,14 +21,14 @@
 import { computed, ref } from "@nuxtjs/composition-api";
 import { CalendarView, CalendarViewHeader } from "vue-simple-calendar";
 import "~/node_modules/vue-simple-calendar/static/css/default.css";
-import { sqlDateUTCToTimeZone } from "~/utils";
+import { fromUTCFormatToLocal, getLocalTimeZone } from '~/utils/dateUtils';
 
 function toCalendarItem(roomLock, tz = "UTC") {
   const title = roomLock.is_a_booking
     ? `Reserva #${roomLock.booking_id}`
     : "Bloqueada";
-  const startDate = sqlDateUTCToTimeZone(roomLock.start_date, tz);
-  const endDate = sqlDateUTCToTimeZone(roomLock.end_date, tz);
+  const startDate = fromUTCFormatToLocal(roomLock.start_date, tz);
+  const endDate = fromUTCFormatToLocal(roomLock.end_date, tz);
   return {
     ...roomLock,
     title,
@@ -73,13 +73,15 @@ export default {
   setup(props, { emit }) {
     const showDate = ref(new Date());
 
+    const localTz = getLocalTimeZone()
+
     function setShowDate(d) {
       showDate.value = d;
     }
 
     const timeLineItems = computed(() =>
       props.roomLocks.map((rl) =>
-        toCalendarItem(rl, props.selectedHotel.iana_time_zone)
+        toCalendarItem(rl, localTz)
       )
     );
 
