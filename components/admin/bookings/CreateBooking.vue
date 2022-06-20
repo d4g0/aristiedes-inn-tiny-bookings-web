@@ -28,6 +28,25 @@
         v-if="rooms.length"
         @rooms_selected="onSelectedRooms"
       />
+      <div v-if="loadingRooms">
+        <p
+          class="
+            text-center
+            p-[40px]
+            font-lg font-medium
+            opacity-80
+            animatie-pulse
+          "
+        >
+          Cargando
+        </p>
+      </div>
+
+      <div v-if="!loadingRooms && !rooms.length && hasLoadedFirstTime">
+        <p class="text-center p-[40px] font-lg font-medium opacity-80">
+          No hay disponibles en este intervalo
+        </p>
+      </div>
 
       <!-- client -->
       <ClientNameForm
@@ -63,10 +82,7 @@ import { computed, ref } from "@nuxtjs/composition-api";
 import SubHeading from "../global/SubHeading.vue";
 import DateTimePicker from "~/components/admin/global/DateTimePicker.vue";
 import RoomsPicker from "./RoomsPicker.vue";
-import {
-  calculateNightsInBetweenDateStr,
-  toTimeZoneKeepenLocal_2,
-} from "~/utils";
+import { calculateNightsInBetweenDateStr, wait } from "~/utils";
 import { useListingsStore } from "~/stores/listings-storage";
 import { smartQueryLoader } from "~/composables/useSmartQueryControler";
 import { roomsAvailable } from "~/querys/roomsAvailable";
@@ -118,6 +134,8 @@ export default {
     const end_date = ref("");
 
     const clientNamesDefined = ref(false);
+
+    const hasLoadedFirstTime = ref(false);
 
     // //
     // listings
@@ -176,23 +194,22 @@ export default {
       "getRoomsAvailable"
     );
 
-    function onDateRangeSelection({ start, end }) {
+    async function onDateRangeSelection({ start = Date(), end = Date() }) {
       if (!process.client) {
         return;
       }
 
-      // map to utc dates
-      const utc_timezoned_start = toTimeZoneKeepenLocal_2(start, "UTC").toISO();
-      const utc_timezoned_end = toTimeZoneKeepenLocal_2(end, "UTC").toISO();
+      const hotel = props.selectedHotel;
+      // js_date_to_zoned_date_time_to_utc
 
-      // console.log({
-      //   start,
-      //   end,
-      //   hotel: props.selectedHotel,
-      // });
+      if (!hotel.iana_time_zone) {
+        await wait(0.1);
+        return onDateRangeSelection({ start, end });
+      }
 
-      start_date.value = utc_timezoned_start;
-      end_date.value = utc_timezoned_end;
+      // map to hotel time keeping local utc dates
+      start_date.value = start.toISOString();
+      end_date.value = end.toISOString();
     }
 
     // toast
@@ -208,6 +225,9 @@ export default {
           true
         );
       }
+
+      hasLoadedFirstTime.value = true;
+
       const variables = {
         input: {
           hotel_id: +props.selectedHotel.id,
@@ -314,6 +334,8 @@ export default {
       creatingBooking,
       start_date,
       end_date,
+      //
+      hasLoadedFirstTime,
     };
   },
 };
